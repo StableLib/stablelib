@@ -1,6 +1,8 @@
 StableLib
 =========
 
+[![Build Status](https://travis-ci.org/StableLib/stablelib.svg?branch=master)](https://travis-ci.org/StableLib/stablelib)
+
 A stable library of useful TypeScript/JavaScript code.
 (Currently unstable.)
 
