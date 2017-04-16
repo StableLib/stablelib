@@ -6,6 +6,9 @@
   "typings": "./dist/snappy.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",

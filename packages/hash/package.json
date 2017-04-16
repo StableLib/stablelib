@@ -6,6 +6,9 @@
   "typings": "./dist/hash.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc"
   }
