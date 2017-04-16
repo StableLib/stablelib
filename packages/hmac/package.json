@@ -1,0 +1,25 @@
+{
+  "name": "@stablelib/hmac",
+  "version": "0.0.1",
+  "description": "Hash-based message authentication code (HMAC)",
+  "main": "./dist/hmac.js",
+  "typings": "./dist/hmac.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/hmac.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/hash": "*",
+    "@stablelib/constant-time": "*",
+    "@stablelib/wipe": "*"
+  },
+  "devDependencies": {
+    "@stablelib/sha256": "*",
+    "@stablelib/sha224": "*",
+    "@stablelib/base64": "*",
+    "@stablelib/benchmark": "*"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@stablelib/blake2xs",
+  "version": "0.0.1",
+  "description": "BLAKE2xs cryptographic extended output function (XOF)",
+  "main": "./dist/blake2xs.js",
+  "typings": "./dist/blake2xs.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/blake2xs.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/hash": "*",
+    "@stablelib/blake2s": "*",
+    "@stablelib/wipe": "*"
+  },
+  "devDependencies": {
+    "@stablelib/benchmark": "*",
+    "@stablelib/bytes": "*",
+    "@stablelib/hex": "*"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@stablelib/bytes",
+  "version": "0.0.1",
+  "description": "Byte utilities",
+  "main": "./dist/bytes.js",
+  "typings": "./dist/bytes.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/bytes.bench.js"
+  },
+  "devDependencies": {
+    "@stablelib/benchmark": "*"
+  }
+}

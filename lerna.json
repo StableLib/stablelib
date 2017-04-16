@@ -1,0 +1,15 @@
+{
+  "lerna": "2.0.0-rc.2",
+  "packages": [
+    "packages/*"
+  ],
+  "npmClient": "yarn",
+  "commands": {
+    "publish": {
+      "ignore": [
+        "tsconfig.json"
+      ]
+    }
+  },
+  "version": "0.0.0"
+}

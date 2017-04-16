@@ -1,0 +1,23 @@
+{
+  "name": "@stablelib/sha256",
+  "version": "0.0.1",
+  "description": "SHA-256 cryptographic hash function",
+  "main": "./dist/sha256.js",
+  "typings": "./dist/sha256.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/sha256.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/hash": "*",
+    "@stablelib/binary": "*",
+    "@stablelib/wipe": "*"
+  },
+  "devDependencies": {
+    "@stablelib/base64": "*",
+    "@stablelib/benchmark": "*"
+  }
+}

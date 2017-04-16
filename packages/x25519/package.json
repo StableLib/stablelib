@@ -1,0 +1,23 @@
+{
+  "name": "@stablelib/x25519",
+  "version": "0.0.1",
+  "description": "X25519 key agreement (Curve25519)",
+  "main": "./dist/x25519.js",
+  "typings": "./dist/x25519.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/x25519.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/keyagreement": "*",
+    "@stablelib/random": "*",
+    "@stablelib/wipe": "*"
+  },
+  "devDependencies": {
+    "@stablelib/hex": "*",
+    "@stablelib/benchmark": "*"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@stablelib/float",
+  "version": "0.0.1",
+  "description": "Floating-point number utilities",
+  "main": "./dist/float.js",
+  "typings": "./dist/float.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+  }
+}

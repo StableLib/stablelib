@@ -1,0 +1,14 @@
+{
+  "name": "@stablelib/test",
+  "version": "0.0.1",
+  "description": "StableLib testing helper functions",
+  "main": "./dist/test.js",
+  "typings": "./dist/test.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/test.bench.js"
+  }
+}

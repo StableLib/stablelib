@@ -1,0 +1,13 @@
+{
+  "name": "@stablelib/int",
+  "version": "0.0.1",
+  "description": "Integer number utilities",
+  "main": "./dist/int.js",
+  "typings": "./dist/int.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+  }
+}

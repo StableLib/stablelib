@@ -1,0 +1,26 @@
+{
+  "name": "@stablelib/cbor",
+  "version": "0.0.1",
+  "description": "CBOR encoder and decoder",
+  "main": "./dist/cbor.js",
+  "typings": "./dist/cbor.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/cbor.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/int": "*",
+    "@stablelib/float": "*",
+    "@stablelib/bytewriter": "*",
+    "@stablelib/bytereader": "*",
+    "@stablelib/utf8": "*"
+  },
+  "devDependencies": {
+    "@stablelib/benchmark": "*",
+    "@stablelib/hex": "*",
+    "@stablelib/bytes": "*"
+  }
+}

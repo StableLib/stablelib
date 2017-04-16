@@ -1,0 +1,12 @@
+{
+  "name": "@stablelib/benchmark",
+  "version": "1.0.0",
+  "description": "StableLib benchmarking suite",
+  "main": "./dist/benchmark.js",
+  "typings": "./dist/benchmark.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  }
+}

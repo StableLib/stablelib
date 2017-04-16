@@ -1,0 +1,17 @@
+{
+  "name": "@stablelib/gf256",
+  "version": "0.0.1",
+  "description": "Arithmetic in GF(256)",
+  "main": "./dist/gf256.js",
+  "typings": "./dist/gf256.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/gf256.bench.js"
+  },
+  "devDependencies": {
+    "@stablelib/benchmark": "*"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@stablelib/blockcipher",
+  "version": "0.0.1",
+  "description": "Block cipher interface declaration",
+  "main": "./dist/blockcipher.js",
+  "typings": "./dist/blockcipher.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  }
+}

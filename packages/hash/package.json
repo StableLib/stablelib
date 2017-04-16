@@ -1,0 +1,12 @@
+{
+  "name": "@stablelib/hash",
+  "version": "0.0.1",
+  "description": "Cryptographic hash function interface declarations",
+  "main": "./dist/hash.js",
+  "typings": "./dist/hash.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  }
+}

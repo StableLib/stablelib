@@ -1,0 +1,20 @@
+{
+  "name": "@stablelib/bytereader",
+  "version": "0.0.1",
+  "description": "Byte reader",
+  "main": "./dist/bytereader.js",
+  "typings": "./dist/bytereader.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/bytereader.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/binary": "*"
+  },
+  "devDependencies": {
+    "@stablelib/benchmark": "*"
+  }
+}

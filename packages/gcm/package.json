@@ -1,0 +1,27 @@
+{
+  "name": "@stablelib/gcm",
+  "version": "0.0.1",
+  "description": "GCM authenticated encryption mode with additional data (AEAD)",
+  "main": "./dist/gcm.js",
+  "typings": "./dist/gcm.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/gcm.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/aead": "*",
+    "@stablelib/blockcipher": "*",
+    "@stablelib/ctr": "*",
+    "@stablelib/binary": "*",
+    "@stablelib/constant-time": "*",
+    "@stablelib/wipe": "*"
+  },
+  "devDependencies": {
+    "@stablelib/aes": "*",
+    "@stablelib/hex": "*",
+    "@stablelib/benchmark": "*"
+  }
+}

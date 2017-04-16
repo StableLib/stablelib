@@ -1,0 +1,18 @@
+{
+  "name": "@stablelib/uuid",
+  "version": "0.0.1",
+  "description": "UUID v4 (random) generator",
+  "main": "./dist/uuid.js",
+  "typings": "./dist/uuid.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+  },
+  "dependencies": {
+    "@stablelib/hex": "*",
+    "@stablelib/wipe": "*",
+    "@stablelib/random": "*"
+  }
+}

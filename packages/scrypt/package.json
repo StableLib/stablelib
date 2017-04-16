@@ -1,0 +1,26 @@
+{
+  "name": "@stablelib/scrypt",
+  "version": "0.0.1",
+  "description": "Scrypt sequential memory-hard key derivation function (RFC 7914)",
+  "main": "./dist/scrypt.js",
+  "typings": "./dist/scrypt.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/scrypt.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/pbkdf2": "*",
+    "@stablelib/sha256": "*",
+    "@stablelib/int": "*",
+    "@stablelib/binary": "*",
+    "@stablelib/wipe": "*"
+  },
+  "devDependencies": {
+    "@stablelib/utf8": "*",
+    "@stablelib/base64": "*",
+    "@stablelib/benchmark": "*"
+  }
+}

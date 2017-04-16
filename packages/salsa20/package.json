@@ -1,0 +1,22 @@
+{
+  "name": "@stablelib/salsa20",
+  "version": "0.0.1",
+  "description": "Salsa20 stream cipher",
+  "main": "./dist/salsa20.js",
+  "typings": "./dist/salsa20.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/salsa20.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/binary": "*",
+    "@stablelib/wipe": "*"
+  },
+  "devDependencies": {
+    "@stablelib/hex": "*",
+    "@stablelib/benchmark": "*"
+  }
+}

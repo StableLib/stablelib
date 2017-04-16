@@ -1,0 +1,16 @@
+{
+  "name": "@stablelib/keyagreement",
+  "version": "0.0.1",
+  "description": "Key agreement interface declaration and utilities",
+  "main": "./dist/keyagreement.js",
+  "typings": "./dist/keyagreement.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+  },
+  "dependencies": {
+    "@stablelib/bytes": "*"
+  }
+}

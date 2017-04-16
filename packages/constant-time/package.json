@@ -1,0 +1,14 @@
+{
+  "name": "@stablelib/constant-time",
+  "version": "0.0.1",
+  "description": "Algorithmically constant-time utility functions",
+  "main": "./dist/constant-time.js",
+  "typings": "./dist/constant-time.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./dist/constant-time.bench.js"
+  }
+}
