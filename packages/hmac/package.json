@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/hmac",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Hash-based message authentication code (HMAC)",
   "main": "./dist/hmac.js",
   "typings": "./dist/hmac.d.ts",
@@ -14,7 +14,7 @@
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
-    "@stablelib/constant-time": "^0.0.1",
+    "@stablelib/constant-time": "^0.0.2",
     "@stablelib/hash": "^0.0.1",
     "@stablelib/wipe": "^0.0.1"
   },

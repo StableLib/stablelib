@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/chacha-drbg",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ChaCha20-based DRBG (digital random byte generator)",
   "main": "./dist/chacha-drbg.js",
   "typings": "./dist/chacha-drbg.d.ts",

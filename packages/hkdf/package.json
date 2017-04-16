@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/hkdf",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "HMAC-based Extract-and-Expand Key Derivation Function (HKDF, RFC 5869)",
   "main": "./dist/hkdf.js",
   "typings": "./dist/hkdf.d.ts",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@stablelib/hash": "^0.0.1",
-    "@stablelib/hmac": "^0.0.1",
+    "@stablelib/hmac": "^0.0.2",
     "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {

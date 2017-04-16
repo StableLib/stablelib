@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/poly1305",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Poly1305 one-time message authentication code",
   "main": "./dist/poly1305.js",
   "typings": "./dist/poly1305.d.ts",
@@ -15,7 +15,7 @@
     "bench": "node ./dist/poly1305.bench.js"
   },
   "dependencies": {
-    "@stablelib/constant-time": "^0.0.1",
+    "@stablelib/constant-time": "^0.0.2",
     "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/hmac-drbg",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "HMAC DRBG (digital random byte generator, NIST)",
   "main": "./dist/hmac-drbg.js",
   "typings": "./dist/hmac-drbg.d.ts",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@stablelib/hash": "^0.0.1",
-    "@stablelib/hmac": "^0.0.1",
+    "@stablelib/hmac": "^0.0.2",
     "@stablelib/random": "^0.0.1",
     "@stablelib/sha256": "^0.0.1",
     "@stablelib/wipe": "^0.0.1"
