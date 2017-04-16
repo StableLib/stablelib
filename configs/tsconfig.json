@@ -12,7 +12,7 @@
         "preserveConstEnums": true,
         "moduleResolution": "node",
         "newLine": "LF",
-        "sourceMap": false,
+        "sourceMap": true,
         "declaration": true,
         "lib": [
             "es5",
