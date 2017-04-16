@@ -1,8 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { RandomSource } from "@stablelib/random/source";
-import { SystemRandomSource } from "@stablelib/random/source/system";
+import { defaultRandomSource, RandomSource } from "@stablelib/random";
 import { streamXOR, stream } from "@stablelib/chacha";
 import { wipe } from "@stablelib/wipe";
 
@@ -34,7 +33,7 @@ export class ChaChaDRBG implements RandomSource {
     // Nonce to use when rekeying.
     private _rekeyNonce = new Uint8Array([3, 0, 0, 0, 0, 0, 0, 0]);
 
-    constructor(private _entropySource: RandomSource = new SystemRandomSource()) {
+    constructor(private _entropySource: RandomSource = defaultRandomSource) {
         this.isAvailable = this._entropySource.isAvailable;
     }
 

@@ -1,8 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { RandomSource } from "@stablelib/random/source";
-import { SystemRandomSource } from "@stablelib/random/source/system";
+import { defaultRandomSource, RandomSource } from "@stablelib/random";
 import { HMAC } from "@stablelib/hmac";
 import { Hash } from "@stablelib/hash";
 import { SHA256 } from "@stablelib/sha256";
@@ -27,7 +26,7 @@ export class HMACDRBG implements RandomSource {
     isInstantiated = false;
 
     constructor(
-        private _entropySource: RandomSource = new SystemRandomSource(),
+        private _entropySource: RandomSource = defaultRandomSource,
         private _hash: new () => Hash = SHA256,
         private _personalization = new Uint8Array(0),
         private _reseedInterval = RESEED_INTERVAL // set to 0 to disable reseeding (not recommended)
