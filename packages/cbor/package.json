@@ -15,15 +15,15 @@
     "bench": "node ./dist/cbor.bench.js"
   },
   "dependencies": {
-    "@stablelib/int": "*",
-    "@stablelib/float": "*",
-    "@stablelib/bytewriter": "*",
-    "@stablelib/bytereader": "*",
-    "@stablelib/utf8": "*"
+    "@stablelib/bytereader": "^0.0.1",
+    "@stablelib/bytewriter": "^0.0.1",
+    "@stablelib/float": "^0.0.1",
+    "@stablelib/int": "^0.0.1",
+    "@stablelib/utf8": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "*",
-    "@stablelib/hex": "*",
-    "@stablelib/bytes": "*"
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/bytes": "^0.0.1",
+    "@stablelib/hex": "^0.0.1"
   }
 }

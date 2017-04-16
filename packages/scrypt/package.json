@@ -15,15 +15,15 @@
     "bench": "node ./dist/scrypt.bench.js"
   },
   "dependencies": {
-    "@stablelib/pbkdf2": "*",
-    "@stablelib/sha256": "*",
-    "@stablelib/int": "*",
-    "@stablelib/binary": "*",
-    "@stablelib/wipe": "*"
+    "@stablelib/binary": "^0.0.1",
+    "@stablelib/int": "^0.0.1",
+    "@stablelib/pbkdf2": "^0.0.1",
+    "@stablelib/sha256": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/utf8": "*",
-    "@stablelib/base64": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/base64": "^0.0.1",
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/utf8": "^0.0.1"
   }
 }

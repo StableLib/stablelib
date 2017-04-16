@@ -14,6 +14,6 @@
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
-    "@stablelib/bytes": "*"
+    "@stablelib/bytes": "^0.0.1"
   }
 }

@@ -15,6 +15,6 @@
     "bench": "node ./dist/bytes.bench.js"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "*"
+    "@stablelib/benchmark": "^0.0.1"
   }
 }

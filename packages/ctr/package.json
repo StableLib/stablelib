@@ -15,12 +15,12 @@
     "bench": "node ./dist/ctr.bench.js"
   },
   "dependencies": {
-    "@stablelib/wipe": "*",
-    "@stablelib/blockcipher": "*"
+    "@stablelib/blockcipher": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/aes": "*",
-    "@stablelib/hex": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/aes": "^0.0.1",
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1"
   }
 }

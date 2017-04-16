@@ -15,14 +15,14 @@
     "bench": "node ./dist/hkdf.bench.js"
   },
   "dependencies": {
-    "@stablelib/hash": "*",
-    "@stablelib/hmac": "*",
-    "@stablelib/wipe": "*"
+    "@stablelib/hash": "^0.0.1",
+    "@stablelib/hmac": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/sha256": "*",
-    "@stablelib/sha512": "*",
-    "@stablelib/hex": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1",
+    "@stablelib/sha256": "^0.0.1",
+    "@stablelib/sha512": "^0.0.1"
   }
 }

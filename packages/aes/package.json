@@ -15,12 +15,12 @@
     "bench": "node ./dist/aes.bench.js"
   },
   "dependencies": {
-    "@stablelib/blockcipher": "*",
-    "@stablelib/wipe": "*",
-    "@stablelib/binary": "*"
+    "@stablelib/binary": "^0.0.1",
+    "@stablelib/blockcipher": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "*",
-    "@stablelib/hex": "*"
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1"
   }
 }

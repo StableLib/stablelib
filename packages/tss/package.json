@@ -15,15 +15,15 @@
     "bench": "node ./dist/tss.bench.js"
   },
   "dependencies": {
-    "@stablelib/hash": "*",
-    "@stablelib/sha256": "*",
-    "@stablelib/random": "*",
-    "@stablelib/gf256": "*",
-    "@stablelib/wipe": "*",
-    "@stablelib/constant-time": "*"
+    "@stablelib/constant-time": "^0.0.1",
+    "@stablelib/gf256": "^0.0.1",
+    "@stablelib/hash": "^0.0.1",
+    "@stablelib/random": "^0.0.1",
+    "@stablelib/sha256": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/hex": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1"
   }
 }

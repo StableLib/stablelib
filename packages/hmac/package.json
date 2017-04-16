@@ -15,14 +15,14 @@
     "bench": "node ./dist/hmac.bench.js"
   },
   "dependencies": {
-    "@stablelib/hash": "*",
-    "@stablelib/constant-time": "*",
-    "@stablelib/wipe": "*"
+    "@stablelib/constant-time": "^0.0.1",
+    "@stablelib/hash": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/sha256": "*",
-    "@stablelib/sha224": "*",
-    "@stablelib/base64": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/base64": "^0.0.1",
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/sha224": "^0.0.1",
+    "@stablelib/sha256": "^0.0.1"
   }
 }

@@ -14,9 +14,9 @@
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
-    "@stablelib/sha256": "*"
+    "@stablelib/sha256": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/base64": "*"
+    "@stablelib/base64": "^0.0.1"
   }
 }

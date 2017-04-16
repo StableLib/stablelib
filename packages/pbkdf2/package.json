@@ -15,18 +15,18 @@
     "bench": "node ./dist/pbkdf2.bench.js"
   },
   "dependencies": {
-    "@stablelib/hash": "*",
-    "@stablelib/hmac": "*",
-    "@stablelib/binary": "*",
-    "@stablelib/wipe": "*"
+    "@stablelib/binary": "^0.0.1",
+    "@stablelib/hash": "^0.0.1",
+    "@stablelib/hmac": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/sha256": "*",
-    "@stablelib/sha224": "*",
-    "@stablelib/sha512": "*",
-    "@stablelib/sha3": "*",
-    "@stablelib/hex": "*",
-    "@stablelib/base64": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/base64": "^0.0.1",
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1",
+    "@stablelib/sha224": "^0.0.1",
+    "@stablelib/sha256": "^0.0.1",
+    "@stablelib/sha3": "^0.0.1",
+    "@stablelib/sha512": "^0.0.1"
   }
 }

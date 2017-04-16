@@ -15,11 +15,11 @@
     "bench": "node ./dist/halfsiphash.bench.js"
   },
   "dependencies": {
-    "@stablelib/int": "*",
-    "@stablelib/binary": "*"
+    "@stablelib/binary": "^0.0.1",
+    "@stablelib/int": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/hex": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1"
   }
 }

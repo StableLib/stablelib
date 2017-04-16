@@ -15,15 +15,15 @@
     "bench": "node ./dist/chacha20poly1305.bench.js"
   },
   "dependencies": {
-    "@stablelib/aead": "*",
-    "@stablelib/chacha": "*",
-    "@stablelib/poly1305": "*",
-    "@stablelib/constant-time": "*",
-    "@stablelib/binary": "*",
-    "@stablelib/wipe": "*"
+    "@stablelib/aead": "^0.0.1",
+    "@stablelib/binary": "^0.0.1",
+    "@stablelib/chacha": "^0.0.1",
+    "@stablelib/constant-time": "^0.0.1",
+    "@stablelib/poly1305": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "*",
-    "@stablelib/hex": "*"
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1"
   }
 }

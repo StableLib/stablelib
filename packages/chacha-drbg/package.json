@@ -15,12 +15,12 @@
     "bench": "node ./dist/chacha-drbg.bench.js"
   },
   "dependencies": {
-    "@stablelib/random": "*",
-    "@stablelib/chacha": "*",
-    "@stablelib/wipe": "*"
+    "@stablelib/chacha": "^0.0.1",
+    "@stablelib/random": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "*",
-    "@stablelib/hex": "*"
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1"
   }
 }

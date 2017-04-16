@@ -15,17 +15,17 @@
     "bench": "node ./dist/newhope.bench.js"
   },
   "dependencies": {
-    "@stablelib/random": "*",
-    "@stablelib/hash": "*",
-    "@stablelib/sha3": "*",
-    "@stablelib/chacha": "*",
-    "@stablelib/binary": "*",
-    "@stablelib/bytes": "*",
-    "@stablelib/wipe": "*",
-    "@stablelib/keyagreement": "*"
+    "@stablelib/binary": "^0.0.1",
+    "@stablelib/bytes": "^0.0.1",
+    "@stablelib/chacha": "^0.0.1",
+    "@stablelib/hash": "^0.0.1",
+    "@stablelib/keyagreement": "^0.0.1",
+    "@stablelib/random": "^0.0.1",
+    "@stablelib/sha3": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/hex": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1"
   }
 }

@@ -15,12 +15,12 @@
     "bench": "node ./dist/ed25519.bench.js"
   },
   "dependencies": {
-    "@stablelib/random": "*",
-    "@stablelib/sha512": "*",
-    "@stablelib/wipe": "*"
+    "@stablelib/random": "^0.0.1",
+    "@stablelib/sha512": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/base64": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/base64": "^0.0.1",
+    "@stablelib/benchmark": "^0.0.1"
   }
 }

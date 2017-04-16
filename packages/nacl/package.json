@@ -15,14 +15,14 @@
     "bench": "node ./dist/secretbox.bench.js"
   },
   "dependencies": {
-    "@stablelib/random": "*",
-    "@stablelib/xsalsa20": "*",
-    "@stablelib/poly1305": "*",
-    "@stablelib/x25519": "*",
-    "@stablelib/wipe": "*"
+    "@stablelib/poly1305": "^0.0.1",
+    "@stablelib/random": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1",
+    "@stablelib/x25519": "^0.0.1",
+    "@stablelib/xsalsa20": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/hex": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1"
   }
 }

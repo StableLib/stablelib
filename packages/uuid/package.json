@@ -14,8 +14,8 @@
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
-    "@stablelib/hex": "*",
-    "@stablelib/wipe": "*",
-    "@stablelib/random": "*"
+    "@stablelib/hex": "^0.0.1",
+    "@stablelib/random": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   }
 }

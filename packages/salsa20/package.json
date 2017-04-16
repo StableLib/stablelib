@@ -15,11 +15,11 @@
     "bench": "node ./dist/salsa20.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "*",
-    "@stablelib/wipe": "*"
+    "@stablelib/binary": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/hex": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1"
   }
 }

@@ -15,12 +15,12 @@
     "bench": "node ./dist/x25519.bench.js"
   },
   "dependencies": {
-    "@stablelib/keyagreement": "*",
-    "@stablelib/random": "*",
-    "@stablelib/wipe": "*"
+    "@stablelib/keyagreement": "^0.0.1",
+    "@stablelib/random": "^0.0.1",
+    "@stablelib/wipe": "^0.0.1"
   },
   "devDependencies": {
-    "@stablelib/hex": "*",
-    "@stablelib/benchmark": "*"
+    "@stablelib/benchmark": "^0.0.1",
+    "@stablelib/hex": "^0.0.1"
   }
 }
