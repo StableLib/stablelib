@@ -7,15 +7,17 @@ import { isInteger } from "@stablelib/int";
 import { readUint32LE, writeUint32LE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";
 
-/**
- * Derives a key from password and salt with parameters
- * N — CPU/memory cost, r — block size, p — parallelization,
- * containing dkLen bytes.
- */
-export function deriveKey(password: Uint8Array, salt: Uint8Array,
-    N: number, r: number, p: number, dkLen: number): Promise<Uint8Array> {
+export class Scrypt {
+    private _XY: Int32Array;
+    private _V: Int32Array;
 
-    return new Promise<Uint8Array>((resolve) => {
+    private _step = 256; // initial step for non-blocking calculation
+
+    readonly N: number;
+    readonly r: number;
+    readonly p: number;
+
+    constructor(N: number, r: number, p: number) {
         // Check parallelization parameter.
         if (p <= 0) {
             throw new Error("scrypt: incorrect p");
@@ -43,26 +45,66 @@ export function deriveKey(password: Uint8Array, salt: Uint8Array,
         }
 
         // XXX we can use Uint32Array, but Int32Array is faster, especially in Safari.
-        const XY = new Int32Array(64 * r);
-        const V = new Int32Array(32 * N * r);
+        this._XY = new Int32Array(64 * r);
+        this._V = new Int32Array(32 * N * r);
+        this.N = N;
+        this.r = r;
+        this.p = p;
+    }
 
-        let B = pbkdf2(SHA256, password, salt, 1, p * 128 * r);
+    deriveKey(password: Uint8Array, salt: Uint8Array, dkLen: number): Promise<Uint8Array> {
+        let B = pbkdf2(SHA256, password, salt, 1, this.p * 128 * this.r);
 
-        for (let i = 0; i < p; i++) {
-            smix(B.subarray(i * 128 * r), r, N, V, XY);
+        for (let i = 0; i < this.p; i++) {
+            smix(B.subarray(i * 128 * this.r), this.r, this.N, this._V, this._XY);
         }
 
         const result = pbkdf2(SHA256, password, B, 1, dkLen);
-
-        // Wipe state.
         wipe(B);
-        wipe(XY);
-        wipe(V);
 
-        resolve(result);
-    });
+        return Promise.resolve(result);
+    }
+
+    deriveKeyNonBlocking(password: Uint8Array, salt: Uint8Array, dkLen: number): Promise<Uint8Array> {
+        let B = pbkdf2(SHA256, password, salt, 1, this.p * 128 * this.r);
+        let tail = Promise.resolve(this._step);
+
+        for (let i = 0; i < this.p; i++) {
+            tail = tail.then(step => smixAsync(B.subarray(i * 128 * this.r), this.r, this.N, this._V, this._XY, step));
+        }
+
+        return tail.then(step => {
+            const result = pbkdf2(SHA256, password, B, 1, dkLen);
+            wipe(B);
+            this._step = step;
+            return result;
+        });
+    }
+
+    clean() {
+        wipe(this._XY);
+        wipe(this._V);
+    }
 }
 
+/**
+ * Derives a key from password and salt with parameters
+ * N — CPU/memory cost, r — block size, p — parallelization,
+ * containing dkLen bytes.
+ */
+export function deriveKey(password: Uint8Array, salt: Uint8Array,
+    N: number, r: number, p: number, dkLen: number): Promise<Uint8Array> {
+    return new Scrypt(N, r, p).deriveKey(password, salt, dkLen);
+}
+
+/**
+ * Same as deriveKey, but performs calculation in a non-blocking way,
+ * making sure to not take more than 100 ms per blocking calculation.
+ */
+export function deriveKeyNonBlocking(password: Uint8Array, salt: Uint8Array,
+    N: number, r: number, p: number, dkLen: number): Promise<Uint8Array> {
+    return new Scrypt(N, r, p).deriveKeyNonBlocking(password, salt, dkLen);
+}
 
 function smix(B: Uint8Array, r: number, N: number, V: Int32Array, XY: Int32Array) {
     const xi = 0;
@@ -95,6 +137,91 @@ function smix(B: Uint8Array, r: number, N: number, V: Int32Array, XY: Int32Array
     wipe(tmp);
 }
 
+const nextTick = (typeof setImmediate !== 'undefined') ? setImmediate : setTimeout;
+
+function splitCalc(start: number, end: number, step: number, fn: (s: number, e: number) => number): Promise<number> {
+    return new Promise<number>(fulfill => {
+        let adjusted = false;
+        let startTime: number;
+        const TARGET_MS = 100; // target milliseconds per calculation
+
+        function nextStep() {
+            if (!adjusted) {
+                // Get current time.
+                startTime = Date.now();
+            }
+
+            // Perform the next step of calculation.
+            start = fn(start, start + step < end ? start + step : end);
+
+            if (start < end) {
+                if (!adjusted) {
+                    // There are more steps to do.
+                    // Measure the time it took for calculation and decide
+                    // if we should increase the step.
+                    const dur = Date.now() - startTime;
+                    if (dur < TARGET_MS) {
+                        if (dur <= 0) {
+                            // Double the steps if duration is too small or negative.
+                            step *= 2;
+                        } else {
+                            step = Math.floor(step * 100 / dur);
+                        }
+                    } else {
+                        // Don't bother with adjusting steps anymore.
+                        adjusted = true;
+                    }
+                }
+                nextTick(() => { nextStep(); });
+            } else {
+                fulfill(step);
+            }
+        }
+
+        nextStep();
+    });
+}
+
+function smixAsync(B: Uint8Array, r: number, N: number, V: Int32Array, XY: Int32Array, initialStep: number): Promise<number> {
+    const xi = 0;
+    const yi = 32 * r;
+    const tmp = new Int32Array(16);
+
+    for (let i = 0; i < 32 * r; i++) {
+        XY[xi + i] = readUint32LE(B, i * 4);
+    }
+
+    return Promise.resolve(initialStep)
+        .then(step => splitCalc(0, N, step, (i: number, end: number): number => {
+            for (; i < end; i += 2) {
+                blockCopy(V, i * (32 * r), XY, xi, 32 * r);
+                blockMix(tmp, XY, xi, yi, r);
+
+                blockCopy(V, (i + 1) * (32 * r), XY, yi, 32 * r);
+                blockMix(tmp, XY, yi, xi, r);
+            }
+            return i;
+        }))
+        .then(step => splitCalc(0, N, step, (i: number, end: number): number => {
+            for (; i < end; i += 2) {
+                let j = integerify(XY, xi, r) & (N - 1);
+                blockXOR(XY, xi, V, j * (32 * r), 32 * r);
+                blockMix(tmp, XY, xi, yi, r);
+
+                j = integerify(XY, yi, r) & (N - 1);
+                blockXOR(XY, yi, V, j * (32 * r), 32 * r);
+                blockMix(tmp, XY, yi, xi, r);
+            }
+            return i;
+        }))
+        .then(step => {
+            for (let i = 0; i < 32 * r; i++) {
+                writeUint32LE(XY[xi + i], B, i * 4);
+            }
+            wipe(tmp);
+            return step;
+        });
+}
 
 function salsaXOR(tmp: Int32Array, B: Int32Array, bin: number, bout: number) {
     const j0 = tmp[0] ^ B[bin++],
@@ -199,6 +326,6 @@ function blockMix(tmp: Int32Array, B: Int32Array, bin: number, bout: number, r: 
     }
 }
 
-function integerify(B: Int32Array, bi: number, r: number) {
+function integerify(B: Int32Array, bi: number, r: number): number {
     return B[bi + (2 * r - 1) * 16];
 }

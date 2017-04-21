@@ -3,7 +3,7 @@
 
 import { encode as encodeBase64 } from "@stablelib/base64";
 import { encode as encodeUTF8 } from "@stablelib/utf8";
-import { deriveKey } from "./scrypt";
+import { deriveKey, deriveKeyNonBlocking } from "./scrypt";
 
 const vectors = [
     {
@@ -247,6 +247,23 @@ describe("scrypt.deriveKey", () => {
             const password = encodeUTF8(v.password);
             const salt = encodeUTF8(v.salt);
             deriveKey(password, salt, 1 << v.logN, v.r, v.p, v.dkLen).then((key: Uint8Array) => {
+                expect(encodeBase64(key)).toBe(v.result);
+                runTests(i + 1);
+            });
+        }
+        runTests(0);
+    });
+
+    it("should derive correct key (non-blocking)", (done) => {
+        function runTests(i: number) {
+            if (i === vectors.length) {
+                done();
+                return;
+            }
+            const v = vectors[i];
+            const password = encodeUTF8(v.password);
+            const salt = encodeUTF8(v.salt);
+            deriveKeyNonBlocking(password, salt, 1 << v.logN, v.r, v.p, v.dkLen).then((key: Uint8Array) => {
                 expect(encodeBase64(key)).toBe(v.result);
                 runTests(i + 1);
             });
