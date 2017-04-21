@@ -53,7 +53,7 @@ export class Scrypt {
     }
 
     deriveKey(password: Uint8Array, salt: Uint8Array, dkLen: number): Promise<Uint8Array> {
-        let B = pbkdf2(SHA256, password, salt, 1, this.p * 128 * this.r);
+        const B = pbkdf2(SHA256, password, salt, 1, this.p * 128 * this.r);
 
         for (let i = 0; i < this.p; i++) {
             smix(B.subarray(i * 128 * this.r), this.r, this.N, this._V, this._XY);
@@ -66,7 +66,7 @@ export class Scrypt {
     }
 
     deriveKeyNonBlocking(password: Uint8Array, salt: Uint8Array, dkLen: number): Promise<Uint8Array> {
-        let B = pbkdf2(SHA256, password, salt, 1, this.p * 128 * this.r);
+        const B = pbkdf2(SHA256, password, salt, 1, this.p * 128 * this.r);
         let tail = Promise.resolve(this._step);
 
         for (let i = 0; i < this.p; i++) {
