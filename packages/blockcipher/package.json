@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/blockcipher",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Block cipher interface declaration",
   "main": "./dist/blockcipher.js",
   "typings": "./dist/blockcipher.d.ts",
