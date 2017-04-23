@@ -1,7 +1,7 @@
 {
   "name": "@stablelib/gcm",
   "version": "0.1.1",
-  "description": "GCM authenticated encryption mode with additional data (AEAD)",
+  "description": "GCM authenticated encryption mode with associated data (AEAD)",
   "main": "./dist/gcm.js",
   "typings": "./dist/gcm.d.ts",
   "author": "Dmitry Chestnykh",

@@ -34,3 +34,7 @@ export interface BlockCipher {
      */
     clean(): this;
 }
+
+export interface BlockCipherContructor {
+    new(key: Uint8Array, noDecryption?: boolean): BlockCipher;
+}

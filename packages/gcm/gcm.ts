@@ -47,13 +47,13 @@ export class GCM implements AEAD {
     }
 
     /**
-     * Encrypts and authenticates plaintext, authenticates additional data,
+     * Encrypts and authenticates plaintext, authenticates associated data,
      * and returns sealed ciphertext, which includes authentication tag.
      *
      * If dst is given (it must be the size of plaintext + the size of tag length)
      * the result will be put into it. Dst and plaintext must not overlap.
      */
-    seal(nonce: Uint8Array, plaintext: Uint8Array, additionalData?: Uint8Array,
+    seal(nonce: Uint8Array, plaintext: Uint8Array, associatedData?: Uint8Array,
         dst?: Uint8Array): Uint8Array {
         if (nonce.length !== this.nonceLength) {
             throw new Error("GCM: incorrect nonce length");
@@ -99,7 +99,7 @@ export class GCM implements AEAD {
 
         // Authenticate.
         this._authenticate(result.subarray(result.length - this.tagLength, result.length),
-            tagMask, result.subarray(0, result.length - this.tagLength), additionalData);
+            tagMask, result.subarray(0, result.length - this.tagLength), associatedData);
 
         // Cleanup.
         wipe(counter);
@@ -110,14 +110,14 @@ export class GCM implements AEAD {
 
     /**
      * Authenticates sealed ciphertext (which includes authentication tag) and
-     * additional data, decrypts ciphertext and returns decrypted plaintext.
+     * associated data, decrypts ciphertext and returns decrypted plaintext.
      *
      * If authentication fails, it returns null.
      *
      * If dst is given (it must be of ciphertext length minus tag length),
      * the result will be put into it. Dst and plaintext must not overlap.
      */
-    open(nonce: Uint8Array, sealed: Uint8Array, additionalData?: Uint8Array,
+    open(nonce: Uint8Array, sealed: Uint8Array, associatedData?: Uint8Array,
         dst?: Uint8Array): Uint8Array | null {
         if (nonce.length !== this.nonceLength) {
             throw new Error("GCM: incorrect nonce length");
@@ -148,7 +148,7 @@ export class GCM implements AEAD {
         // Authenticate.
         const calculatedTag = new Uint8Array(this.tagLength);
         this._authenticate(calculatedTag, tagMask,
-            sealed.subarray(0, sealed.length - this.tagLength), additionalData);
+            sealed.subarray(0, sealed.length - this.tagLength), associatedData);
 
         // Constant-time compare tags and return null if they differ.
         if (!equal(calculatedTag,
@@ -188,15 +188,15 @@ export class GCM implements AEAD {
     }
 
     private _authenticate(tagOut: Uint8Array, tagMask: Uint8Array,
-        ciphertext: Uint8Array, additionalData?: Uint8Array) {
+        ciphertext: Uint8Array, associatedData?: Uint8Array) {
 
         const blockSize = this._cipher.blockSize;
 
-        // Authenticate additional data.
-        if (additionalData) {
-            for (let i = 0; i < additionalData.length; i += blockSize) {
-                const slice = additionalData.subarray(i,
-                    Math.min(i + blockSize, additionalData.length));
+        // Authenticate associated data.
+        if (associatedData) {
+            for (let i = 0; i < associatedData.length; i += blockSize) {
+                const slice = associatedData.subarray(i,
+                    Math.min(i + blockSize, associatedData.length));
                 addmul(tagOut, slice, this._subkey);
             }
         }
@@ -207,11 +207,11 @@ export class GCM implements AEAD {
             addmul(tagOut, slice, this._subkey);
         }
 
-        // Make a block of additional data and ciphertext (plaintext) bit lengths.
+        // Make a block of associated data and ciphertext (plaintext) bit lengths.
         // XXX: can avoid allocation here?
         const lengthsBlock = new Uint8Array(blockSize);
-        if (additionalData) {
-            writeBitLength(additionalData.length, lengthsBlock, 0);
+        if (associatedData) {
+            writeBitLength(associatedData.length, lengthsBlock, 0);
         }
         writeBitLength(ciphertext.length, lengthsBlock, 8);
         addmul(tagOut, lengthsBlock, this._subkey);

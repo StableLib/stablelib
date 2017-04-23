@@ -1,7 +1,7 @@
 {
   "name": "@stablelib/aead",
   "version": "0.0.1",
-  "description": "AEAD interface declaration (authenticated encryption with additional data)",
+  "description": "AEAD interface declaration (authenticated encryption with associated data)",
   "main": "./dist/aead.js",
   "typings": "./dist/aead.d.ts",
   "author": "Dmitry Chestnykh",

@@ -15,7 +15,7 @@ export const TAG_LENGTH = 16;
 const ZEROS = new Uint8Array(16);
 
 /**
- * ChaCha20-Poly1305 Authenticated Encryption with Additional Data.
+ * ChaCha20-Poly1305 Authenticated Encryption with Associated Data.
  *
  * Defined in RFC7539.
  */
@@ -37,7 +37,7 @@ export class ChaCha20Poly1305 implements AEAD {
     }
 
     /**
-     * Encrypts and authenticates plaintext, authenticates additional data,
+     * Encrypts and authenticates plaintext, authenticates associated data,
      * and returns sealed ciphertext, which includes authentication tag.
      *
      * RFC7539 specifies 12 bytes for nonce. It may be this 12-byte nonce
@@ -48,7 +48,7 @@ export class ChaCha20Poly1305 implements AEAD {
      * length) the result will be put into it. Dst and plaintext must not
      * overlap.
      */
-    seal(nonce: Uint8Array, plaintext: Uint8Array, additionalData?: Uint8Array,
+    seal(nonce: Uint8Array, plaintext: Uint8Array, associatedData?: Uint8Array,
         dst?: Uint8Array): Uint8Array {
         if (nonce.length > 16) {
             throw new Error("ChaCha20Poly1305: incorrect nonce length");
@@ -86,7 +86,7 @@ export class ChaCha20Poly1305 implements AEAD {
         // due to zeroes prepared for tag), and ciphertext length instead of
         // subarray of result.
         this._authenticate(result.subarray(result.length - this.tagLength, result.length),
-            authKey, result.subarray(0, result.length - this.tagLength), additionalData);
+            authKey, result.subarray(0, result.length - this.tagLength), associatedData);
 
         // Cleanup.
         wipe(counter);
@@ -96,7 +96,7 @@ export class ChaCha20Poly1305 implements AEAD {
 
     /**
      * Authenticates sealed ciphertext (which includes authentication tag) and
-     * additional data, decrypts ciphertext and returns decrypted plaintext.
+     * associated data, decrypts ciphertext and returns decrypted plaintext.
      *
      * RFC7539 specifies 12 bytes for nonce. It may be this 12-byte nonce
      * ("IV"), or full 16-byte counter (called "32-bit fixed-common part")
@@ -107,7 +107,7 @@ export class ChaCha20Poly1305 implements AEAD {
      * If dst is given (it must be of ciphertext length minus tag length),
      * the result will be put into it. Dst and plaintext must not overlap.
      */
-    open(nonce: Uint8Array, sealed: Uint8Array, additionalData?: Uint8Array,
+    open(nonce: Uint8Array, sealed: Uint8Array, associatedData?: Uint8Array,
         dst?: Uint8Array): Uint8Array | null {
         if (nonce.length > 16) {
             throw new Error("ChaCha20Poly1305: incorrect nonce length");
@@ -134,7 +134,7 @@ export class ChaCha20Poly1305 implements AEAD {
         // we'll need to copy it.
         const calculatedTag = new Uint8Array(this.tagLength);
         this._authenticate(calculatedTag, authKey,
-            sealed.subarray(0, sealed.length - this.tagLength), additionalData);
+            sealed.subarray(0, sealed.length - this.tagLength), associatedData);
 
         // Constant-time compare tags and return null if they differ.
         if (!equal(calculatedTag,
@@ -170,16 +170,16 @@ export class ChaCha20Poly1305 implements AEAD {
     }
 
     private _authenticate(tagOut: Uint8Array, authKey: Uint8Array,
-        ciphertext: Uint8Array, additionalData?: Uint8Array) {
+        ciphertext: Uint8Array, associatedData?: Uint8Array) {
 
         // Initialize Poly1305 with authKey.
         const h = new Poly1305(authKey);
 
-        // Authenticate padded additional data.
-        if (additionalData) {
-            h.update(additionalData);
-            if (additionalData.length % 16 > 0) {
-                h.update(ZEROS.subarray(additionalData.length % 16));
+        // Authenticate padded associated data.
+        if (associatedData) {
+            h.update(associatedData);
+            if (associatedData.length % 16 > 0) {
+                h.update(ZEROS.subarray(associatedData.length % 16));
             }
         }
 
@@ -189,11 +189,11 @@ export class ChaCha20Poly1305 implements AEAD {
             h.update(ZEROS.subarray(ciphertext.length % 16));
         }
 
-        // Authenticate length of additional data.
+        // Authenticate length of associated data.
         // XXX: can avoid allocation here?
         const length = new Uint8Array(8);
-        if (additionalData) {
-            writeUint64LE(additionalData.length, length);
+        if (associatedData) {
+            writeUint64LE(associatedData.length, length);
         }
         h.update(length);
 
