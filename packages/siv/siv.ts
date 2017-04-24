@@ -21,6 +21,9 @@ export class SIV {
     tagLength: number;
 
     constructor(cipher: BlockCipherContructor, key: Uint8Array) {
+        if (key.length % 2 !== 0 || key.length < 32) {
+            throw new Error("SIV: key size must be a double of block cipher key size");
+        }
         const macKey = key.subarray(0, key.length / 2 | 0);
         const encKey = key.subarray(key.length / 2 | 0);
 

@@ -159,5 +159,13 @@ describe("SIV (AES)", () => {
             expect(unsealed).toBeNull();
         });
     });
+
+    it("should not accept keys smaller than 256 bits", () => {
+        expect(() => new SIV(AES, new Uint8Array(16))).toThrowError(/key size/);
+    });
+
+    it("should not accept key lengths not divisible by 2", () => {
+        expect(() => new SIV(AES, new Uint8Array(255))).toThrowError(/key size/);
+    });
 });
 
