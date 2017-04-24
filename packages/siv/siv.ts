@@ -24,8 +24,8 @@ export class SIV {
         const macKey = key.subarray(0, key.length / 2 | 0);
         const encKey = key.subarray(key.length / 2 | 0);
 
-        this._macCipher = new cipher(macKey);
-        this._encCipher = new cipher(encKey);
+        this._macCipher = new cipher(macKey, true);
+        this._encCipher = new cipher(encKey, true);
         this._mac = new CMAC(this._macCipher);
 
         if (this._mac.digestLength !== this._mac.blockSize) {
