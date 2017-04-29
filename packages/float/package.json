@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/float",
-  "version": "0.0.1",
+  "version": "0.2.5",
   "description": "Floating-point number utilities",
   "main": "./dist/float.js",
   "typings": "./dist/float.d.ts",

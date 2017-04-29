@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/random",
-  "version": "0.0.1",
+  "version": "0.2.5",
   "description": "Cryptographically-secure pseudorandom number generator",
   "main": "./dist/random.js",
   "typings": "./dist/random.d.ts",
@@ -14,11 +14,11 @@
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
-    "@stablelib/binary": "^0.0.1",
-    "@stablelib/wipe": "^0.0.1"
+    "@stablelib/binary": "^0.2.5",
+    "@stablelib/wipe": "^0.2.5"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.0.1",
-    "@stablelib/hex": "^0.0.1"
+    "@stablelib/benchmark": "^0.2.5",
+    "@stablelib/hex": "^0.2.5"
   }
 }

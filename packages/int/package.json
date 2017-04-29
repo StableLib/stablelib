@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/int",
-  "version": "0.0.1",
+  "version": "0.2.5",
   "description": "Integer number utilities",
   "main": "./dist/int.js",
   "typings": "./dist/int.d.ts",

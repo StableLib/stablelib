@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/cbor",
-  "version": "0.0.1",
+  "version": "0.2.5",
   "description": "CBOR encoder and decoder",
   "main": "./dist/cbor.js",
   "typings": "./dist/cbor.d.ts",
@@ -15,15 +15,15 @@
     "bench": "node ./dist/cbor.bench.js"
   },
   "dependencies": {
-    "@stablelib/bytereader": "^0.0.1",
-    "@stablelib/bytewriter": "^0.0.1",
-    "@stablelib/float": "^0.0.1",
-    "@stablelib/int": "^0.0.1",
-    "@stablelib/utf8": "^0.0.1"
+    "@stablelib/bytereader": "^0.2.5",
+    "@stablelib/bytewriter": "^0.2.5",
+    "@stablelib/float": "^0.2.5",
+    "@stablelib/int": "^0.2.5",
+    "@stablelib/utf8": "^0.2.5"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.0.1",
-    "@stablelib/bytes": "^0.0.1",
-    "@stablelib/hex": "^0.0.1"
+    "@stablelib/benchmark": "^0.2.5",
+    "@stablelib/bytes": "^0.2.5",
+    "@stablelib/hex": "^0.2.5"
   }
 }

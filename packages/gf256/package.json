@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/gf256",
-  "version": "0.0.1",
+  "version": "0.2.5",
   "description": "Arithmetic in GF(256)",
   "main": "./dist/gf256.js",
   "typings": "./dist/gf256.d.ts",
@@ -15,6 +15,6 @@
     "bench": "node ./dist/gf256.bench.js"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.0.1"
+    "@stablelib/benchmark": "^0.2.5"
   }
 }

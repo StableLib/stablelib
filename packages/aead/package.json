@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/aead",
-  "version": "0.1.2",
+  "version": "0.2.5",
   "description": "AEAD interface declaration (authenticated encryption with associated data)",
   "main": "./dist/aead.js",
   "typings": "./dist/aead.d.ts",

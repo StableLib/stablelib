@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/tss",
-  "version": "0.0.2",
+  "version": "0.2.5",
   "description": "Threshold Secret Sharing (TSS and RTSS, IETF draft-mcgrew-tss-03)",
   "main": "./dist/tss.js",
   "typings": "./dist/tss.d.ts",
@@ -15,15 +15,15 @@
     "bench": "node ./dist/tss.bench.js"
   },
   "dependencies": {
-    "@stablelib/constant-time": "^0.0.2",
-    "@stablelib/gf256": "^0.0.1",
-    "@stablelib/hash": "^0.0.1",
-    "@stablelib/random": "^0.0.1",
-    "@stablelib/sha256": "^0.0.1",
-    "@stablelib/wipe": "^0.0.1"
+    "@stablelib/constant-time": "^0.2.5",
+    "@stablelib/gf256": "^0.2.5",
+    "@stablelib/hash": "^0.2.5",
+    "@stablelib/random": "^0.2.5",
+    "@stablelib/sha256": "^0.2.5",
+    "@stablelib/wipe": "^0.2.5"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.0.1",
-    "@stablelib/hex": "^0.0.1"
+    "@stablelib/benchmark": "^0.2.5",
+    "@stablelib/hex": "^0.2.5"
   }
 }

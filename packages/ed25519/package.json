@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/ed25519",
-  "version": "0.0.1",
+  "version": "0.2.5",
   "description": "Ed25519 public-key signature (EdDSA with Curve25519)",
   "main": "./dist/ed25519.js",
   "typings": "./dist/ed25519.d.ts",
@@ -15,12 +15,12 @@
     "bench": "node ./dist/ed25519.bench.js"
   },
   "dependencies": {
-    "@stablelib/random": "^0.0.1",
-    "@stablelib/sha512": "^0.0.1",
-    "@stablelib/wipe": "^0.0.1"
+    "@stablelib/random": "^0.2.5",
+    "@stablelib/sha512": "^0.2.5",
+    "@stablelib/wipe": "^0.2.5"
   },
   "devDependencies": {
-    "@stablelib/base64": "^0.0.1",
-    "@stablelib/benchmark": "^0.0.1"
+    "@stablelib/base64": "^0.2.5",
+    "@stablelib/benchmark": "^0.2.5"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/salsa20",
-  "version": "0.0.1",
+  "version": "0.2.5",
   "description": "Salsa20 stream cipher",
   "main": "./dist/salsa20.js",
   "typings": "./dist/salsa20.d.ts",
@@ -15,11 +15,11 @@
     "bench": "node ./dist/salsa20.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^0.0.1",
-    "@stablelib/wipe": "^0.0.1"
+    "@stablelib/binary": "^0.2.5",
+    "@stablelib/wipe": "^0.2.5"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.0.1",
-    "@stablelib/hex": "^0.0.1"
+    "@stablelib/benchmark": "^0.2.5",
+    "@stablelib/hex": "^0.2.5"
   }
 }
