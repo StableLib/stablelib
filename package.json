@@ -9,7 +9,8 @@
     "test": "lerna run test",
     "bench": "lerna run bench",
     "lint": "tslint packages/**/*.ts",
-    "publish-all": "lerna publish"
+    "publish-all": "lerna publish",
+    "docs": "typedoc --mode modules --disableOutputCheck --out ../stablelib.github.io/ --ignoreCompilerErrors --excludeExternals --excludePrivate --excludeNotExported --externalPattern '**/node_modules/**' --exclude '**/*.+(test|test-data|bench).ts' --name 'StableLib' --module commonjs ."
   },
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -23,6 +24,7 @@
     "jasmine": "^2.5.2",
     "lerna": "2.0.0-rc.2",
     "tslint": "^5.1.0",
+    "typedoc": "^0.6.0",
     "typescript": "^2.3.1"
   }
 }
