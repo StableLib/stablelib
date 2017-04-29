@@ -367,7 +367,7 @@ export type DecoderOptions = {
 
     /**
      * If true, map keys must be unique (after conversion to string).
-     * Throw if encoutered duplicate keys.
+     * Throw if encountered duplicate keys.
      *
      * By default, false.
      */
