@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/xsalsa20",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "XSalsa20 (eXtended-nonce Salsa20) stream cipher",
   "main": "./dist/xsalsa20.js",
   "typings": "./dist/xsalsa20.d.ts",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@stablelib/binary": "^0.2.5",
-    "@stablelib/salsa20": "^0.2.5",
+    "@stablelib/salsa20": "^0.3.0",
     "@stablelib/wipe": "^0.2.5"
   },
   "devDependencies": {
