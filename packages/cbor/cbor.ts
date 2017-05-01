@@ -513,7 +513,8 @@ export type DecoderOptions = {
 
 export const DEFAULT_DECODER_OPTIONS: DecoderOptions = {
     noCopy: false,
-    ignoreExtraData: false
+    ignoreExtraData: false,
+    taggedDecoders: DEFAULT_TAGGED_DECODERS
 };
 
 export class Decoder {
