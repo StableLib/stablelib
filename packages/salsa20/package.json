@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@stablelib/binary": "^0.2.5",
+    "@stablelib/constant-time": "^0.2.5",
     "@stablelib/wipe": "^0.2.5"
   },
   "devDependencies": {
