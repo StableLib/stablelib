@@ -97,6 +97,7 @@ export const DateStringEncoder: TaggedEncoder<Date> =
         if (date instanceof Date) {
             return new Tagged(Tags.DateString, date.toISOString().slice(0, 19) + "Z");
         }
+        return undefined;
     };
 
 export const DateStringDecoder: TaggedDecoder<Date> =
@@ -110,6 +111,7 @@ export const DateStringDecoder: TaggedDecoder<Date> =
             }
             return new Date(value);
         }
+        return undefined;
     };
 
 // This encoder is unused by default, because dates are processed with
@@ -119,6 +121,7 @@ export const DateNumberEncoder: TaggedEncoder<Date> =
         if (date instanceof Date) {
             return new Tagged(Tags.DateNumber, date.getTime() / 1000);
         }
+        return undefined;
     };
 
 export const DateNumberDecoder: TaggedDecoder<Date> =
@@ -129,6 +132,7 @@ export const DateNumberDecoder: TaggedDecoder<Date> =
             }
             return new Date(value * 1000);
         }
+        return undefined;
     };
 
 export const RegExpEncoder: TaggedEncoder<RegExp> =
@@ -136,6 +140,7 @@ export const RegExpEncoder: TaggedEncoder<RegExp> =
         if (rx instanceof RegExp) {
             return new Tagged(Tags.RegExp, rx.toString());
         }
+        return undefined;
     };
 
 export const RegExpDecoder: TaggedDecoder<RegExp> =
@@ -150,6 +155,7 @@ export const RegExpDecoder: TaggedDecoder<RegExp> =
             }
             return new RegExp(matches[1], matches[2]);
         }
+        return undefined;
     };
 
 /**

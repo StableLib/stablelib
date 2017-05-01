@@ -266,6 +266,7 @@ describe("cbor", () => {
                 if (h instanceof Hello) {
                     return new Tagged(7777, h.get());
                 }
+                return undefined;
             };
 
         const HelloDecoder: TaggedDecoder<Hello> =
@@ -276,6 +277,7 @@ describe("cbor", () => {
                     }
                     return new Hello(value);
                 }
+                return undefined;
             };
 
         const testData = {
