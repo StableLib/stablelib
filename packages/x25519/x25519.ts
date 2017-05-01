@@ -592,13 +592,25 @@ export function generateKeyPair(prng?: RandomSource): KeyPair {
 /**
  * Returns a shared key between our secret key and a peer's public key.
  *
- * Throws an error if the given keys are of wrong length or the calculated
- * result is all-zero.
+ * Throws an error if the given keys are of wrong length.
  *
- * Important: the returned key is a raw result exponentiation.
+ * If rejectZero is true throws if the calculated shared key is all-zero.
+ * From RFC 7748:
+ *
+ * > Protocol designers using Diffie-Hellman over the curves defined in
+ * > this document must not assume "contributory behaviour".  Specially,
+ * > contributory behaviour means that both parties' private keys
+ * > contribute to the resulting shared key.  Since curve25519 and
+ * > curve448 have cofactors of 8 and 4 (respectively), an input point of
+ * > small order will eliminate any contribution from the other party's
+ * > private key.  This situation can be detected by checking for the all-
+ * > zero output, which implementations MAY do, as specified in Section 6.
+ * > However, a large number of existing implementations do not do this.
+ *
+ * Important: the returned key is a raw result of scalar multiplication.
  * To use it as a key material, hash it with a cryptographic hash function.
  */
-export function sharedKey(mySecretKey: Uint8Array, theirPublicKey: Uint8Array): Uint8Array {
+export function sharedKey(mySecretKey: Uint8Array, theirPublicKey: Uint8Array, rejectZero = false): Uint8Array {
     if (mySecretKey.length !== PUBLIC_KEY_LENGTH) {
         throw new Error("X25519: incorrect secret key length");
     }
@@ -608,12 +620,14 @@ export function sharedKey(mySecretKey: Uint8Array, theirPublicKey: Uint8Array): 
 
     const result = scalarMult(mySecretKey, theirPublicKey);
 
-    let zeros = 0;
-    for (let i = 0; i < result.length; i++) {
-        zeros |= result[i];
-    }
-    if (zeros === 0) {
-        throw new Error("X25519: invalid shared key");
+    if (rejectZero) {
+        let zeros = 0;
+        for (let i = 0; i < result.length; i++) {
+            zeros |= result[i];
+        }
+        if (zeros === 0) {
+            throw new Error("X25519: invalid shared key");
+        }
     }
 
     return result;

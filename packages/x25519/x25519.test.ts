@@ -30,10 +30,16 @@ describe("x25519.scalarMultBase", () => {
         expect(s0).toEqual(s1);
     });
 
-    it("should throw if shared key is all-zero", () => {
+    it("should throw if shared key is all-zero and rejectZero = true", () => {
         const k = generateKeyPair();
         const z = new Uint8Array(32);
-        expect(() => sharedKey(k.secretKey, z)).toThrowError(/invalid/);
+        expect(() => sharedKey(k.secretKey, z, true)).toThrowError(/invalid/);
+    });
+
+    it("should not throw if shared key is all-zero and rejectZero = false", () => {
+        const k = generateKeyPair();
+        const z = new Uint8Array(32);
+        expect(sharedKey(k.secretKey, z)).toBeTruthy();
     });
 });
 
