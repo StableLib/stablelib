@@ -262,22 +262,22 @@ describe("cbor", () => {
         }
 
         const HelloEncoder: TaggedEncoder<Hello> =
-            (h: Hello | any): Tagged | undefined => {
-                if (h instanceof Hello) {
-                    return new Tagged(7777, h.get());
+            h => {
+                if (!(h instanceof Hello)) {
+                    return undefined;
                 }
-                return undefined;
+                return new Tagged(7777, h.get());
             };
 
         const HelloDecoder: TaggedDecoder<Hello> =
-            ({ tag, value }: Tagged): Hello | undefined => {
-                if (tag === 7777) {
-                    if (typeof value !== "string") {
-                        throw new Error(`cbor: unexpected type for Hello string: "${typeof value}"`);
-                    }
-                    return new Hello(value);
+            ({ tag, value }) => {
+                if (tag !== 7777) {
+                    return undefined;
                 }
-                return undefined;
+                if (typeof value !== "string") {
+                    throw new Error(`cbor: unexpected type for Hello string: "${typeof value}"`);
+                }
+                return new Hello(value);
             };
 
         const testData = {

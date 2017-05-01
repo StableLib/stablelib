@@ -82,7 +82,7 @@ export class Tagged {
  * If it can encode the object, it must return a Tagged instance,
  * otherwise must return undefined.
  */
-export type TaggedEncoder<T> = (obj: T | any) => Tagged | undefined;
+export type TaggedEncoder<T> = (obj: T | object) => Tagged | undefined;
 
 /**
  * Tagged value decoder.
@@ -93,69 +93,69 @@ export type TaggedEncoder<T> = (obj: T | any) => Tagged | undefined;
 export type TaggedDecoder<T> = (tagged: Tagged) => T | undefined;
 
 export const DateStringEncoder: TaggedEncoder<Date> =
-    (date: Date | any): Tagged | undefined => {
-        if (date instanceof Date) {
-            return new Tagged(Tags.DateString, date.toISOString().slice(0, 19) + "Z");
+    date => {
+        if (!(date instanceof Date)) {
+            return undefined;
         }
-        return undefined;
+        return new Tagged(Tags.DateString, date.toISOString().slice(0, 19) + "Z");
     };
 
 export const DateStringDecoder: TaggedDecoder<Date> =
-    ({ tag, value }: Tagged): Date | undefined => {
-        if (tag === Tags.DateString) {
-            if (typeof value !== "string") {
-                throw new Error(`cbor: unexpected type for date string: "${typeof value}"`);
-            }
-            if (!ISO_DATE_RX.test(value)) {
-                throw new Error(`cbor: invalid date string format`);
-            }
-            return new Date(value);
+    ({ tag, value }) => {
+        if (tag !== Tags.DateString) {
+            return undefined;
         }
-        return undefined;
+        if (typeof value !== "string") {
+            throw new Error(`cbor: unexpected type for date string: "${typeof value}"`);
+        }
+        if (!ISO_DATE_RX.test(value)) {
+            throw new Error(`cbor: invalid date string format`);
+        }
+        return new Date(value);
     };
 
 // This encoder is unused by default, because dates are processed with
 // DateStringEncoder. The decoder is used, though.
 export const DateNumberEncoder: TaggedEncoder<Date> =
-    (date: Date | any): Tagged | undefined => {
-        if (date instanceof Date) {
-            return new Tagged(Tags.DateNumber, date.getTime() / 1000);
+    date => {
+        if (!(date instanceof Date)) {
+            return undefined;
         }
-        return undefined;
+        return new Tagged(Tags.DateNumber, date.getTime() / 1000);
     };
 
 export const DateNumberDecoder: TaggedDecoder<Date> =
-    ({ tag, value }: Tagged): Date | undefined => {
-        if (tag === Tags.DateNumber) {
-            if (typeof value !== "number") {
-                throw new Error(`cbor: unexpected type for date number: "${typeof value}"`);
-            }
-            return new Date(value * 1000);
+    ({ tag, value }) => {
+        if (tag !== Tags.DateNumber) {
+            return undefined;
         }
-        return undefined;
+        if (typeof value !== "number") {
+            throw new Error(`cbor: unexpected type for date number: "${typeof value}"`);
+        }
+        return new Date(value * 1000);
     };
 
 export const RegExpEncoder: TaggedEncoder<RegExp> =
-    (rx: RegExp | any): Tagged | undefined => {
-        if (rx instanceof RegExp) {
-            return new Tagged(Tags.RegExp, rx.toString());
+    rx => {
+        if (!(rx instanceof RegExp)) {
+            return undefined;
         }
-        return undefined;
+        return new Tagged(Tags.RegExp, rx.toString());
     };
 
 export const RegExpDecoder: TaggedDecoder<RegExp> =
-    ({ tag, value }: Tagged): RegExp | undefined => {
-        if (tag === Tags.RegExp) {
-            if (typeof value !== "string") {
-                throw new Error(`cbor: unexpected type for regexp: "${typeof value}"`);
-            }
-            let matches = value.match(/^\/(.*)\/(.*)$/);
-            if (!matches || matches.length < 3) {
-                throw new Error('cbor: invalid regexp format');
-            }
-            return new RegExp(matches[1], matches[2]);
+    ({ tag, value }) => {
+        if (tag !== Tags.RegExp) {
+            return undefined;
         }
-        return undefined;
+        if (typeof value !== "string") {
+            throw new Error(`cbor: unexpected type for regexp: "${typeof value}"`);
+        }
+        let matches = value.match(/^\/(.*)\/(.*)$/);
+        if (!matches || matches.length < 3) {
+            throw new Error('cbor: invalid regexp format');
+        }
+        return new RegExp(matches[1], matches[2]);
     };
 
 /**
