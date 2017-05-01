@@ -3,7 +3,10 @@
 
 import * as hex from "@stablelib/hex";
 import { concat } from "@stablelib/bytes";
-import { encode, decode, Simple, Tagged } from "./cbor";
+import {
+    encode, decode, Simple, Tagged, TaggedEncoder, TaggedDecoder,
+    DEFAULT_TAGGED_ENCODERS, DEFAULT_TAGGED_DECODERS
+} from "./cbor";
 
 // Test vectors from RFC 7049: Appendix A.  Examples.
 const encoderTestVectors = [
@@ -226,25 +229,71 @@ describe("cbor", () => {
     });
 
     it("should throw for objects cycles", () => {
-        const a: {[key: string]: any} = { "one": 1 };
-        const b: {[key: string]: any} = { "two": 2 };
+        const a: { [key: string]: any } = { "one": 1 };
+        const b: { [key: string]: any } = { "two": 2 };
         // create cycle
         b["a"] = a;
         a["b"] = b;
         // We expect JS runtime to throw "Maximum call stack size exceeded" error.
         expect(() => encode(a)).toThrowError(/call stack/);
         expect(() => encode(["insideArray", a])).toThrowError(/call stack/);
-        expect(() => encode({"insideObject": a})).toThrowError(/call stack/);
+        expect(() => encode({ "insideObject": a })).toThrowError(/call stack/);
     });
 
     it("should encode maps with integer keys differently from string keys", () => {
-        const a: {[key: string]: any} = { 1: "one", 2: "two", "3str": "three" };
+        const a: { [key: string]: any } = { 1: "one", 2: "two", "3str": "three" };
         const eai = encode(a, { intKeys: true });
         // make sure it decodes
         const dec = decode(eai);
         expect(dec).toEqual(a);
         // make sure it differs from string encoding
         expect(encode(a)).not.toEqual(eai);
+    });
+
+    it("should encode and decode custom tagged object", () => {
+        class Hello {
+            greeting: string;
+            constructor(g: string) {
+                this.greeting = g;
+            }
+            get() {
+                return this.greeting;
+            }
+        }
+
+        const HelloEncoder: TaggedEncoder<Hello> =
+            (h: Hello | any): Tagged | undefined => {
+                if (h instanceof Hello) {
+                    return new Tagged(7777, h.get());
+                }
+            };
+
+        const HelloDecoder: TaggedDecoder<Hello> =
+            ({ tag, value }: Tagged): Hello | undefined => {
+                if (tag === 7777) {
+                    if (typeof value !== "string") {
+                        throw new Error(`cbor: unexpected type for Hello string: "${typeof value}"`);
+                    }
+                    return new Hello(value);
+                }
+            };
+
+        const testData = {
+            one: new Hello("world"),
+            two: new Date(123)
+        };
+
+        const encodedData = encode(testData, {
+            taggedEncoders: DEFAULT_TAGGED_ENCODERS.concat(HelloEncoder)
+        });
+
+        const decodedData = decode(encodedData, {
+            taggedDecoders: DEFAULT_TAGGED_DECODERS.concat(HelloDecoder)
+        });
+
+        expect(decodedData.one instanceof Hello).toBeTruthy();
+        expect(decodedData.one.greeting).toEqual(testData.one.greeting);
+        expect(decodedData.two instanceof Date).toBeTruthy();
     });
 
 });

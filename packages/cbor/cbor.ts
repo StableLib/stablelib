@@ -61,16 +61,113 @@ export enum Tags {
  *
  * Predefined tags are listed in Tags enum.
  *
- * Some tagged values are handled automatically (Tags.DateString and
- * Tags.DateNumber correspond to Date object, Tags.RegExp to RegExp).
- * Others are returned as an instance of Tagged. If Tagged is passed
- * to encoder, it will properly encode it.
+ * Some tagged values are handled automatically by default (Tags.DateString and
+ * Tags.DateNumber correspond to Date object, Tags.RegExp to RegExp). Others
+ * are returned as an instance of Tagged, unless encoder/decoder is provided
+ * with customer converters. If Tagged is passed to encoder, it will properly
+ * encode it.
  *
  * IANA keeps "CBOR Tags" registry (see RFC 7049, Section 7.2).
  */
 export class Tagged {
     constructor(public tag: number, public value: any | null | undefined) { }
 }
+
+/**
+ * Interface describing a custom tagged value converter.
+ */
+/**
+ * Tagged value encoder.
+ *
+ * If it can encode the object, it must return a Tagged instance,
+ * otherwise must return undefined.
+ */
+export type TaggedEncoder<T> = (obj: T | any) => Tagged | undefined;
+
+/**
+ * Tagged value decoder.
+ *
+ * If it can decode a Tagged value (by checking its tag property),
+ * it must return this value, otherwise must return undefined.
+ */
+export type TaggedDecoder<T> = (tagged: Tagged) => T | undefined;
+
+export const DateStringEncoder: TaggedEncoder<Date> =
+    (date: Date | any): Tagged | undefined => {
+        if (date instanceof Date) {
+            return new Tagged(Tags.DateString, date.toISOString().slice(0, 19) + "Z");
+        }
+    };
+
+export const DateStringDecoder: TaggedDecoder<Date> =
+    ({ tag, value }: Tagged): Date | undefined => {
+        if (tag === Tags.DateString) {
+            if (typeof value !== "string") {
+                throw new Error(`cbor: unexpected type for date string: "${typeof value}"`);
+            }
+            if (!ISO_DATE_RX.test(value)) {
+                throw new Error(`cbor: invalid date string format`);
+            }
+            return new Date(value);
+        }
+    };
+
+// This encoder is unused by default, because dates are processed with
+// DateStringEncoder. The decoder is used, though.
+export const DateNumberEncoder: TaggedEncoder<Date> =
+    (date: Date | any): Tagged | undefined => {
+        if (date instanceof Date) {
+            return new Tagged(Tags.DateNumber, date.getTime() / 1000);
+        }
+    };
+
+export const DateNumberDecoder: TaggedDecoder<Date> =
+    ({ tag, value }: Tagged): Date | undefined => {
+        if (tag === Tags.DateNumber) {
+            if (typeof value !== "number") {
+                throw new Error(`cbor: unexpected type for date number: "${typeof value}"`);
+            }
+            return new Date(value * 1000);
+        }
+    };
+
+export const RegExpEncoder: TaggedEncoder<RegExp> =
+    (rx: RegExp | any): Tagged | undefined => {
+        if (rx instanceof RegExp) {
+            return new Tagged(Tags.RegExp, rx.toString());
+        }
+    };
+
+export const RegExpDecoder: TaggedDecoder<RegExp> =
+    ({ tag, value }: Tagged): RegExp | undefined => {
+        if (tag === Tags.RegExp) {
+            if (typeof value !== "string") {
+                throw new Error(`cbor: unexpected type for regexp: "${typeof value}"`);
+            }
+            let matches = value.match(/^\/(.*)\/(.*)$/);
+            if (!matches || matches.length < 3) {
+                throw new Error('cbor: invalid regexp format');
+            }
+            return new RegExp(matches[1], matches[2]);
+        }
+    };
+
+/**
+ * Default tagged values encoders.
+ */
+export const DEFAULT_TAGGED_ENCODERS: TaggedEncoder<any>[] = [
+    DateStringEncoder,
+    RegExpEncoder
+];
+
+/**
+ * Default tagged values decoders.
+ */
+export const DEFAULT_TAGGED_DECODERS: TaggedDecoder<any>[] = [
+    DateStringDecoder,
+    DateNumberDecoder,
+    RegExpDecoder
+];
 
 /**
  * Simple values are some predefined (see RFC 7049, Section 2.3),
@@ -100,18 +197,31 @@ export type EncoderOptions = {
      * By default, false.
      */
     intKeys?: boolean;
+
+    /**
+     * Tagged object encoders.
+     *
+     * By default, DEFAULT_TAGGED_ENCODERS, which encodes Dates (as a string)
+     * and RegExps.
+     *
+     * Pass empty array to disable tagged encoders.
+     */
+    taggedEncoders?: TaggedEncoder<any>[];
 };
 
 export const DEFAULT_ENCODER_OPTIONS: EncoderOptions = {
     intKeys: false,
+    taggedEncoders: DEFAULT_TAGGED_ENCODERS
 };
 
 export class Encoder {
     private _buf = new ByteWriter();
     private _opt: EncoderOptions;
+    private _taggedEncoders: TaggedEncoder<any>[];
 
     constructor(options = DEFAULT_ENCODER_OPTIONS) {
         this._opt = options;
+        this._taggedEncoders = options.taggedEncoders || DEFAULT_TAGGED_ENCODERS;
     }
 
     finish(): Uint8Array {
@@ -282,11 +392,20 @@ export class Encoder {
             return this.encodeDate(value);
         } else if (value instanceof RegExp) {
             return this.encodeRegExp(value);
-        } else if (value instanceof Tagged) {
-            return this.encodeTagged(value.tag, value.value);
         } else if (value instanceof Simple) {
             return this.encodeSimple(value.value);
+        } else if (value instanceof Tagged) {
+            return this.encodeTagged(value.tag, value.value);
         }
+
+        // Try encoding tagged objects.
+        for (let i = 0; i < this._taggedEncoders.length; i++) {
+            const result = this._taggedEncoders[i](value);
+            if (result) { // skip any falsy result
+                return this.encodeTagged(result.tag, result.value);
+            }
+        }
+
         return this.encodeMap(value);
     }
 
@@ -372,6 +491,18 @@ export type DecoderOptions = {
      * By default, false.
      */
     uniqueMapKeys?: boolean;
+
+    /**
+     * Tagged object decoders.
+     *
+     * By default, DEFAULT_TAGGED_DECODERS, which converts tagged
+     * Tags.DateString and Tags.DateNumber to Date and Tags.RegExp to RegExp
+     * objects.
+     *
+     * Pass empty array to disable tagged decoders.
+     */
+    taggedDecoders?: TaggedDecoder<any>[];
+
 };
 
 export const DEFAULT_DECODER_OPTIONS: DecoderOptions = {
@@ -382,6 +513,7 @@ export const DEFAULT_DECODER_OPTIONS: DecoderOptions = {
 export class Decoder {
     private _r: ByteReader;
     private _opt: DecoderOptions;
+    private _taggedDecoders: TaggedDecoder<any>[];
 
     /**
      * Creates decoder.
@@ -393,6 +525,7 @@ export class Decoder {
     constructor(src: Uint8Array, options = DEFAULT_DECODER_OPTIONS) {
         this._r = new ByteReader(src);
         this._opt = options;
+        this._taggedDecoders = options.taggedDecoders || DEFAULT_TAGGED_DECODERS;
     }
 
     decode(): any | null | undefined {
@@ -635,47 +768,15 @@ export class Decoder {
     }
 
     private _decodeTagged(tag: number): (any | null | undefined) {
-        let v = this._decodeValue();
-        switch (tag) {
-            case Tags.DateString:
-                return this._decodeDateString(v);
-            case Tags.DateNumber:
-                return this._decodeDateNumber(v);
-            case Tags.RegExp:
-                return this._decodeRegExp(v);
-            default:
-                return new Tagged(tag, v);
+        const tagged = new Tagged(tag, this._decodeValue());
+        for (let i = 0; i < this._taggedDecoders.length; i++) {
+            const result = this._taggedDecoders[i](tagged);
+            if (result !== undefined) {
+                return result;
+            }
         }
+        return tagged;
     }
-
-    private _decodeDateString(value: any) {
-        if (typeof value !== "string") {
-            throw new Error(`cbor: unexpected type for date string: "${typeof value}"`);
-        }
-        if (!ISO_DATE_RX.test(value)) {
-            throw new Error(`cbor: invalid date string format`);
-        }
-        return new Date(value);
-    }
-
-    private _decodeDateNumber(value: any) {
-        if (typeof value !== "number") {
-            throw new Error(`cbor: unexpected type for date number: "${typeof value}"`);
-        }
-        return new Date(value * 1000);
-    }
-
-    private _decodeRegExp(value: any) {
-        if (typeof value !== "string") {
-            throw new Error(`cbor: unexpected type for regexp: "${typeof value}"`);
-        }
-        let matches = value.match(/^\/(.*)\/(.*)$/);
-        if (!matches || matches.length < 3) {
-            throw new Error('cbor: invalid regexp format');
-        }
-        return new RegExp(matches[1], matches[2]);
-    }
-
 }
 
 /**
