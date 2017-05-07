@@ -15,13 +15,9 @@ export class ConcatKeyAgreement implements KeyAgreement {
     readonly sharedKeyLength = 0;
     readonly savedStateLength = 0;
 
-    private agreements: KeyAgreement[];
-
-    constructor(ac: (new (...args: (any | undefined)[]) => KeyAgreement)[]) {
-        this.agreements = new Array(ac.length);
-        for (let i = 0; i < ac.length; i++) {
-            const a = new ac[i]();
-            this.agreements[i] = a;
+    constructor(public agreements: KeyAgreement[]) {
+        for (let i = 0; i < agreements.length; i++) {
+            const a = agreements[i];
             this.offerMessageLength += a.offerMessageLength;
             this.acceptMessageLength += a.acceptMessageLength;
             this.sharedKeyLength += a.sharedKeyLength;
