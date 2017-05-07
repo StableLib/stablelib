@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/keyagreement",
-  "version": "0.2.5",
+  "version": "0.4.1",
   "description": "Key agreement interface declaration and utilities",
   "main": "./dist/keyagreement.js",
   "typings": "./dist/keyagreement.d.ts",

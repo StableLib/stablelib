@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/nacl",
-  "version": "0.3.0",
+  "version": "0.4.1",
   "description": "Implementation of secretbox and box from NaCl (Networking and Cryptography Library)",
   "main": "./dist/nacl.js",
   "typings": "./dist/nacl.d.ts",
@@ -18,7 +18,7 @@
     "@stablelib/poly1305": "^0.2.5",
     "@stablelib/random": "^0.2.5",
     "@stablelib/wipe": "^0.2.5",
-    "@stablelib/x25519": "^0.3.0",
+    "@stablelib/x25519": "^0.4.1",
     "@stablelib/xsalsa20": "^0.3.0"
   },
   "devDependencies": {
