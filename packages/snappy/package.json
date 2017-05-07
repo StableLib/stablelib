@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/snappy",
-  "version": "0.2.5",
+  "version": "0.5.0",
   "description": "Snappy compression algorithm",
   "main": "./lib/snappy.js",
   "typings": "./lib/snappy.d.ts",
@@ -15,8 +15,8 @@
     "bench": "node ./lib/snappy.bench.js"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.2.5",
-    "@stablelib/hex": "^0.2.5",
-    "@stablelib/utf8": "^0.2.5"
+    "@stablelib/benchmark": "^0.5.0",
+    "@stablelib/hex": "^0.5.0",
+    "@stablelib/utf8": "^0.5.0"
   }
 }

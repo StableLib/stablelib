@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/ctr",
-  "version": "0.2.5",
+  "version": "0.5.0",
   "description": "Counter block cipher mode (CTR)",
   "main": "./lib/ctr.js",
   "typings": "./lib/ctr.d.ts",
@@ -15,12 +15,12 @@
     "bench": "node ./lib/ctr.bench.js"
   },
   "dependencies": {
-    "@stablelib/blockcipher": "^0.2.5",
-    "@stablelib/wipe": "^0.2.5"
+    "@stablelib/blockcipher": "^0.5.0",
+    "@stablelib/wipe": "^0.5.0"
   },
   "devDependencies": {
-    "@stablelib/aes": "^0.2.5",
-    "@stablelib/benchmark": "^0.2.5",
-    "@stablelib/hex": "^0.2.5"
+    "@stablelib/aes": "^0.5.0",
+    "@stablelib/benchmark": "^0.5.0",
+    "@stablelib/hex": "^0.5.0"
   }
 }

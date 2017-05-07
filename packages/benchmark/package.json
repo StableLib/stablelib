@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/benchmark",
-  "version": "0.2.5",
+  "version": "0.5.0",
   "description": "StableLib benchmarking suite",
   "main": "./lib/benchmark.js",
   "typings": "./lib/benchmark.d.ts",

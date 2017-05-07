@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/sha512",
-  "version": "0.2.5",
+  "version": "0.5.0",
   "description": "SHA-512 cryptographic hash function",
   "main": "./lib/sha512.js",
   "typings": "./lib/sha512.d.ts",
@@ -15,12 +15,12 @@
     "bench": "node ./lib/sha512.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^0.2.5",
-    "@stablelib/hash": "^0.2.5",
-    "@stablelib/wipe": "^0.2.5"
+    "@stablelib/binary": "^0.5.0",
+    "@stablelib/hash": "^0.5.0",
+    "@stablelib/wipe": "^0.5.0"
   },
   "devDependencies": {
-    "@stablelib/base64": "^0.2.5",
-    "@stablelib/benchmark": "^0.2.5"
+    "@stablelib/base64": "^0.5.0",
+    "@stablelib/benchmark": "^0.5.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/blake2xs",
-  "version": "0.2.5",
+  "version": "0.5.0",
   "description": "BLAKE2xs cryptographic extended output function (XOF)",
   "main": "./lib/blake2xs.js",
   "typings": "./lib/blake2xs.d.ts",
@@ -15,13 +15,13 @@
     "bench": "node ./lib/blake2xs.bench.js"
   },
   "dependencies": {
-    "@stablelib/blake2s": "^0.2.5",
-    "@stablelib/hash": "^0.2.5",
-    "@stablelib/wipe": "^0.2.5"
+    "@stablelib/blake2s": "^0.5.0",
+    "@stablelib/hash": "^0.5.0",
+    "@stablelib/wipe": "^0.5.0"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.2.5",
-    "@stablelib/bytes": "^0.2.5",
-    "@stablelib/hex": "^0.2.5"
+    "@stablelib/benchmark": "^0.5.0",
+    "@stablelib/bytes": "^0.5.0",
+    "@stablelib/hex": "^0.5.0"
   }
 }

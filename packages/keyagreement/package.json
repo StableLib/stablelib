@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/keyagreement",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Key agreement interface declaration and utilities",
   "main": "./lib/keyagreement.js",
   "typings": "./lib/keyagreement.d.ts",
@@ -14,6 +14,6 @@
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
-    "@stablelib/bytes": "^0.2.5"
+    "@stablelib/bytes": "^0.5.0"
   }
 }

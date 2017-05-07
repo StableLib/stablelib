@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/sha384",
-  "version": "0.2.5",
+  "version": "0.5.0",
   "description": "SHA-384 cryptographic hash function",
   "main": "./lib/sha384.js",
   "typings": "./lib/sha384.d.ts",
@@ -14,9 +14,9 @@
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
-    "@stablelib/sha512": "^0.2.5"
+    "@stablelib/sha512": "^0.5.0"
   },
   "devDependencies": {
-    "@stablelib/base64": "^0.2.5"
+    "@stablelib/base64": "^0.5.0"
   }
 }

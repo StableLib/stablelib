@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/hash",
-  "version": "0.2.5",
+  "version": "0.5.0",
   "description": "Cryptographic hash function interface declarations",
   "main": "./lib/hash.js",
   "typings": "./lib/hash.d.ts",

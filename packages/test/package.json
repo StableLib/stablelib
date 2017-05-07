@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/test",
-  "version": "0.2.5",
+  "version": "0.5.0",
   "description": "StableLib testing helper functions",
   "main": "./lib/test.js",
   "typings": "./lib/test.d.ts",

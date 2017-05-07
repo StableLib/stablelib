@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/xsalsa20",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "XSalsa20 (eXtended-nonce Salsa20) stream cipher",
   "main": "./lib/xsalsa20.js",
   "typings": "./lib/xsalsa20.d.ts",
@@ -15,12 +15,12 @@
     "bench": "node ./lib/xsalsa20.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^0.2.5",
-    "@stablelib/salsa20": "^0.3.0",
-    "@stablelib/wipe": "^0.2.5"
+    "@stablelib/binary": "^0.5.0",
+    "@stablelib/salsa20": "^0.5.0",
+    "@stablelib/wipe": "^0.5.0"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.2.5",
-    "@stablelib/hex": "^0.2.5"
+    "@stablelib/benchmark": "^0.5.0",
+    "@stablelib/hex": "^0.5.0"
   }
 }
