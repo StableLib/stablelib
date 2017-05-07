@@ -2,8 +2,8 @@
   "name": "@stablelib/random",
   "version": "0.2.5",
   "description": "Cryptographically-secure pseudorandom number generator",
-  "main": "./dist/random.js",
-  "typings": "./dist/random.d.ts",
+  "main": "./lib/random.js",
+  "typings": "./lib/random.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {

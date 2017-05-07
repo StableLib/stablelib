@@ -2,8 +2,8 @@
   "name": "@stablelib/hkdf",
   "version": "0.2.5",
   "description": "HMAC-based Extract-and-Expand Key Derivation Function (HKDF, RFC 5869)",
-  "main": "./dist/hkdf.js",
-  "typings": "./dist/hkdf.d.ts",
+  "main": "./lib/hkdf.js",
+  "typings": "./lib/hkdf.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./dist/hkdf.bench.js"
+    "bench": "node ./lib/hkdf.bench.js"
   },
   "dependencies": {
     "@stablelib/hash": "^0.2.5",

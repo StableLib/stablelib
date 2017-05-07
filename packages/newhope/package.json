@@ -2,8 +2,8 @@
   "name": "@stablelib/newhope",
   "version": "0.4.1",
   "description": "NewHope post-quantum secure key agreement",
-  "main": "./dist/newhope.js",
-  "typings": "./dist/newhope.d.ts",
+  "main": "./lib/newhope.js",
+  "typings": "./lib/newhope.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./dist/newhope.bench.js"
+    "bench": "node ./lib/newhope.bench.js"
   },
   "dependencies": {
     "@stablelib/binary": "^0.2.5",

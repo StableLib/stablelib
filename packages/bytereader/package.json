@@ -2,8 +2,8 @@
   "name": "@stablelib/bytereader",
   "version": "0.2.5",
   "description": "Byte reader",
-  "main": "./dist/bytereader.js",
-  "typings": "./dist/bytereader.d.ts",
+  "main": "./lib/bytereader.js",
+  "typings": "./lib/bytereader.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./dist/bytereader.bench.js"
+    "bench": "node ./lib/bytereader.bench.js"
   },
   "dependencies": {
     "@stablelib/binary": "^0.2.5"

@@ -2,8 +2,8 @@
   "name": "@stablelib/bytewriter",
   "version": "0.2.5",
   "description": "Byte writer",
-  "main": "./dist/bytewriter.js",
-  "typings": "./dist/bytewriter.d.ts",
+  "main": "./lib/bytewriter.js",
+  "typings": "./lib/bytewriter.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./dist/bytewriter.bench.js"
+    "bench": "node ./lib/bytewriter.bench.js"
   },
   "dependencies": {
     "@stablelib/binary": "^0.2.5",

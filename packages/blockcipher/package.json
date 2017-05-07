@@ -2,8 +2,8 @@
   "name": "@stablelib/blockcipher",
   "version": "0.2.5",
   "description": "Block cipher interface declaration",
-  "main": "./dist/blockcipher.js",
-  "typings": "./dist/blockcipher.d.ts",
+  "main": "./lib/blockcipher.js",
+  "typings": "./lib/blockcipher.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {

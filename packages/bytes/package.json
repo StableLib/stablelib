@@ -2,8 +2,8 @@
   "name": "@stablelib/bytes",
   "version": "0.2.5",
   "description": "Byte utilities",
-  "main": "./dist/bytes.js",
-  "typings": "./dist/bytes.d.ts",
+  "main": "./lib/bytes.js",
+  "typings": "./lib/bytes.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./dist/bytes.bench.js"
+    "bench": "node ./lib/bytes.bench.js"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^0.2.5"

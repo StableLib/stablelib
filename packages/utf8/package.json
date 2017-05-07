@@ -2,8 +2,8 @@
   "name": "@stablelib/utf8",
   "version": "0.2.5",
   "description": "UTF-8 encoder and decoder",
-  "main": "./dist/utf8.js",
-  "typings": "./dist/utf8.d.ts",
+  "main": "./lib/utf8.js",
+  "typings": "./lib/utf8.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./dist/utf8.bench.js"
+    "bench": "node ./lib/utf8.bench.js"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^0.2.5"

@@ -2,8 +2,8 @@
   "name": "@stablelib/float",
   "version": "0.2.5",
   "description": "Floating-point number utilities",
-  "main": "./dist/float.js",
-  "typings": "./dist/float.d.ts",
+  "main": "./lib/float.js",
+  "typings": "./lib/float.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {

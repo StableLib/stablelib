@@ -2,8 +2,8 @@
   "name": "@stablelib/sha224",
   "version": "0.2.5",
   "description": "SHA-224 cryptographic hash function",
-  "main": "./dist/sha224.js",
-  "typings": "./dist/sha224.d.ts",
+  "main": "./lib/sha224.js",
+  "typings": "./lib/sha224.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {

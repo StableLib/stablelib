@@ -2,8 +2,8 @@
   "name": "@stablelib/hash",
   "version": "0.2.5",
   "description": "Cryptographic hash function interface declarations",
-  "main": "./dist/hash.js",
-  "typings": "./dist/hash.d.ts",
+  "main": "./lib/hash.js",
+  "typings": "./lib/hash.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {

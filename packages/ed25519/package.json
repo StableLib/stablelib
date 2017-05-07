@@ -2,8 +2,8 @@
   "name": "@stablelib/ed25519",
   "version": "0.2.5",
   "description": "Ed25519 public-key signature (EdDSA with Curve25519)",
-  "main": "./dist/ed25519.js",
-  "typings": "./dist/ed25519.d.ts",
+  "main": "./lib/ed25519.js",
+  "typings": "./lib/ed25519.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./dist/ed25519.bench.js"
+    "bench": "node ./lib/ed25519.bench.js"
   },
   "dependencies": {
     "@stablelib/random": "^0.2.5",

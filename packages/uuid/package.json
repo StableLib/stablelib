@@ -2,8 +2,8 @@
   "name": "@stablelib/uuid",
   "version": "0.2.5",
   "description": "UUID v4 (random) generator",
-  "main": "./dist/uuid.js",
-  "typings": "./dist/uuid.d.ts",
+  "main": "./lib/uuid.js",
+  "typings": "./lib/uuid.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {

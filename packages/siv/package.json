@@ -2,8 +2,8 @@
   "name": "@stablelib/siv",
   "version": "0.2.5",
   "description": "Synthetic Initialization Vector (SIV) authenticated encryption",
-  "main": "./dist/siv.js",
-  "typings": "./dist/siv.d.ts",
+  "main": "./lib/siv.js",
+  "typings": "./lib/siv.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./dist/siv.bench.js"
+    "bench": "node ./lib/siv.bench.js"
   },
   "dependencies": {
     "@stablelib/blockcipher": "^0.2.5",

@@ -2,8 +2,8 @@
   "name": "@stablelib/test",
   "version": "0.2.5",
   "description": "StableLib testing helper functions",
-  "main": "./dist/test.js",
-  "typings": "./dist/test.d.ts",
+  "main": "./lib/test.js",
+  "typings": "./lib/test.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {

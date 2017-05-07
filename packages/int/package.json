@@ -2,8 +2,8 @@
   "name": "@stablelib/int",
   "version": "0.2.5",
   "description": "Integer number utilities",
-  "main": "./dist/int.js",
-  "typings": "./dist/int.d.ts",
+  "main": "./lib/int.js",
+  "typings": "./lib/int.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {

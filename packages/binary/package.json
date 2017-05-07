@@ -2,8 +2,8 @@
   "name": "@stablelib/binary",
   "version": "0.2.5",
   "description": "Binary encoding and decoding",
-  "main": "./dist/binary.js",
-  "typings": "./dist/binary.d.ts",
+  "main": "./lib/binary.js",
+  "typings": "./lib/binary.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {

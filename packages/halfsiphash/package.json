@@ -2,8 +2,8 @@
   "name": "@stablelib/halfsiphash",
   "version": "0.2.5",
   "description": "Half-SipHash 32-bit cryptographic pseudorandom function",
-  "main": "./dist/halfsiphash.js",
-  "typings": "./dist/halfsiphash.d.ts",
+  "main": "./lib/halfsiphash.js",
+  "typings": "./lib/halfsiphash.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./dist/halfsiphash.bench.js"
+    "bench": "node ./lib/halfsiphash.bench.js"
   },
   "dependencies": {
     "@stablelib/binary": "^0.2.5",

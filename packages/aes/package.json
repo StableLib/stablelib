@@ -2,8 +2,8 @@
   "name": "@stablelib/aes",
   "version": "0.2.5",
   "description": "AES block cipher (Advanced Encryption Standard)",
-  "main": "./dist/aes.js",
-  "typings": "./dist/aes.d.ts",
+  "main": "./lib/aes.js",
+  "typings": "./lib/aes.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./dist/aes.bench.js"
+    "bench": "node ./lib/aes.bench.js"
   },
   "dependencies": {
     "@stablelib/binary": "^0.2.5",

@@ -2,8 +2,8 @@
   "name": "@stablelib/benchmark",
   "version": "0.2.5",
   "description": "StableLib benchmarking suite",
-  "main": "./dist/benchmark.js",
-  "typings": "./dist/benchmark.d.ts",
+  "main": "./lib/benchmark.js",
+  "typings": "./lib/benchmark.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {

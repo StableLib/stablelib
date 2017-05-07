@@ -2,8 +2,8 @@
   "name": "@stablelib/aead",
   "version": "0.2.5",
   "description": "AEAD interface declaration (authenticated encryption with associated data)",
-  "main": "./dist/aead.js",
-  "typings": "./dist/aead.d.ts",
+  "main": "./lib/aead.js",
+  "typings": "./lib/aead.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "publishConfig": {
