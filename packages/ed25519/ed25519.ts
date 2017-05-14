@@ -679,6 +679,13 @@ export function generateKeyPair(prng?: RandomSource): KeyPair {
     return result;
 }
 
+export function extractPublicKeyFromSecretKey(secretKey: Uint8Array): Uint8Array {
+    if (secretKey.length !== SECRET_KEY_LENGTH) {
+        throw new Error(`ed25519: secret key must be ${SECRET_KEY_LENGTH} bytes`);
+    }
+    return new Uint8Array(secretKey.subarray(32));
+}
+
 const L = new Float64Array([
     0xed, 0xd3, 0xf5, 0x5c, 0x1a, 0x63, 0x12, 0x58, 0xd6, 0x9c, 0xf7, 0xa2,
     0xde, 0xf9, 0xde, 0x14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x10

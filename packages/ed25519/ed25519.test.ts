@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { encode, decode } from "@stablelib/base64";
-import { sign, verify, generateKeyPair } from "./ed25519";
+import { sign, verify, generateKeyPair, extractPublicKeyFromSecretKey } from "./ed25519";
 
 /* tslint:disable */
 const testVectors = [
@@ -5154,5 +5154,11 @@ describe("ed25519", () => {
         const signature = sign(keys.secretKey, message);
         const ok = verify(keys.publicKey, message, signature);
         expect(ok).toBe(true);
+    });
+
+    it("should extract public key from secret key", () => {
+        const keys = generateKeyPair();
+        const publicKey = extractPublicKeyFromSecretKey(keys.secretKey);
+        expect(encode(publicKey)).toEqual(encode(keys.publicKey));
     });
 });
