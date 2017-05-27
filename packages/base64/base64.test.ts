@@ -3,7 +3,7 @@
 
 import { encode, decode, encodeURLSafe, decodeURLSafe } from "./base64";
 
-const testVectors = [
+const testVectors: [number[], string][] = [
     // https://tools.ietf.org/html/rfc4648
     [[], ""],
     [[102], "Zg=="],

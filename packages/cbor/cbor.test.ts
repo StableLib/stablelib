@@ -192,7 +192,7 @@ describe("cbor", () => {
     it("should correctly encode test vectors", () => {
         for (let i = 0; i < encoderTestVectors.length; i += 2) {
             const value = encoderTestVectors[i];
-            const expected = encoderTestVectors[i + 1];
+            const expected = encoderTestVectors[i + 1] as string;
             const got = encode(value);
             expect(hex.encode(got, true)).toBe(expected);
         }

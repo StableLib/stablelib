@@ -19,12 +19,12 @@
     "buffer": false
   },
   "devDependencies": {
-    "@types/jasmine": "^2.5.38",
-    "browserify": "^13.1.1",
-    "jasmine": "^2.5.2",
-    "lerna": "2.0.0-rc.2",
-    "tslint": "^5.1.0",
-    "typedoc": "^0.6.0",
-    "typescript": "^2.3.1"
+    "@types/jasmine": "^2.5.47",
+    "browserify": "^14.4.0",
+    "jasmine": "^2.6.0",
+    "lerna": "^2.0.0-rc.5",
+    "tslint": "^5.3.2",
+    "typedoc": "^0.7.1",
+    "typescript": "^2.3.3"
   }
 }

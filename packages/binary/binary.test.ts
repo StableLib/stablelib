@@ -12,7 +12,7 @@ import {
     readFloat32LE, writeFloat32LE, readFloat64LE, writeFloat64LE
 } from "./binary";
 
-const int16BEVectors = [
+const int16BEVectors: [number, number[]][] = [
     [0, [0, 0]],
     [1, [0, 1]],
     [255, [0, 255]],
@@ -23,7 +23,7 @@ const int16BEVectors = [
 
 const int16LEVectors = int16BEVectors.map(v =>
     [v[0], (v[1] as number[]).slice().reverse()]
-);
+) as [number, number[]][];
 
 describe("readInt16BE", () => {
     it("should read correct value", () => {
@@ -43,7 +43,7 @@ describe("readInt16LE", () => {
     });
 });
 
-const uint16BEVectors = [
+const uint16BEVectors: [number, number[]][] = [
     [0, [0, 0]],
     [1, [0, 1]],
     [255, [0, 255]],
@@ -53,7 +53,7 @@ const uint16BEVectors = [
 
 const uint16LEVectors = uint16BEVectors.map(v =>
     [v[0], (v[1] as number[]).slice().reverse()]
-);
+) as [number, number[]][];
 
 describe("readUint16BE", () => {
     it("should read correct value", () => {
@@ -127,7 +127,7 @@ describe("writeUint16LE", () => {
     });
 });
 
-const int32BEVectors = [
+const int32BEVectors: [number, number[]][] = [
     [0, [0, 0, 0, 0]],
     [1, [0, 0, 0, 1]],
     [255, [0, 0, 0, 255]],
@@ -140,7 +140,7 @@ const int32BEVectors = [
 
 const int32LEVectors = int32BEVectors.map(v =>
     [v[0], (v[1] as number[]).slice().reverse()]
-);
+) as [number, number[]][];
 
 describe("readInt32BE", () => {
     it("should read correct value", () => {
@@ -160,7 +160,7 @@ describe("readInt32LE", () => {
     });
 });
 
-const uint32BEVectors = [
+const uint32BEVectors: [number, number[]][] = [
     [0, [0, 0, 0, 0]],
     [1, [0, 0, 0, 1]],
     [255, [0, 0, 0, 255]],
@@ -174,7 +174,7 @@ const uint32BEVectors = [
 
 const uint32LEVectors = uint32BEVectors.map(v =>
     [v[0], (v[1] as number[]).slice().reverse()]
-);
+) as [number, number[]][];
 
 describe("readUint32BE", () => {
     it("should read correct value", () => {
@@ -248,7 +248,7 @@ describe("writeUint32LE", () => {
     });
 });
 
-const int64BEVectors = [
+const int64BEVectors: [number, number[]][] = [
     [0, [0, 0, 0, 0, 0, 0, 0, 0]],
     [1, [0, 0, 0, 0, 0, 0, 0, 1]],
     [255, [0, 0, 0, 0, 0, 0, 0, 255]],
@@ -271,7 +271,7 @@ const int64BEVectors = [
 
 const int64LEVectors = int64BEVectors.map(v =>
     [v[0], (v[1] as number[]).slice().reverse()]
-);
+) as [number, number[]][];
 
 describe("readInt64BE", () => {
     it("should read correct value", () => {
@@ -291,7 +291,7 @@ describe("readInt64LE", () => {
     });
 });
 
-const uint64BEVectors = [
+const uint64BEVectors: [number, number[]][] = [
     [0, [0, 0, 0, 0, 0, 0, 0, 0]],
     [1, [0, 0, 0, 0, 0, 0, 0, 1]],
     [255, [0, 0, 0, 0, 0, 0, 0, 255]],
@@ -314,7 +314,7 @@ const uint64BEVectors = [
 
 const uint64LEVectors = uint64BEVectors.map(v =>
     [v[0], (v[1] as number[]).slice().reverse()]
-);
+) as [number, number[]][];
 
 describe("readUint64BE", () => {
     it("should read correct value", () => {

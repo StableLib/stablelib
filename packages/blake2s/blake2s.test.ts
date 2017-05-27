@@ -607,7 +607,7 @@ describe("BLAKE2s different lengths", () => {
             buf[i] = i;
             const h = new BLAKE2s(i);
             h.update(buf.subarray(0, i));
-            expect(encode(h.digest(), true)).toEqual(lengthVectors[i]);
+            expect(encode(h.digest(), true)).toEqual(lengthVectors[i]!);
         }
     });
 });
