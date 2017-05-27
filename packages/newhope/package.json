@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/newhope",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "description": "NewHope post-quantum secure key agreement",
   "main": "./lib/newhope.js",
   "typings": "./lib/newhope.d.ts",
