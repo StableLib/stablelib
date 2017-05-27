@@ -48,19 +48,20 @@ class SHAKE128Expander extends SHAKE128 implements SeedExpander {
 /**
  * NewHope provides post-quantum Ring-LWE-based key exchange between two peers.
  *
- * This is a reference version, which uses SHA3. See newhopeaessha module for
- * the BoringSSL-compatible implementation, which uses AES-SHA256.
- *
  * One peer generates an "offer message"" by calling offer(), and sends it to
  * the other peer. The other peer accepts the offer and generates "accept
  * message" by calling accept() with the received offer message. It then send
  * the result to the first peer, which calls finish(). After completing these
  * steps, both peers call getSharedKey() to get the established shared key.
  *
+ * This is a reference version, which uses SHAKE-128 and SHA-3-256. You can
+ * create a custom version by requiring "lib/custom" and extending
+ * CustomNewHope class.
+ *
  * Reference:
  *
- * Erdem Alkim, Léo Ducas, Thomas Pöppelmann, and Peter Schwabe:
- * Post-quantum key exchange – a new hope.
+ * Erdem Alkim, Léo Ducas, Thomas Pöppelmann, and Peter Schwabe: Post-quantum
+ * key exchange – a new hope.
  *
  * https://cryptojedi.org/papers/#newhope
  */
