@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/gcm",
-  "version": "0.5.0",
+  "version": "0.7.2",
   "description": "GCM authenticated encryption mode with associated data (AEAD)",
   "main": "./lib/gcm.js",
   "typings": "./lib/gcm.d.ts",
@@ -16,14 +16,14 @@
   },
   "dependencies": {
     "@stablelib/aead": "^0.5.0",
-    "@stablelib/binary": "^0.5.0",
+    "@stablelib/binary": "^0.7.2",
     "@stablelib/blockcipher": "^0.5.0",
     "@stablelib/constant-time": "^0.5.0",
-    "@stablelib/ctr": "^0.5.0",
+    "@stablelib/ctr": "^0.7.2",
     "@stablelib/wipe": "^0.5.0"
   },
   "devDependencies": {
-    "@stablelib/aes": "^0.5.0",
+    "@stablelib/aes": "^0.7.2",
     "@stablelib/benchmark": "^0.5.0",
     "@stablelib/hex": "^0.5.0"
   }

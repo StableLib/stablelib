@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/chacha20poly1305",
-  "version": "0.5.0",
+  "version": "0.7.2",
   "description": "ChaCha20-Poly1305 AEAD (RFC 7539)",
   "main": "./lib/chacha20poly1305.js",
   "typings": "./lib/chacha20poly1305.d.ts",
@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@stablelib/aead": "^0.5.0",
-    "@stablelib/binary": "^0.5.0",
-    "@stablelib/chacha": "^0.5.0",
+    "@stablelib/binary": "^0.7.2",
+    "@stablelib/chacha": "^0.7.2",
     "@stablelib/constant-time": "^0.5.0",
     "@stablelib/poly1305": "^0.5.0",
     "@stablelib/wipe": "^0.5.0"

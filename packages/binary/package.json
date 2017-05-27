@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/binary",
-  "version": "0.5.0",
+  "version": "0.7.2",
   "description": "Binary encoding and decoding",
   "main": "./lib/binary.js",
   "typings": "./lib/binary.d.ts",

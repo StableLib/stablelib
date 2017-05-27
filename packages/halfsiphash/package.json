@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/halfsiphash",
-  "version": "0.5.0",
+  "version": "0.7.2",
   "description": "Half-SipHash 32-bit cryptographic pseudorandom function",
   "main": "./lib/halfsiphash.js",
   "typings": "./lib/halfsiphash.d.ts",
@@ -15,7 +15,7 @@
     "bench": "node ./lib/halfsiphash.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^0.5.0",
+    "@stablelib/binary": "^0.7.2",
     "@stablelib/int": "^0.5.0"
   },
   "devDependencies": {

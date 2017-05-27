@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/aes",
-  "version": "0.5.0",
+  "version": "0.7.2",
   "description": "AES block cipher (Advanced Encryption Standard)",
   "main": "./lib/aes.js",
   "typings": "./lib/aes.d.ts",
@@ -15,7 +15,7 @@
     "bench": "node ./lib/aes.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^0.5.0",
+    "@stablelib/binary": "^0.7.2",
     "@stablelib/blockcipher": "^0.5.0",
     "@stablelib/wipe": "^0.5.0"
   },
