@@ -47,7 +47,7 @@ export function encode(s: string): Uint8Array {
  */
 export function encodedLength(s: string): number {
     let result = 0;
-    for (let i = 0; i < s.length; ++i) {
+    for (let i = 0; i < s.length; i++) {
         const c = s.charCodeAt(i);
         if (c < 0x80) {
             result += 1;
@@ -74,49 +74,52 @@ export function encodedLength(s: string): number {
  */
 export function decode(arr: Uint8Array): string {
     const chars: number[] = [];
-    let pos = 0;
-    while (pos < arr.length) {
-        let b = arr[pos++];
+    for (let i = 0; i < arr.length; i++) {
+        let b = arr[i];
+
         if (b & 0x80) {
             if (b < 0xe0) {
                 // Need 1 more byte.
-                if (pos >= arr.length) {
+                if (i >= arr.length) {
                     throw new Error(INVALID_UTF8);
                 }
-                const n1 = arr[pos++];
+                const n1 = arr[++i];
                 b = (b & 0x1f) << 6 | (n1 & 0x3f);
             } else if (b < 0xf0) {
                 // Need 2 more bytes.
-                if (pos >= arr.length - 1) {
+                if (i >= arr.length - 1) {
                     throw new Error(INVALID_UTF8);
                 }
-                const n1 = arr[pos++];
-                const n2 = arr[pos++];
+                const n1 = arr[++i];
+                const n2 = arr[++i];
                 b = (b & 0x0f) << 12 | (n1 & 0x3f) << 6 | (n2 & 0x3f);
             } else {
                 // Need 3 more bytes.
-                if (pos >= arr.length - 2) {
+                if (i >= arr.length - 2) {
                     throw new Error(INVALID_UTF8);
                 }
-                const n1 = arr[pos++];
-                const n2 = arr[pos++];
-                const n3 = arr[pos++];
+                const n1 = arr[++i];
+                const n2 = arr[++i];
+                const n3 = arr[++i];
                 b = (b & 0x0f) << 18 | (n1 & 0x3f) << 12 | (n2 & 0x3f) << 6 | (n3 & 0x3f);
+            }
+
+            if (b >= 0xd800 && b <= 0xdfff) {
+                throw new Error(INVALID_UTF8);
+            }
+
+            if (b >= 0x10000) {
+                // Surrogate pair.
+                if (b > 0x10ffff) {
+                    throw new Error(INVALID_UTF8);
+                }
+                b -= 0x10000;
+                chars.push(0xd800 | (b >> 10));
+                b = 0xdc00 | (b & 0x3ff);
             }
         }
 
-        if (b >= 0xd800 && b <= 0xdfff) {
-            throw new Error(INVALID_UTF8);
-        }
-
-        if (b < 0x10000) {
-            chars.push(b);
-        } else {
-            // Surrogate pair.
-            b -= 0x10000;
-            chars.push(0xd800 | (b >> 10));
-            chars.push(0xdc00 | (b & 0x3ff));
-        }
+        chars.push(b);
     }
     return String.fromCharCode.apply(null, chars);
 }
