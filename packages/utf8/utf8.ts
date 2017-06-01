@@ -1,6 +1,9 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+const INVALID_UTF16 = "utf8: invalid string";
+const INVALID_UTF8 = "utf8: invalid source encoding";
+
 export function encode(s: string): Uint8Array {
     // Calculate result length and allocate output array.
     // encodedLength() also validates string and throws errors,
@@ -46,16 +49,17 @@ export function encodedLength(s: string): number {
             result += 3;
         } else if (c <= 0xdfff) {
             if (i >= s.length - 1) {
-                throw new Error("utf8: invalid source string");
+                throw new Error(INVALID_UTF16);
             }
             i++; // "eat" next character
             result += 4;
         } else {
-            throw new Error("utf8: invalid source string");
+            throw new Error(INVALID_UTF16);
         }
     }
     return result;
 }
+
 
 export function decode(arr: Uint8Array): string {
     const chars: number[] = [];
@@ -66,14 +70,14 @@ export function decode(arr: Uint8Array): string {
             if (b < 0xe0) {
                 // Need 1 more byte.
                 if (pos >= arr.length) {
-                    throw new Error("utf8: invalid source encoding");
+                    throw new Error(INVALID_UTF8);
                 }
                 const n1 = arr[pos++];
                 b = (b & 0x1f) << 6 | (n1 & 0x3f);
             } else if (b < 0xf0) {
                 // Need 2 more bytes.
                 if (pos >= arr.length - 1) {
-                    throw new Error("utf8: invalid source encoding");
+                    throw new Error(INVALID_UTF8);
                 }
                 const n1 = arr[pos++];
                 const n2 = arr[pos++];
@@ -81,7 +85,7 @@ export function decode(arr: Uint8Array): string {
             } else {
                 // Need 3 more bytes.
                 if (pos >= arr.length - 2) {
-                    throw new Error("utf8: invalid source encoding");
+                    throw new Error(INVALID_UTF8);
                 }
                 const n1 = arr[pos++];
                 const n2 = arr[pos++];
@@ -91,6 +95,9 @@ export function decode(arr: Uint8Array): string {
         }
 
         if (b < 0x10000) {
+            if (b >= 0xd800 && b <= 0xdfff) {
+                throw new Error(INVALID_UTF8);
+            }
             chars.push(b);
         } else {
             // Surrogate pair.
