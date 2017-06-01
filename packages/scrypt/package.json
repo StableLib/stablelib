@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/scrypt",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Scrypt sequential memory-hard key derivation function (RFC 7914)",
   "main": "./lib/scrypt.js",
   "typings": "./lib/scrypt.d.ts",
@@ -24,6 +24,6 @@
   "devDependencies": {
     "@stablelib/base64": "^0.7.2",
     "@stablelib/benchmark": "^0.5.0",
-    "@stablelib/utf8": "^0.5.0"
+    "@stablelib/utf8": "^0.7.3"
   }
 }
