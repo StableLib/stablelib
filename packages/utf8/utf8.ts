@@ -105,10 +105,11 @@ export function decode(arr: Uint8Array): string {
             }
         }
 
+        if (b >= 0xd800 && b <= 0xdfff) {
+            throw new Error(INVALID_UTF8);
+        }
+
         if (b < 0x10000) {
-            if (b >= 0xd800 && b <= 0xdfff) {
-                throw new Error(INVALID_UTF8);
-            }
             chars.push(b);
         } else {
             // Surrogate pair.
