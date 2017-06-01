@@ -4,6 +4,10 @@
 const INVALID_UTF16 = "utf8: invalid string";
 const INVALID_UTF8 = "utf8: invalid source encoding";
 
+/**
+ * Encodes the given string into UTF-8 byte array.
+ * Throws if the source string has invalid UTF-16 encoding.
+ */
 export function encode(s: string): Uint8Array {
     // Calculate result length and allocate output array.
     // encodedLength() also validates string and throws errors,
@@ -37,6 +41,10 @@ export function encode(s: string): Uint8Array {
     return arr;
 }
 
+/**
+ * Returns the number of bytes required to encode the given string into UTF-8.
+ * Throws if the source string has invalid UTF-16 encoding.
+ */
 export function encodedLength(s: string): number {
     let result = 0;
     for (let i = 0; i < s.length; ++i) {
@@ -60,7 +68,10 @@ export function encodedLength(s: string): number {
     return result;
 }
 
-
+/**
+ * Decodes the given byte array from UTF-8 into a string.
+ * Throws if encoding is invalid.
+ */
 export function decode(arr: Uint8Array): string {
     const chars: number[] = [];
     let pos = 0;
