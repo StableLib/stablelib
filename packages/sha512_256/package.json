@@ -1,0 +1,22 @@
+{
+  "name": "@stablelib/sha512_256",
+  "version": "0.7.2",
+  "description": "SHA-512/256 cryptographic hash function",
+  "main": "./lib/sha512_256.js",
+  "typings": "./lib/sha512_256.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+  },
+  "dependencies": {
+    "@stablelib/sha512": "^0.7.2"
+  },
+  "devDependencies": {
+    "@stablelib/base64": "^0.7.2"
+  }
+}
