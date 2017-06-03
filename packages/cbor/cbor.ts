@@ -221,11 +221,12 @@ export const DEFAULT_ENCODER_OPTIONS: EncoderOptions = {
 };
 
 export class Encoder {
-    private _buf = new ByteWriter();
+    private _buf: ByteWriter;
     private _opt: EncoderOptions;
     private _taggedEncoders: TaggedEncoder<any>[];
 
-    constructor(options = DEFAULT_ENCODER_OPTIONS) {
+    constructor(options = DEFAULT_ENCODER_OPTIONS, writer = new ByteWriter()) {
+        this._buf = writer;
         this._opt = options;
         this._taggedEncoders = options.taggedEncoders || DEFAULT_TAGGED_ENCODERS;
     }
