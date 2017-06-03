@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/cbor",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "CBOR encoder and decoder",
   "main": "./lib/cbor.js",
   "typings": "./lib/cbor.d.ts",
