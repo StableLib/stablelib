@@ -78,7 +78,7 @@ export function decode(arr: Uint8Array): string {
         let b = arr[i];
 
         if (b & 0x80) {
-            let min = 0;
+            let min;
             if (b < 0xe0) {
                 // Need 1 more byte.
                 if (i >= arr.length) {
