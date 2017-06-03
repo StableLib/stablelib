@@ -15,6 +15,7 @@
     "bench": "node ./lib/utf8.bench.js"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.5.0"
+    "@stablelib/benchmark": "^0.5.0",
+    "@stablelib/hex": "^0.5.0"
   }
 }
