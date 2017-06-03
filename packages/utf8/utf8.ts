@@ -78,6 +78,7 @@ export function decode(arr: Uint8Array): string {
         let b = arr[i];
 
         if (b & 0x80) {
+            let min = 0;
             if (b < 0xe0) {
                 // Need 1 more byte.
                 if (i >= arr.length) {
@@ -88,9 +89,7 @@ export function decode(arr: Uint8Array): string {
                     throw new Error(INVALID_UTF8);
                 }
                 b = (b & 0x1f) << 6 | (n1 & 0x3f);
-                if (b < 0x80) {
-                    throw new Error(INVALID_UTF8);
-                }
+                min = 0x80;
             } else if (b < 0xf0) {
                 // Need 2 more bytes.
                 if (i >= arr.length - 1) {
@@ -102,9 +101,7 @@ export function decode(arr: Uint8Array): string {
                     throw new Error(INVALID_UTF8);
                 }
                 b = (b & 0x0f) << 12 | (n1 & 0x3f) << 6 | (n2 & 0x3f);
-                if (b < 0x800) {
-                    throw new Error(INVALID_UTF8);
-                }
+                min = 0x800;
             } else if (b < 0xf8) {
                 // Need 3 more bytes.
                 if (i >= arr.length - 2) {
@@ -117,14 +114,12 @@ export function decode(arr: Uint8Array): string {
                     throw new Error(INVALID_UTF8);
                 }
                 b = (b & 0x0f) << 18 | (n1 & 0x3f) << 12 | (n2 & 0x3f) << 6 | (n3 & 0x3f);
-                if (b < 0x10000) {
-                    throw new Error(INVALID_UTF8);
-                }
+                min = 0x10000;
             } else {
                 throw new Error(INVALID_UTF8);
             }
 
-            if (b >= 0xd800 && b <= 0xdfff) {
+            if (b < min || (b >= 0xd800 && b <= 0xdfff)) {
                 throw new Error(INVALID_UTF8);
             }
 
