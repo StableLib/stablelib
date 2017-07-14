@@ -734,7 +734,6 @@ function reduce(r: GF) {
 
 // Returns 64-byte signature of the message under the 64-byte secret key.
 export function sign(secretKey: Uint8Array, message: Uint8Array): Uint8Array {
-    // const h = new Uint8Array(64);
     const x = new Float64Array(64);
     const p = [gf(), gf(), gf(), gf()];
 
