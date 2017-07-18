@@ -52,7 +52,7 @@ export class Scrypt {
         this.p = p;
     }
 
-    deriveKey(password: Uint8Array, salt: Uint8Array, dkLen: number): Promise<Uint8Array> {
+    deriveKey(password: Uint8Array, salt: Uint8Array, dkLen: number): Uint8Array {
         const B = pbkdf2(SHA256, password, salt, 1, this.p * 128 * this.r);
 
         for (let i = 0; i < this.p; i++) {
@@ -62,7 +62,7 @@ export class Scrypt {
         const result = pbkdf2(SHA256, password, B, 1, dkLen);
         wipe(B);
 
-        return Promise.resolve(result);
+        return result;
     }
 
     deriveKeyNonBlocking(password: Uint8Array, salt: Uint8Array, dkLen: number): Promise<Uint8Array> {
@@ -93,7 +93,7 @@ export class Scrypt {
  * containing dkLen bytes.
  */
 export function deriveKey(password: Uint8Array, salt: Uint8Array,
-    N: number, r: number, p: number, dkLen: number): Promise<Uint8Array> {
+    N: number, r: number, p: number, dkLen: number): Uint8Array {
     return new Scrypt(N, r, p).deriveKey(password, salt, dkLen);
 }
 

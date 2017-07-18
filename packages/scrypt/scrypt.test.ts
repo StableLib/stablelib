@@ -238,20 +238,12 @@ const vectors = [
 describe("scrypt.deriveKey", () => {
 
     it("should derive correct key", (done) => {
-        function runTests(i: number) {
-            if (i === vectors.length) {
-                done();
-                return;
-            }
-            const v = vectors[i];
+        vectors.forEach((v, i) => {
             const password = encodeUTF8(v.password);
             const salt = encodeUTF8(v.salt);
-            deriveKey(password, salt, 1 << v.logN, v.r, v.p, v.dkLen).then((key: Uint8Array) => {
-                expect(encodeBase64(key)).toBe(v.result);
-                runTests(i + 1);
-            });
-        }
-        runTests(0);
+            const key = deriveKey(password, salt, 1 << v.logN, v.r, v.p, v.dkLen);
+            expect(encodeBase64(key)).toBe(v.result);
+        });
     });
 
     it("should derive correct key (non-blocking)", (done) => {
