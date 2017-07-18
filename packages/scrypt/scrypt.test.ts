@@ -237,8 +237,8 @@ const vectors = [
 
 describe("scrypt.deriveKey", () => {
 
-    it("should derive correct key", (done) => {
-        vectors.forEach((v, i) => {
+    it("should derive correct key", () => {
+        vectors.forEach(v => {
             const password = encodeUTF8(v.password);
             const salt = encodeUTF8(v.salt);
             const key = deriveKey(password, salt, 1 << v.logN, v.r, v.p, v.dkLen);
