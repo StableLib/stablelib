@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/ed25519",
-  "version": "0.7.2",
+  "version": "0.9.0",
   "description": "Ed25519 public-key signature (EdDSA with Curve25519)",
   "main": "./lib/ed25519.js",
   "typings": "./lib/ed25519.d.ts",
