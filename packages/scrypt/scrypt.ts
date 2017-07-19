@@ -45,8 +45,8 @@ export class Scrypt {
         }
 
         // XXX we can use Uint32Array, but Int32Array is faster, especially in Safari.
-        this._XY = new Int32Array(64 * r);
-        this._V = new Int32Array(32 * N * r);
+        this._V = new Int32Array(32 * (N + 2) * r);
+        this._XY = this._V.subarray(32 * N * r);
         this.N = N;
         this.r = r;
         this.p = p;
@@ -112,14 +112,11 @@ function smix(B: Uint8Array, r: number, N: number, V: Int32Array, XY: Int32Array
     const tmp = new Int32Array(16);
 
     for (let i = 0; i < 32 * r; i++) {
-        XY[xi + i] = readUint32LE(B, i * 4);
+        V[i] = readUint32LE(B, i * 4);
     }
     for (let i = 0; i < N; i += 2) {
-        blockCopy(V, i * (32 * r), XY, xi, 32 * r);
-        blockMix(tmp, XY, xi, yi, r);
-
-        blockCopy(V, (i + 1) * (32 * r), XY, yi, 32 * r);
-        blockMix(tmp, XY, yi, xi, r);
+        blockMix(tmp, V, i * (32 * r), (i + 1) * (32 * r), r);
+        blockMix(tmp, V, (i + 1) * (32 * r), (i + 2) * (32 * r), r);
     }
     for (let i = 0; i < N; i += 2) {
         let j = integerify(XY, xi, r) & (N - 1);
@@ -188,17 +185,14 @@ function smixAsync(B: Uint8Array, r: number, N: number, V: Int32Array, XY: Int32
     const tmp = new Int32Array(16);
 
     for (let i = 0; i < 32 * r; i++) {
-        XY[xi + i] = readUint32LE(B, i * 4);
+        V[i] = readUint32LE(B, i * 4);
     }
 
     return Promise.resolve(initialStep)
         .then(step => splitCalc(0, N, step, (i: number, end: number): number => {
             for (; i < end; i += 2) {
-                blockCopy(V, i * (32 * r), XY, xi, 32 * r);
-                blockMix(tmp, XY, xi, yi, r);
-
-                blockCopy(V, (i + 1) * (32 * r), XY, yi, 32 * r);
-                blockMix(tmp, XY, yi, xi, r);
+                blockMix(tmp, V, i * (32 * r), (i + 1) * (32 * r), r);
+                blockMix(tmp, V, (i + 1) * (32 * r), (i + 2) * (32 * r), r);
             }
             return i;
         }))
