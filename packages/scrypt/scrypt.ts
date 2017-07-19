@@ -114,9 +114,8 @@ function smix(B: Uint8Array, r: number, N: number, V: Int32Array, XY: Int32Array
     for (let i = 0; i < 32 * r; i++) {
         V[i] = readUint32LE(B, i * 4);
     }
-    for (let i = 0; i < N; i += 2) {
+    for (let i = 0; i < N; i++) {
         blockMix(tmp, V, i * (32 * r), (i + 1) * (32 * r), r);
-        blockMix(tmp, V, (i + 1) * (32 * r), (i + 2) * (32 * r), r);
     }
     for (let i = 0; i < N; i += 2) {
         let j = integerify(XY, xi, r) & (N - 1);
@@ -190,9 +189,8 @@ function smixAsync(B: Uint8Array, r: number, N: number, V: Int32Array, XY: Int32
 
     return Promise.resolve(initialStep)
         .then(step => splitCalc(0, N, step, (i: number, end: number): number => {
-            for (; i < end; i += 2) {
+            for (; i < end; i++) {
                 blockMix(tmp, V, i * (32 * r), (i + 1) * (32 * r), r);
-                blockMix(tmp, V, (i + 1) * (32 * r), (i + 2) * (32 * r), r);
             }
             return i;
         }))
