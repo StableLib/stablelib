@@ -82,7 +82,6 @@ export class Scrypt {
     }
 
     clean() {
-        wipe(this._XY);
         wipe(this._V);
     }
 }
