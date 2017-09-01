@@ -107,4 +107,14 @@ describe("utf8", () => {
             }).toThrowError(/invalid/);
         });
     });
+
+    it("should decode a huge string", () => {
+        let s = "";
+        for (let i = 0; i < 1024 * 1024; i++) {
+            s += "это test";
+        }
+        const enc = encode(s);
+        const dec = decode(enc);
+        expect(dec).toEqual(s);
+    });
 });
