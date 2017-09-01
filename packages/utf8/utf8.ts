@@ -73,7 +73,7 @@ export function encodedLength(s: string): number {
  * Throws if encoding is invalid.
  */
 export function decode(arr: Uint8Array): string {
-    const chars: number[] = [];
+    const chars: string[] = [];
     for (let i = 0; i < arr.length; i++) {
         let b = arr[i];
 
@@ -129,12 +129,12 @@ export function decode(arr: Uint8Array): string {
                     throw new Error(INVALID_UTF8);
                 }
                 b -= 0x10000;
-                chars.push(0xd800 | (b >> 10));
+                chars.push(String.fromCharCode(0xd800 | (b >> 10)));
                 b = 0xdc00 | (b & 0x3ff);
             }
         }
 
-        chars.push(b);
+        chars.push(String.fromCharCode(b));
     }
-    return String.fromCharCode.apply(null, chars);
+    return chars.join("");
 }
