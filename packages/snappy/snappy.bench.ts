@@ -17,9 +17,9 @@ const compressedDst = new Uint8Array(maxCompressedLength(data.length));
 report("Snappy compress", benchmark(() => compress(data, compressedDst), data.length));
 report("Snappy decompress", benchmark(() => decompress(compressedData, decompressedData), data.length));
 
+const zOpts = { level: zlib.constants.Z_BEST_SPEED, strategy: zlib.constants.Z_HUFFMAN_ONLY };
 const zData = Buffer.from(data);
-const zCompressedData = zlib.deflateSync(zData);
-const zOpts = { level: zlib.constants.Z_BEST_SPEED };
+const zCompressedData = zlib.deflateSync(zData, zOpts);
 
 report("zlib-1 compress", benchmark(() => zlib.deflateSync(zData, zOpts), zData.length));
 report("zlib-1 decompress", benchmark(() => zlib.inflateSync(zCompressedData), zData.length));
