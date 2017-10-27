@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/snappy",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Snappy compression algorithm",
   "main": "./lib/snappy.js",
   "typings": "./lib/snappy.d.ts",

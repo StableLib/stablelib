@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/poly1305",
-  "version": "0.5.0",
+  "version": "0.10.2",
   "description": "Poly1305 one-time message authentication code",
   "main": "./lib/poly1305.js",
   "typings": "./lib/poly1305.d.ts",
