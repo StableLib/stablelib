@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@stablelib/benchmark": "^0.5.0",
+    "@stablelib/bytes": "^0.5.0",
     "@stablelib/hex": "^0.5.0"
   }
 }

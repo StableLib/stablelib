@@ -369,7 +369,6 @@ export class Poly1305 {
             }
             this._blocks(this._buffer, 0, 16);
             this._leftover = 0;
-            return this;
         }
 
         if (bytes >= 16) {

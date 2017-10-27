@@ -2,7 +2,8 @@
 // MIT License. See LICENSE file for details.
 
 import { encode, decode } from "@stablelib/hex";
-import { oneTimeAuth } from "./poly1305";
+import { concat } from "@stablelib/bytes";
+import { oneTimeAuth, Poly1305 } from "./poly1305";
 
 const testVectors = [
         {
@@ -255,5 +256,32 @@ describe("poly1305", () => {
             const mac = oneTimeAuth(decode(v.key), decode(v.data));
             expect(encode(mac)).toBe(v.mac);
         });
+    });
+
+    it('multiple update should produce the same result as a single update', () => {
+        const key = new Uint8Array(32);
+        for (let i = 0; i < key.length; i++) {
+            key[i] = i;
+        }
+        const data = new Uint8Array(4 + 64 + 169);
+        for (let i = 0; i < data.length; i++) {
+            data[i] = i;
+        }
+        const d1 = data.subarray(0, 4);
+        const d2 = data.subarray(4, 4 + 64);
+        const d3 = data.subarray(4 + 64);
+
+        expect(encode(concat(d1, d2, d3))).toBe(encode(data));
+
+        const p1 = new Poly1305(key);
+        p1.update(data);
+        const r1 = p1.digest();
+
+        const p2 = new Poly1305(key);
+        p2.update(d1);
+        p2.update(d2);
+        p2.update(d3);
+        const r2 = p2.digest();
+        expect(encode(r1)).toBe(encode(r2));
     });
 });
