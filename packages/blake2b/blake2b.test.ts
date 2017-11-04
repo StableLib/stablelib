@@ -569,7 +569,7 @@ describe("BLAKE2b keyed", () => {
     });
 });
 
-describe("BLAKEbs config", () => {
+describe("BLAKEb config", () => {
     const salt = new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
     const person = new Uint8Array([17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 39, 30, 31, 32]);
     const input = new Uint8Array([255, 254, 253, 252, 251, 250]);
