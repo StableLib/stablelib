@@ -84,6 +84,9 @@ export class BLAKE2b implements SerializableHash {
     private _lastNode = false;
     private _finished = false;
 
+    private _vtmp = new Int32Array(32);
+    private _mtmp = new Int32Array(32);
+
     private _paddedKey: Uint8Array | undefined; // copy of zero-padded key if present
     private _initialState: Int32Array; // initial state after initialization
 
@@ -295,6 +298,8 @@ export class BLAKE2b implements SerializableHash {
     }
 
     clean() {
+        wipe(this._vtmp);
+        wipe(this._mtmp);
         wipe(this._state);
         wipe(this._buffer);
         wipe(this._initialState);
@@ -505,7 +510,7 @@ export class BLAKE2b implements SerializableHash {
 
     private _processBlock(length: number) {
         this._incrementCounter(length);
-        let v = new Uint32Array(32);
+        let v = this._vtmp;
         v.set(this._state);
         v.set(IV, 16);
         v[12 * 2 + 0] ^= this._ctr[0];
@@ -517,7 +522,7 @@ export class BLAKE2b implements SerializableHash {
         v[15 * 2 + 0] ^= this._flag[2];
         v[15 * 2 + 1] ^= this._flag[3];
 
-        let m = new Uint32Array(32);
+        let m = this._mtmp;
         for (let i = 0; i < 32; i++) {
             m[i] = readUint32LE(this._buffer, i * 4);
         }
