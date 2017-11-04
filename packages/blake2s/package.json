@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/blake2s",
-  "version": "0.10.3",
+  "version": "0.10.4",
   "description": "BLAKE2s cryptographic hash function",
   "main": "./lib/blake2s.js",
   "typings": "./lib/blake2s.d.ts",
