@@ -499,7 +499,7 @@ export class BLAKE2b implements SerializableHash {
                 this._ctr[i] = a;
                 return;
             }
-            this._ctr[i + 1] = 0;
+            this._ctr[i] = 0;
             n = 1;
         }
     }
