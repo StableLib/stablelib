@@ -1,0 +1,26 @@
+{
+  "name": "@stablelib/blake2b",
+  "version": "0.0.0",
+  "description": "BLAKE2b cryptographic hash function",
+  "main": "./lib/blake2b.js",
+  "typings": "./lib/blake2b.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./lib/blake2b.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/binary": "^0.7.2",
+    "@stablelib/hash": "^0.5.0",
+    "@stablelib/wipe": "^0.5.0"
+  },
+  "devDependencies": {
+    "@stablelib/benchmark": "^0.5.0",
+    "@stablelib/hex": "^0.5.0"
+  }
+}
