@@ -76,6 +76,7 @@ const SIGMA = [
 export class BLAKE2b implements SerializableHash {
     readonly blockSize = BLOCK_SIZE;
 
+    // Note: Int32Arrays for state and message are used for performance reasons.
     private _state = new Int32Array(IV); // hash state, initialized with IV
     private _buffer = new Uint8Array(BLOCK_SIZE); // buffer for data
     private _bufferLength = 0; // number of bytes in buffer
