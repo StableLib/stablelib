@@ -340,7 +340,7 @@ export class BLAKE2b implements SerializableHash {
         if (this._paddedKey) {
             wipe(this._paddedKey);
         }
-        this._paddedKey = savedState.paddedKey ? new Uint32Array(savedState.paddedKey) : undefined;
+        this._paddedKey = savedState.paddedKey ? new Uint8Array(savedState.paddedKey) : undefined;
         this._initialState.set(savedState.initialState);
         return this;
     }
