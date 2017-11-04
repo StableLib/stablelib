@@ -511,8 +511,8 @@ export class BLAKE2b implements SerializableHash {
         v.set(IV, 16);
         v[12 * 2 + 0] ^= this._ctr[0];
         v[12 * 2 + 1] ^= this._ctr[1];
-        v[13 * 2 + 0] ^= this._ctr[3];
-        v[13 * 2 + 1] ^= this._ctr[4];
+        v[13 * 2 + 0] ^= this._ctr[2];
+        v[13 * 2 + 1] ^= this._ctr[3];
         v[14 * 2 + 0] ^= this._flag[0];
         v[14 * 2 + 1] ^= this._flag[1];
         v[15 * 2 + 0] ^= this._flag[2];
