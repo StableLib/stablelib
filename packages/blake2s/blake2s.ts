@@ -296,30 +296,33 @@ export class BLAKE2s implements SerializableHash {
             throw new Error("blake2s: cannot save finished state");
         }
         return {
-            state: this._state,
-            buffer: this._buffer,
+            state: new Uint32Array(this._state),
+            buffer: new Uint8Array(this._buffer),
             bufferLength: this._bufferLength,
             ctr0: this._ctr0,
             ctr1: this._ctr1,
             flag0: this._flag0,
             flag1: this._flag1,
             lastNode: this._lastNode,
-            paddedKey: this._paddedKey,
-            initialState: this._initialState
+            paddedKey: this._paddedKey ? new Uint8Array(this._paddedKey) : undefined,
+            initialState: new Uint32Array(this._initialState)
         };
     }
 
     restoreState(savedState: SavedState): this {
-        this._state = savedState.state;
-        this._buffer = savedState.buffer;
+        this._state.set(savedState.state);
+        this._buffer.set(savedState.buffer);
         this._bufferLength = savedState.bufferLength;
         this._ctr0 = savedState.ctr0;
         this._ctr1 = savedState.ctr1;
         this._flag0 = savedState.flag0;
         this._flag1 = savedState.flag1;
         this._lastNode = savedState.lastNode;
-        this._paddedKey = savedState.paddedKey;
-        this._initialState = savedState.initialState;
+        if (this._paddedKey) {
+            wipe(this._paddedKey);
+        }
+        this._paddedKey = savedState.paddedKey ? new Uint8Array(savedState.paddedKey) : undefined;
+        this._initialState.set(savedState.initialState);
         return this;
     }
 
