@@ -568,18 +568,20 @@ describe("BLAKE2s", () => {
         }
     });
 
-    it("should correctly hash 3 GiB", () => {
+    it("should correctly hash 4 GiB", () => {
        const h = new BLAKE2s();
-       const buf = new Uint8Array(256 * 1024 * 1024); // 256 MiB
+       const buf = new Uint8Array(64 * 1024 * 1024); // 64 MiB
        for (let i = 0; i < buf.length; i++) {
            buf[i] = i & 0xff;
        }
-       for (let i = 0; i < 12; i++) { // 3 GiB
+       let i;
+       for (i = 0; i < Math.pow(2, 32) / buf.length; i++) {
            buf[0] = i & 0xff;
            h.update(buf);
        }
-       expect(encode(h.digest()))
-        .toBe("A73D2A684E935F91A892370D3F0451CEE76C4A4D95136FFDDE0E489F5A941A1F");
+       h.update(buf.subarray(0, 10));
+       expect(encode(h.digest(), true))
+           .toBe("2ae21ba03c8d668a3de993830be68c24c97293cd1e6b86f97fe31c0fabeb5fe0");
     });
 
 });

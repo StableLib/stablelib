@@ -342,9 +342,9 @@ export class BLAKE2s implements SerializableHash {
     }
 
     private _processBlock(length: number) {
-        this._ctr0 += length;
-        if (this._ctr0 !== this._ctr0 >>> 0) {
-            this._ctr0 = 0;
+        let nc = this._ctr0 + length;
+        this._ctr0 = nc >>> 0;
+        if (nc !== this._ctr0) {
             this._ctr1++;
         }
 
