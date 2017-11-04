@@ -495,11 +495,10 @@ export class BLAKE2b implements SerializableHash {
     private _incrementCounter(n: number) {
         for (let i = 0; i < 3; i++) {
             let a = this._ctr[i] + n;
-            if (a === a >>> 0) {
-                this._ctr[i] = a;
+            this._ctr[i] = a >>> 0;
+            if (this._ctr[i] === a) {
                 return;
             }
-            this._ctr[i] = 0;
             n = 1;
         }
     }

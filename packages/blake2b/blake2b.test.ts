@@ -533,20 +533,23 @@ describe("BLAKE2b", () => {
         }
     });
 
-    it("should correctly hash 3 GiB", () => {
-       const h = new BLAKE2b();
-       const buf = new Uint8Array(256 * 1024 * 1024); // 256 MiB
-       for (let i = 0; i < buf.length; i++) {
-           buf[i] = i & 0xff;
-       }
-       for (let i = 0; i < 12; i++) { // 3 GiB
-           buf[0] = i & 0xff;
-           h.update(buf);
-       }
-       expect(encode(h.digest(), true)).toBe(
-           "1e62f4808921ec14c538f53402efd51ecccc3e6c67851df593dc478bbfd0f3fb26e26e" +
-           "378f78f61236c0b6c891c6c2b1433796bb91a58c0f2da19e78950e3be3"
-        );
+    it("should correctly hash 4 GiB", () => {
+        const h = new BLAKE2b();
+        const buf = new Uint8Array(64 * 1024 * 1024); // 64 MiB
+        for (let i = 0; i < buf.length; i++) {
+            buf[i] = i & 0xff;
+        }
+        let i;
+        for (i = 0; i < Math.pow(2, 32) / buf.length; i++) {
+            buf[0] = i & 0xff;
+            h.update(buf);
+        }
+        h.update(buf.subarray(0, 10));
+        expect(encode(h.digest(), true))
+            .toBe(
+                "f14e911ec25e89c546ad7b91b3d5b059be65a3ff9bc876cdbcf6b4919784dad38f496986c41" +
+                "329065b4b9813fa1ee1bad5195b114fc7de476d0603364288f5f2"
+            );
     });
 });
 
