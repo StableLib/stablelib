@@ -609,7 +609,7 @@ function cswap(p: GF[], q: GF[], b: number) {
     }
 }
 
-function pack(r: GF, p: GF[]) {
+function pack(r: Uint8Array, p: GF[]) {
     const tx = gf(), ty = gf(), zi = gf();
     inv25519(zi, p[2]);
     mul(tx, p[0], zi);
@@ -618,7 +618,7 @@ function pack(r: GF, p: GF[]) {
     r[31] ^= par25519(tx) << 7;
 }
 
-function scalarmult(p: GF[], q: GF[], s: GF) {
+function scalarmult(p: GF[], q: GF[], s: Uint8Array) {
     set25519(p[0], gf0);
     set25519(p[1], gf1);
     set25519(p[2], gf1);
@@ -632,7 +632,7 @@ function scalarmult(p: GF[], q: GF[], s: GF) {
     }
 }
 
-function scalarbase(p: GF[], s: GF) {
+function scalarbase(p: GF[], s: Uint8Array) {
     const q = [gf(), gf(), gf(), gf()];
     set25519(q[0], X);
     set25519(q[1], Y);
@@ -721,7 +721,7 @@ function modL(r: Uint8Array, x: Float64Array) {
     }
 }
 
-function reduce(r: GF) {
+function reduce(r: Uint8Array) {
     const x = new Float64Array(64);
     for (let i = 0; i < 64; i++) {
         x[i] = r[i];
@@ -774,7 +774,7 @@ export function sign(secretKey: Uint8Array, message: Uint8Array): Uint8Array {
     return signature;
 }
 
-function unpackneg(r: GF[], p: GF) {
+function unpackneg(r: GF[], p: Uint8Array) {
     const t = gf(), chk = gf(), num = gf(),
         den = gf(), den2 = gf(), den4 = gf(),
         den6 = gf();
