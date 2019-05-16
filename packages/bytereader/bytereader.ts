@@ -200,10 +200,10 @@ export class ByteReader {
     seek(n: number): this {
         if (n < 0) {
             // Seek backward.
-            if (this._pos - n < 0) {
+            if (this._pos + n < 0) {
                 throw new Error("ByteReader: trying to seek out of bounds");
             }
-            this._pos -= n;
+            this._pos += n;
         } else if (n > 0) {
             // Seek forward.
             if (this._pos + n >= this._arr.length) {
