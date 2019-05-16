@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/bytereader",
-  "version": "0.7.2",
+  "version": "0.10.7",
   "description": "Byte reader",
   "main": "./lib/bytereader.js",
   "typings": "./lib/bytereader.d.ts",
