@@ -29,6 +29,39 @@ describe("ByteReader", () => {
        expect(r.unreadLength).toBe(0);
     });
 
+    it("should do correct seek backward", () => {
+       const r = new ByteReader(new Uint8Array([1, 2, 3]));
+
+       r.readByte();
+       expect(r.unreadLength).toBe(2);
+
+       r.readByte();
+       expect(r.unreadLength).toBe(1);
+
+       r.seek(-2);
+       expect(r.unreadLength).toBe(3);
+    });
+
+    it("should do correct seek forward", () => {
+       const r = new ByteReader(new Uint8Array([1, 2, 3]));
+
+       r.seek(2);
+       expect(r.unreadLength).toBe(1);
+    });
+
+    it("should do correct seek to beginning", () => {
+       const r = new ByteReader(new Uint8Array([1, 2, 3]));
+
+       r.readByte();
+       expect(r.unreadLength).toBe(2);
+
+       r.readByte();
+       expect(r.unreadLength).toBe(1);
+
+       r.seek(0);
+       expect(r.unreadLength).toBe(3);
+    });
+
     // TODO(dchest): test for readXXX.
 
 });
