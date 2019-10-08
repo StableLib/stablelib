@@ -1,0 +1,26 @@
+{
+  "name": "@stablelib/xchacha20",
+  "version": "0.1.0",
+  "description": "XChaCha20 stream cipher",
+  "main": "./lib/xchacha20.js",
+  "typings": "./lib/xchacha20.d.ts",
+  "contributors": [{"name": "Dmitry Chestnykh" }, {"name": "Kyle Den Hartog" } ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./lib/chacha.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/binary": "^0.7.2",
+    "@stablelib/wipe": "^0.5.0",
+    "@stablelib/chacha": "^0.7.2"
+  },
+  "devDependencies": {
+    "@stablelib/benchmark": "^0.5.0",
+    "@stablelib/hex": "^0.5.0"
+  }
+}
