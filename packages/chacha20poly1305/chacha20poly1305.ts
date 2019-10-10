@@ -147,7 +147,7 @@ export class ChaCha20Poly1305 implements AEAD {
         let result;
         if (dst) {
             if (dst.length !== resultLength) {
-                throw new Error("GCM: incorrect destination length");
+                throw new Error("ChaCha20Poly1305: incorrect destination length");
             }
             result = dst;
         } else {
