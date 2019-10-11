@@ -9,7 +9,7 @@ const buf1111 = byteSeq(1111);
 const buf0 = new Uint8Array(0);
 
 const key = byteSeq(32);
-const nonce = byteSeq(12);
+const nonce = byteSeq(24);
 
 const aead = new XChaCha20Poly1305(key);
 

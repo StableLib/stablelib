@@ -25,19 +25,19 @@ export function streamXOR(key: Uint8Array, nonce: Uint8Array, src: Uint8Array,
         throw new Error("XChacha20 nonce must be 24 bytes");
     }
 
-    // Use HSalsa one-way function to transform first 16 bytes of
+    // Use HChaCha one-way function to transform first 16 bytes of
     // 24-byte extended nonce and key into a new key for Salsa
     // stream -- "subkey".
     const subkey = hchacha(key, nonce.subarray(0, 16), new Uint8Array(32));
 
 
-    // Use last 8 bytes of 24-byte extended nonce as an actual nonce prefixed by 4 NUL bytes,
+    // Use last 8 bytes of 24-byte extended nonce as an actual nonce prefixed by 4 zero bytes,
     // and a subkey derived in the previous step as key to encrypt.
-    const modified_nonce = new Uint8Array(12);
-    modified_nonce.set(nonce.subarray(16), 4);
+    const modifiedNonce = new Uint8Array(12);
+    modifiedNonce.set(nonce.subarray(16), 4);
     // If nonceInplaceCounterLength > 0, we'll still pass the correct
     // nonce || counter, as we don't limit the end of nonce subarray.
-    const result = chachaStreamXOR(subkey, modified_nonce, src, dst);
+    const result = chachaStreamXOR(subkey, modifiedNonce, src, dst);
 
     // Clean subkey.
     wipe(subkey);
@@ -47,7 +47,7 @@ export function streamXOR(key: Uint8Array, nonce: Uint8Array, src: Uint8Array,
 
 /**
  * Generate XChaCha20 stream for the given 32-byte key and 12-byte
- * nonce (last 8 bytes of 24 byte nonce prefixed with 4 null bytes)
+ * nonce (last 8 bytes of 24 byte nonce prefixed with 4 zero bytes)
  * and write it into dst and return it.
  *
  * Nonces MUST be generated using an CSPRNG to generate a sufficiently

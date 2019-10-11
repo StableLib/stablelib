@@ -14,7 +14,7 @@ export const TAG_LENGTH = 16;
 /**
  * XChaCha20-Poly1305 Authenticated Encryption with Associated Data.
  *
- * Defined in draft-irtf-cfrg-xchacha.
+ * Defined in draft-irtf-cfrg-xchacha-01.
  * see https://tools.ietf.org/html/draft-irtf-cfrg-xchacha-01
  */
 export class XChaCha20Poly1305 implements AEAD {
@@ -38,10 +38,10 @@ export class XChaCha20Poly1305 implements AEAD {
    * Encrypts and authenticates plaintext, authenticates associated data,
    * and returns sealed ciphertext, which includes authentication tag.
    *
-   * draft-irtf-cfrg-xchacha defines a 24 byte nonce (192 bits) which
+   * draft-irtf-cfrg-xchacha-01 defines a 24 byte nonce (192 bits) which
    * then uses the first 16 bytes of the nonce and the secret key with
    * Hchacha to generate an initial subkey. The last 8 bytes of the nonce
-   * are then prefixed with 4 null bytes and then provided with the subkey
+   * are then prefixed with 4 zero bytes and then provided with the subkey
    * to the chacha20poly1305 implementation.
    *
    * If dst is given (it must be the size of plaintext + the size of tag
@@ -63,7 +63,7 @@ export class XChaCha20Poly1305 implements AEAD {
     const subKey = hchacha(this._key, nonce.subarray(0, 16), new Uint8Array(32));
 
 
-    // Use last 8 bytes of 24-byte extended nonce as an actual nonce prefixed by 4 NUL bytes,
+    // Use last 8 bytes of 24-byte extended nonce as an actual nonce prefixed by 4 zero bytes,
     // and a subkey derived in the previous step as key to encrypt.
     const modifiedNonce = new Uint8Array(12);
     modifiedNonce.set(nonce.subarray(16), 4);
@@ -95,7 +95,7 @@ export class XChaCha20Poly1305 implements AEAD {
    * draft-irtf-cfrg-xchacha-01 defines a 24 byte nonce (192 bits) which
    * then uses the first 16 bytes of the nonce and the secret key with
    * Hchacha to generate an initial subkey. The last 8 bytes of the nonce
-   * are then prefixed with 4 null bytes and then provided with the subkey
+   * are then prefixed with 4 zero bytes and then provided with the subkey
    * to the chacha20poly1305 implementation.
    *
    * If dst is given (it must be the size of plaintext + the size of tag
@@ -120,7 +120,7 @@ export class XChaCha20Poly1305 implements AEAD {
 
     /**
     * Generate subKey by using HChaCha20 function as defined
-    * in section 2 step 1 of draft-irtf-cfrg-xchacha-03
+    * in section 2 step 1 of draft-irtf-cfrg-xchacha-01
     */
     const subKey = hchacha(
       this._key,
@@ -130,35 +130,18 @@ export class XChaCha20Poly1305 implements AEAD {
 
     /**
     * Generate Nonce as defined - remaining 8 bytes of the nonce prefixed with
-    * 4 NUL bytes
+    * 4 zero bytes
     */
     const modifiedNonce = new Uint8Array(12);
     modifiedNonce.set(nonce.subarray(16), 4);
 
-    // Decrypt.
-    const chachaPoly1305 = new ChaCha20Poly1305(subKey);
-
-    // Allocate space for decrypted plaintext.
-    const resultLength = sealed.length - this.tagLength;
-    let result;
-    if (dst) {
-      if (dst.length !== resultLength) {
-        throw new Error("XChaCha20Poly1305: incorrect destination length");
-      }
-      result = dst;
-    } else {
-      result = new Uint8Array(resultLength);
-    }
-
     /**
      * decrypt by calling into chacha20poly1305 as is described should be done
-     * in draft-
+     * in draft-irtf-cfrg-xchacha-01
      */
-    chachaPoly1305.open(modifiedNonce, sealed, associatedData, result);
-
-    // Cleanup.
+    const chachaPoly1305 = new ChaCha20Poly1305(subKey);
+    const result = chachaPoly1305.open(modifiedNonce, sealed, associatedData, dst);
     wipe(modifiedNonce);
-
     return result;
   }
 

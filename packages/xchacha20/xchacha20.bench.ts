@@ -11,7 +11,7 @@ const buf64 = byteSeq(64);
 
 
 const key = byteSeq(32);
-const nonce = byteSeq(8);
+const nonce = byteSeq(24);
 
 report("ChaCha20 xor 16K", benchmark(() => streamXOR(key, nonce, buf16K, buf16K), buf16K.length));
 report("ChaCha20 xor 8K", benchmark(() => streamXOR(key, nonce, buf8192, buf8192), buf8192.length));
