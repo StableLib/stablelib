@@ -6,7 +6,6 @@ import { hchacha } from "@stablelib/xchacha20";
 import { ChaCha20Poly1305 } from "@stablelib/chacha20poly1305";
 import { wipe } from "@stablelib/wipe";
 
-
 export const KEY_LENGTH = 32;
 export const NONCE_LENGTH = 24;
 export const TAG_LENGTH = 16;
@@ -15,7 +14,7 @@ export const TAG_LENGTH = 16;
  * XChaCha20-Poly1305 Authenticated Encryption with Associated Data.
  *
  * Defined in draft-irtf-cfrg-xchacha-01.
- * see https://tools.ietf.org/html/draft-irtf-cfrg-xchacha-01
+ * See https://tools.ietf.org/html/draft-irtf-cfrg-xchacha-01
  */
 export class XChaCha20Poly1305 implements AEAD {
   readonly nonceLength = NONCE_LENGTH;
@@ -39,10 +38,10 @@ export class XChaCha20Poly1305 implements AEAD {
    * and returns sealed ciphertext, which includes authentication tag.
    *
    * draft-irtf-cfrg-xchacha-01 defines a 24 byte nonce (192 bits) which
-   * then uses the first 16 bytes of the nonce and the secret key with
-   * Hchacha to generate an initial subkey. The last 8 bytes of the nonce
+   * uses the first 16 bytes of the nonce and the secret key with
+   * HChaCha to generate an initial subkey. The last 8 bytes of the nonce
    * are then prefixed with 4 zero bytes and then provided with the subkey
-   * to the chacha20poly1305 implementation.
+   * to the ChaCha20Poly1305 implementation.
    *
    * If dst is given (it must be the size of plaintext + the size of tag
    * length) the result will be put into it. Dst and plaintext must not
@@ -86,6 +85,8 @@ export class XChaCha20Poly1305 implements AEAD {
    * are then prefixed with 4 zero bytes and then provided with the subkey
    * to the chacha20poly1305 implementation.
    *
+   * If authentication fails, it returns null.
+   *
    * If dst is given (it must be the size of plaintext + the size of tag
    * length) the result will be put into it. Dst and plaintext must not
    * overlap.
@@ -124,8 +125,7 @@ export class XChaCha20Poly1305 implements AEAD {
     modifiedNonce.set(nonce.subarray(16), 4);
 
     /**
-     * decrypt by calling into chacha20poly1305 as is described should be done
-     * in draft-irtf-cfrg-xchacha-01
+     * Authenticate and decrypt by calling into chacha20poly1305.
      */
     const chaChaPoly = new ChaCha20Poly1305(subKey);
     const result = chaChaPoly.open(modifiedNonce, sealed, associatedData, dst);
