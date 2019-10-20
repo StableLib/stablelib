@@ -68,10 +68,11 @@ export class XChaCha20Poly1305 implements AEAD {
     const modifiedNonce = new Uint8Array(12);
     modifiedNonce.set(nonce.subarray(16), 4);
 
-    const chachapoly1305 = new ChaCha20Poly1305(subKey);
-    const result = chachapoly1305.seal(modifiedNonce, plaintext, associatedData, dst);
+    const chaChaPoly = new ChaCha20Poly1305(subKey);
+    const result = chaChaPoly.seal(modifiedNonce, plaintext, associatedData, dst);
     wipe(subKey);
     wipe(modifiedNonce);
+    chaChaPoly.clean();
     return result;
   }
 
@@ -126,10 +127,11 @@ export class XChaCha20Poly1305 implements AEAD {
      * decrypt by calling into chacha20poly1305 as is described should be done
      * in draft-irtf-cfrg-xchacha-01
      */
-    const chachaPoly1305 = new ChaCha20Poly1305(subKey);
-    const result = chachaPoly1305.open(modifiedNonce, sealed, associatedData, dst);
+    const chaChaPoly = new ChaCha20Poly1305(subKey);
+    const result = chaChaPoly.open(modifiedNonce, sealed, associatedData, dst);
     wipe(subKey);
     wipe(modifiedNonce);
+    chaChaPoly.clean();
     return result;
   }
 
