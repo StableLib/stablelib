@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@stablelib/aead": "^0.5.0",
+    "@stablelib/chacha20poly1305": "^0.10.2",
     "@stablelib/xchacha20": "^0.1.0",
     "@stablelib/constant-time": "^0.5.0",
     "@stablelib/wipe": "^0.5.0"
