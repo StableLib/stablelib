@@ -13,15 +13,15 @@ const nonce = byteSeq(24);
 
 const aead = new XChaCha20Poly1305(key);
 
-report("ChaCha20Poly1305 seal 8K",
+report("XChaCha20Poly1305 seal 8K",
     benchmark(() => aead.seal(nonce, buf8192), buf8192.length));
-report("ChaCha20Poly1305 seal 1111",
+report("XChaCha20Poly1305 seal 1111",
     benchmark(() => aead.seal(nonce, buf1111), buf1111.length));
-report("ChaCha20Poly1305 seal 8K + AD",
+report("XChaCha20Poly1305 seal 8K + AD",
     benchmark(() => aead.seal(nonce, buf8192, buf8192), buf8192.length * 2));
-report("ChaCha20Poly1305 seal 1111 + AD",
+report("XChaCha20Poly1305 seal 1111 + AD",
     benchmark(() => aead.seal(nonce, buf1111, buf1111), buf1111.length * 2));
-report("ChaCha20Poly1305 seal 0 + AD 8K",
+report("XChaCha20Poly1305 seal 0 + AD 8K",
     benchmark(() => aead.seal(nonce, buf0, buf8192), buf8192.length));
 
 const sealed8192 = aead.seal(nonce, buf8192);
@@ -29,16 +29,16 @@ const sealed1111 = aead.seal(nonce, buf1111);
 const sealed8192ad = aead.seal(nonce, buf8192, buf8192);
 const sealed1111ad = aead.seal(nonce, buf1111, buf1111);
 
-report("ChaCha20Poly1305 open 8K",
+report("XChaCha20Poly1305 open 8K",
     benchmark(() => aead.open(nonce, sealed8192), buf8192.length));
-report("ChaCha20Poly1305 open 1111",
+report("XChaCha20Poly1305 open 1111",
     benchmark(() => aead.open(nonce, sealed1111), buf1111.length));
-report("ChaCha20Poly1305 open 8K + AD",
+report("XChaCha20Poly1305 open 8K + AD",
     benchmark(() => aead.open(nonce, sealed8192ad, buf8192), buf8192.length * 2));
-report("ChaCha20Poly1305 open 1111 + AD",
+report("XChaCha20Poly1305 open 1111 + AD",
     benchmark(() => aead.seal(nonce, sealed1111ad, buf1111), buf1111.length * 2));
 
 sealed8192[0] ^= sealed8192[0];
 
-report("ChaCha20Poly1305 open (bad)",
+report("XChaCha20Poly1305 open (bad)",
     benchmark(() => aead.open(nonce, sealed8192), buf8192.length));
