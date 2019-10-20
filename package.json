@@ -5,7 +5,7 @@
   "description": "Code library for TypeScript/JavaScript",
   "main": "index.js",
   "scripts": {
-    "build": "node scripts/build.js",
+    "build": "lerna bootstrap && lerna run build",
     "test": "lerna run test",
     "bench": "lerna run bench",
     "lint": "tslint packages/**/*.ts",
@@ -22,7 +22,7 @@
     "@types/jasmine": "^2.5.47",
     "browserify": "^14.4.0",
     "jasmine": "^2.6.0",
-    "lerna": "^2.0.0-rc.5",
+    "lerna": "^3.16.4",
     "tslint": "^5.3.2",
     "typedoc": "^0.7.1",
     "typescript": "^2.3.3"
