@@ -68,23 +68,10 @@ export class XChaCha20Poly1305 implements AEAD {
     const modifiedNonce = new Uint8Array(12);
     modifiedNonce.set(nonce.subarray(16), 4);
 
-    const resultLength = plaintext.length + this.tagLength;
-    let result;
-    if (dst) {
-      if (dst.length !== resultLength) {
-        throw new Error(
-          "XChaCha20Poly1305: incorrect destination length"
-        );
-      }
-      result = dst;
-    } else {
-      result = new Uint8Array(resultLength);
-    }
-
     const chachapoly1305 = new ChaCha20Poly1305(subKey);
-
-    chachapoly1305.seal(modifiedNonce, plaintext, associatedData, result);
-
+    const result = chachapoly1305.seal(modifiedNonce, plaintext, associatedData, dst);
+    wipe(subKey);
+    wipe(modifiedNonce);
     return result;
   }
 
@@ -141,6 +128,7 @@ export class XChaCha20Poly1305 implements AEAD {
      */
     const chachaPoly1305 = new ChaCha20Poly1305(subKey);
     const result = chachaPoly1305.open(modifiedNonce, sealed, associatedData, dst);
+    wipe(subKey);
     wipe(modifiedNonce);
     return result;
   }
