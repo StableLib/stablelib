@@ -53,7 +53,9 @@ export class CTR {
         wipe(this._buffer);
         wipe(this._counter);
         this._bufpos = this._buffer.length;
-        // Cleaning cipher is caller's responsibility.
+        // Cleaning cipher is caller's responsibility,
+        // just remove a reference to it.
+        this._cipher = undefined;
         return this;
     }
 
