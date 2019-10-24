@@ -9,7 +9,7 @@ export class BrowserRandomSource implements RandomSource {
     isAvailable = false;
     isInstantiated = false;
 
-    private _crypto: { getRandomValues(out: ArrayBufferView): ArrayBufferView };
+    private _crypto?: { getRandomValues: typeof window.crypto.getRandomValues };
 
     constructor() {
         const browserCrypto = typeof self !== 'undefined'
@@ -24,7 +24,7 @@ export class BrowserRandomSource implements RandomSource {
     }
 
     randomBytes(length: number): Uint8Array {
-        if (!this.isAvailable) {
+        if (!this.isAvailable || !this._crypto) {
             throw new Error("Browser random byte generator is not available.");
         }
         const out = new Uint8Array(length);
