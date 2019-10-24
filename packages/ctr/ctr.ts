@@ -14,7 +14,7 @@ export class CTR {
     private _counter: Uint8Array;
     private _buffer: Uint8Array;
     private _bufpos = 0;
-    private _cipher: BlockCipher;
+    private _cipher: BlockCipher | undefined;
 
     constructor(cipher: BlockCipher, iv: Uint8Array) {
         // Allocate space for counter.
@@ -29,6 +29,10 @@ export class CTR {
     }
 
     setCipher(cipher: BlockCipher, iv: Uint8Array): this {
+        // Reset this._cipher to prevent reusing the existing one,
+        // if this method throws.
+        this._cipher = undefined;
+
         if (iv.length !== this._counter.length) {
             throw new Error("CTR: iv length must be equal to cipher block size");
         }
@@ -54,7 +58,7 @@ export class CTR {
     }
 
     private fillBuffer() {
-        this._cipher.encryptBlock(this._counter, this._buffer);
+        this._cipher!.encryptBlock(this._counter, this._buffer);
         this._bufpos = 0;
         incrementCounter(this._counter);
     }
