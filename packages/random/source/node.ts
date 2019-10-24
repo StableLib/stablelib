@@ -10,7 +10,7 @@ export class NodeRandomSource implements RandomSource {
     isAvailable = false;
     isInstantiated = false;
 
-    private _crypto: { randomBytes(n: number): Uint8Array };
+    private _crypto: { randomBytes(n: number): Uint8Array } | undefined;
 
     constructor() {
         if (typeof require !== "undefined") {
@@ -24,7 +24,7 @@ export class NodeRandomSource implements RandomSource {
     }
 
     randomBytes(length: number): Uint8Array {
-        if (!this.isAvailable) {
+        if (!this.isAvailable || !this._crypto) {
             throw new Error("Node.js random byte generator is not available.");
         }
 
