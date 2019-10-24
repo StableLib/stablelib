@@ -1,10 +1,17 @@
 {
   "name": "@stablelib/xchacha20poly1305",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "XChaCha20-Poly1305 AEAD (draft-irtf-cfrg-xchacha-01)",
   "main": "./lib/xchacha20poly1305.js",
   "typings": "./lib/xchacha20poly1305.d.ts",
-  "contributors": [{"name": "Dmitry Chestnykh" }, {"name": "Kyle Den Hartog" } ],
+  "contributors": [
+    {
+      "name": "Dmitry Chestnykh"
+    },
+    {
+      "name": "Kyle Den Hartog"
+    }
+  ],
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -16,10 +23,10 @@
   },
   "dependencies": {
     "@stablelib/aead": "^0.5.0",
-    "@stablelib/chacha20poly1305": "^0.10.2",
-    "@stablelib/xchacha20": "^0.1.0",
+    "@stablelib/chacha20poly1305": "^0.10.3",
     "@stablelib/constant-time": "^0.5.0",
-    "@stablelib/wipe": "^0.5.0"
+    "@stablelib/wipe": "^0.5.0",
+    "@stablelib/xchacha20": "^0.1.1"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^0.5.0",

@@ -1,10 +1,17 @@
 {
   "name": "@stablelib/xchacha20",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "XChaCha20 stream cipher",
   "main": "./lib/xchacha20.js",
   "typings": "./lib/xchacha20.d.ts",
-  "contributors": [{"name": "Dmitry Chestnykh" }, {"name": "Kyle Den Hartog" } ],
+  "contributors": [
+    {
+      "name": "Dmitry Chestnykh"
+    },
+    {
+      "name": "Kyle Den Hartog"
+    }
+  ],
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -16,8 +23,8 @@
   },
   "dependencies": {
     "@stablelib/binary": "^0.7.2",
-    "@stablelib/wipe": "^0.5.0",
-    "@stablelib/chacha": "^0.7.2"
+    "@stablelib/chacha": "^0.7.2",
+    "@stablelib/wipe": "^0.5.0"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^0.5.0",

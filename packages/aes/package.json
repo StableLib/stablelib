@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/aes",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "AES block cipher (Advanced Encryption Standard)",
   "main": "./lib/aes.js",
   "typings": "./lib/aes.d.ts",

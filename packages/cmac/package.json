@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/cmac",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "CMAC message authentication code",
   "main": "./lib/cmac.js",
   "typings": "./lib/cmac.d.ts",
@@ -20,7 +20,7 @@
     "@stablelib/wipe": "^0.5.0"
   },
   "devDependencies": {
-    "@stablelib/aes": "^0.7.2",
+    "@stablelib/aes": "^0.7.3",
     "@stablelib/benchmark": "^0.5.0",
     "@stablelib/hex": "^0.5.0"
   }

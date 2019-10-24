@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/pbkdf2",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "PBKDF2 (Password-based key derivation function)",
   "main": "./lib/pbkdf2.js",
   "typings": "./lib/pbkdf2.d.ts",
@@ -17,7 +17,7 @@
   "dependencies": {
     "@stablelib/binary": "^0.7.2",
     "@stablelib/hash": "^0.5.0",
-    "@stablelib/hmac": "^0.7.2",
+    "@stablelib/hmac": "^0.7.3",
     "@stablelib/wipe": "^0.5.0"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/hmac",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Hash-based message authentication code (HMAC)",
   "main": "./lib/hmac.js",
   "typings": "./lib/hmac.d.ts",
