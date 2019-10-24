@@ -123,7 +123,7 @@ export class CustomNewHope implements KeyAgreement {
     readonly offerMessageLength = OFFER_MESSAGE_LENGTH;
     readonly acceptMessageLength = ACCEPT_MESSAGE_LENGTH;
     readonly savedStateLength = SAVED_STATE_LENGTH;
-    readonly sharedKeyLength: number; // subclasses will set it to correct length.
+    readonly sharedKeyLength: number;
 
     private _sFreq: Poly | undefined;
     private _sharedKey: Uint8Array | undefined;
@@ -136,6 +136,7 @@ export class CustomNewHope implements KeyAgreement {
     constructor(
         private _expander: SeedExpanderConstructor,
         private _hash: new () => Hash,
+        sharedKeyLength: number,
         secretSeed?: Uint8Array,
         private _prng?: RandomSource
     ) {
@@ -143,6 +144,7 @@ export class CustomNewHope implements KeyAgreement {
             throw new Error("NewHope: incorrect secret seed length");
         }
         this._secretSeed = secretSeed || randomBytes(SECRET_SEED_LENGTH, _prng);
+        this.sharedKeyLength = sharedKeyLength;
     }
 
     saveState(): Uint8Array {

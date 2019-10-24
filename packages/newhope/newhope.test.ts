@@ -10,9 +10,9 @@ import * as hex from "@stablelib/hex";
 //
 class TestRandomSource {
     isAvailable = true;
-    key = new Uint32Array([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5]);
-    nonce = new Uint32Array(8);
-    out = new Uint32Array(64);
+    key = new Uint8Array([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5]);
+    nonce = new Uint8Array(8);
+    out = new Uint8Array(64);
     outleft = 0;
 
     randomBytes(len: number): Uint8Array {

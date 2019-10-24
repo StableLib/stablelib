@@ -70,6 +70,7 @@ export class NewHope extends CustomNewHope {
         super(
             SHAKE128Expander,
             SHA3256,
+            SHARED_KEY_LENGTH,
             secretSeed,
             prng
         );
