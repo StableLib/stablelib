@@ -5,6 +5,7 @@
         "strict": true,
         "noUnusedParameters": true,
         "noImplicitReturns": true,
+        "strictPropertyInitialization": false,
         "noUnusedLocals": true,
         "removeComments": false,
         "preserveConstEnums": true,
