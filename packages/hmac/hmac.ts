@@ -13,7 +13,7 @@ export class HMAC implements SerializableHash {
     private _inner: Hash; // inner hash
     private _outer: Hash; // outer hash
 
-    private _finished: boolean; // true if HMAC was finalized
+    private _finished = false; // true if HMAC was finalized
 
     // Copies of hash states after keying.
     // Need for quick reset without hashing the key again.
