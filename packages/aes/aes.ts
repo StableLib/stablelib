@@ -144,7 +144,7 @@ export class AES implements BlockCipher {
     private _keyLen: number;
 
     // Expanded encryption key.
-    private _encKey: Uint32Array;
+    private _encKey: Uint32Array | undefined;
 
     // Expanded decryption key. May be undefined if instance
     // was created "noDecryption" option set to true.
@@ -229,7 +229,7 @@ export class AES implements BlockCipher {
         }
 
         // Encrypt block.
-        encryptBlock(this._encKey, src, dst);
+        encryptBlock(this._encKey!, src, dst);
 
         return this;
     }
@@ -273,7 +273,7 @@ function rotw(w: number): number {
     return (w << 8) | (w >>> 24);
 }
 
-function expandKey(key: Uint8Array, encKey: Uint32Array, decKey?: Uint8Array): void {
+function expandKey(key: Uint8Array, encKey: Uint32Array, decKey?: Uint32Array): void {
     const nk = key.length / 4 | 0;
     const n = encKey.length;
     for (let i = 0; i < nk; i++) {
