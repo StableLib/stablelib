@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/tss",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Threshold Secret Sharing (TSS and RTSS, IETF draft-mcgrew-tss-03)",
   "main": "./lib/tss.js",
   "typings": "./lib/tss.d.ts",
@@ -18,7 +18,7 @@
     "@stablelib/constant-time": "^0.5.0",
     "@stablelib/gf256": "^0.5.0",
     "@stablelib/hash": "^0.5.0",
-    "@stablelib/random": "^0.7.3",
+    "@stablelib/random": "^0.7.4",
     "@stablelib/sha256": "^0.7.2",
     "@stablelib/wipe": "^0.5.0"
   },
