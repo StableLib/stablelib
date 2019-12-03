@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { encode, decode } from "@stablelib/base64";
-import { sign, verify, generateKeyPair, extractPublicKeyFromSecretKey } from "./ed25519";
+import { sign, verify, generateKeyPair, extractPublicKeyFromSecretKey, convertPublicKeyToX25519, convertSecretKeyToX25519 } from "./ed25519";
 
 /* tslint:disable */
 const testVectors = [
@@ -5160,5 +5160,24 @@ describe("ed25519", () => {
         const keys = generateKeyPair();
         const publicKey = extractPublicKeyFromSecretKey(keys.secretKey);
         expect(encode(publicKey)).toEqual(encode(keys.publicKey));
+    });
+
+    it("should convert Ed25519 public key to X25519 public key", () => {
+        const edPublicKey = decode("OT2GPApyB0MZYQGq+srsnvHJO50a6GF6N3tCMFV8j6U=");
+        const xGoodPublicKey = "s9qSVIQ+bkz3DPSRcKv/b1Spfpht/xqKls/Fy2eNe1Q=";
+        const xPublicKey = convertPublicKeyToX25519(edPublicKey);
+        expect(encode(xPublicKey)).toEqual(xGoodPublicKey);
+    });
+
+    it("should throw when converting invalid Ed25519 public key to X25519 public key", () => {
+        const edBadPublicKey = (new Uint8Array(32)).fill(0xff, 0, 31);
+        expect(() => convertPublicKeyToX25519(edBadPublicKey)).toThrowError(/invalid/);
+    });
+
+    it("should convert Ed25519 private key to X25519 private key", () => {
+        const edPrivateKey = decode("fkxhaCYoYkq/ByK7d+gY5q5u6uJhc/nPmyHGJGqGbPo5PYY8CnIHQxlhAar6yuye8ck7nRroYXo3e0IwVXyPpQ==");
+        const xGoodPrivateKey = "MGx44rPG9Mi3jjQ0G+Pm74n6ZnsliE00cMYlj66WyUs=";
+        const xPrivateKey = convertSecretKeyToX25519(edPrivateKey);
+        expect(encode(xPrivateKey)).toEqual(xGoodPrivateKey);
     });
 });

@@ -848,3 +848,42 @@ export function verify(publicKey: Uint8Array, message: Uint8Array, signature: Ui
     }
     return true;
 }
+
+/**
+ * Convert Ed25519 public key to X5519 public key.
+ *
+ * Throws if given an invalid public key.
+ */
+export function convertPublicKeyToX25519(publicKey: Uint8Array): Uint8Array {
+    let q = [gf(), gf(), gf(), gf()];
+
+    if (unpackneg(q, publicKey)) {
+        throw new Error("Ed25519: invalid public key");
+    }
+
+    // Formula: montgomeryX = (edwardsY + 1)*inverse(1 - edwardsY) mod p
+    let a = gf();
+    let b = gf();
+    let y = q[1];
+    add(a, gf1, y);
+    sub(b, gf1, y);
+    inv25519(b, b);
+    mul(a, a, b);
+
+    let z = new Uint8Array(32);
+    pack25519(z, a);
+    return z;
+}
+
+/**
+ *  Convert Ed25519 secret (private) key to X25519 secret key.
+ */
+export function convertSecretKeyToX25519(secretKey: Uint8Array): Uint8Array {
+    const d = hash(secretKey.subarray(0, 32));
+    d[0] &= 248;
+    d[31] &= 127;
+    d[31] |= 64;
+    const o = new Uint8Array(d.subarray(0, 32));
+    wipe(d);
+    return o;
+}
