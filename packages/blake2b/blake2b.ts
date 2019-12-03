@@ -85,11 +85,11 @@ export class BLAKE2b implements SerializableHash {
     private _lastNode = false;
     private _finished = false;
 
-    private _vtmp = new Int32Array(32);
-    private _mtmp = new Int32Array(32);
+    private _vtmp = new Uint32Array(32);
+    private _mtmp = new Uint32Array(32);
 
     private _paddedKey: Uint8Array | undefined; // copy of zero-padded key if present
-    private _initialState: Int32Array; // initial state after initialization
+    private _initialState: Uint32Array; // initial state after initialization
 
     constructor(public digestLength = 64, config?: Config) {
         // Validate digest length.
@@ -320,7 +320,7 @@ export class BLAKE2b implements SerializableHash {
         }
         return {
             state: new Uint32Array(this._state),
-            buffer: new Uint32Array(this._buffer),
+            buffer: new Uint8Array(this._buffer),
             bufferLength: this._bufferLength,
             ctr: new Uint32Array(this._ctr),
             flag: new Uint32Array(this._flag),
