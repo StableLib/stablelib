@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "echo No test"
   },
   "dependencies": {
     "@stablelib/bytes": "^0.5.0"
