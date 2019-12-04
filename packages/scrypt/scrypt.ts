@@ -132,7 +132,7 @@ function smix(B: Uint8Array, r: number, N: number, V: Int32Array, XY: Int32Array
     wipe(tmp);
 }
 
-const nextTick = (typeof setImmediate !== 'undefined') ? setImmediate : setTimeout;
+const nextTick = (typeof setImmediate !== 'undefined') ? setImmediate : (setTimeout as unknown as () => void);
 
 function splitCalc(start: number, end: number, step: number, fn: (s: number, e: number) => number): Promise<number> {
     return new Promise<number>(fulfill => {
