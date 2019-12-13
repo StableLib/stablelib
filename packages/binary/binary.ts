@@ -154,26 +154,22 @@ export const writeInt32LE = writeUint32LE;
  * Reads 8 bytes from array starting at offset as big-endian
  * signed 64-bit integer and returns it.
  *
- * Due to JavaScript limitation, supports values up to 2^53-1.
- *
- * XXX: not constant-time.
+ * IMPORTANT: due to JavaScript limitation, supports exact
+ * numbers in range -9007199254740991 to 9007199254740991.
+ * If the number stored in th byte array is outside this range,
+ * the result is not exact.
  */
 export function readInt64BE(array: Uint8Array, offset = 0): number {
     const hi = readInt32BE(array, offset);
     const lo = readInt32BE(array, offset + 4);
-    let result = hi * 0x100000000 + lo;
-    // TODO(dchest): make constant-time.
-    if (lo < 0) {
-        result += 0x100000000;
-    }
-    return result;
+    return hi * 0x100000000 + lo - ((lo>>31) * 0x100000000);
 }
 
 /**
  * Reads 8 bytes from array starting at offset as big-endian
  * unsigned 64-bit integer and returns it.
  *
- * Due to JavaScript limitation, supports values up to 2^53-1.
+ * IMPORTANT: due to JavaScript limitation, supports values up to 2^53-1.
  */
 export function readUint64BE(array: Uint8Array, offset = 0): number {
     const hi = readUint32BE(array, offset);
@@ -185,19 +181,15 @@ export function readUint64BE(array: Uint8Array, offset = 0): number {
  * Reads 8 bytes from array starting at offset as little-endian
  * signed 64-bit integer and returns it.
  *
- * Due to JavaScript limitation, supports values up to 2^53-1.
- *
- * XXX: not constant-time.
+ * IMPORTANT: due to JavaScript limitation, supports exact
+ * numbers in range -9007199254740991 to 9007199254740991.
+ * If the number stored in th byte array is outside this range,
+ * the result is not exact.
  */
 export function readInt64LE(array: Uint8Array, offset = 0): number {
     const lo = readInt32LE(array, offset);
     const hi = readInt32LE(array, offset + 4);
-    let result = hi * 0x100000000 + lo;
-    // TODO(dchest): make constant-time.
-    if (lo < 0) {
-        result += 0x100000000;
-    }
-    return result;
+    return hi * 0x100000000 + lo - ((lo>>31) * 0x100000000);
 }
 
 
@@ -205,7 +197,7 @@ export function readInt64LE(array: Uint8Array, offset = 0): number {
  * Reads 8 bytes from array starting at offset as little-endian
  * unsigned 64-bit integer and returns it.
  *
- * Due to JavaScript limitation, supports values up to 2^53-1.
+ * IMPORTANT: due to JavaScript limitation, supports values up to 2^53-1.
  */
 export function readUint64LE(array: Uint8Array, offset = 0): number {
     const lo = readUint32LE(array, offset);
