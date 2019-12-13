@@ -33,18 +33,6 @@ export type Tree = {
     lastNode: boolean; // indicates processing of the last node of layer
 };
 
-// TODO(dchest): these can probably be statically checked in TS 2.1.
-
-// Config and Tree objects are also checked in runtime
-// to make sure they contain only allowed keys.
-const ALLOWED_CONFIG_KEYS = ["key", "salt", "personalization", "tree"];
-
-const ALLOWED_TREE_KEYS = [
-    "fanout", "maxDepth", "leafSize", "nodeOffset",
-    "nodeDepth", "innerDigestLength", "lastNode"
-];
-
-
 const IV = new Uint32Array([
     0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
     0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
@@ -183,19 +171,6 @@ export class BLAKE2s implements SerializableHash {
             }
             if (config.tree.nodeOffset < 0 || config.tree.nodeOffset > MAX_NODE_OFFSET) {
                 throw new Error("blake2s: tree node offset is too large");
-            }
-        }
-        // Make sure there are no misspelt keys in config and tree.
-        for (let k in config) {
-            if (ALLOWED_CONFIG_KEYS.indexOf(k) === -1) {
-                throw new Error("blake2s: unexpected key in config: " + k);
-            }
-        }
-        if (config.tree) {
-            for (let k in config.tree) {
-                if (ALLOWED_TREE_KEYS.indexOf(k) === -1) {
-                    throw new Error("blake2s: unexpected key in config.tree: " + k);
-                }
             }
         }
     }
