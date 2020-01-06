@@ -1,12 +1,16 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package hkdf implements HKDF key derivation function.
+ */
+
 import { Hash } from "@stablelib/hash";
 import { HMAC, hmac } from "@stablelib/hmac";
 import { wipe } from "@stablelib/wipe";
 
 /**
- * HMAC-based Extract-and-Expand Key Derivation Function
+ * HMAC-based Extract-and-Expand Key Derivation Function.
  *
  * Implements HKDF from RFC5869.
  *
@@ -17,7 +21,7 @@ export class HKDF {
     private _hmac: HMAC;
     private _buffer: Uint8Array;
     private _bufpos: number;
-    private _counter = 1;
+    private _counter = new Uint8Array(1); // starts with zero
     private _hash: new () => Hash;
     private _info?: Uint8Array;
 
@@ -50,8 +54,13 @@ export class HKDF {
 
     // Fill buffer with new block of HKDF-Extract output.
     private _fillBuffer(): void {
-        // Counter is a byte value: check if it overflowed.
-        if (this._counter > 255) {
+        // Increment counter.
+        this._counter[0]++;
+
+        const ctr = this._counter[0];
+
+        // Check if counter overflowed.
+        if (ctr === 0) {
             throw new Error("hkdf: cannot expand more");
         }
 
@@ -60,7 +69,7 @@ export class HKDF {
 
         // Hash in previous output if it was generated
         // (i.e. counter is greater than 1).
-        if (this._counter > 1) {
+        if (ctr > 1) {
             this._hmac.update(this._buffer);
         }
 
@@ -71,13 +80,10 @@ export class HKDF {
 
         // Hash in the counter.
         // TODO(dchest): avoid allocation.
-        this._hmac.update(new Uint8Array([this._counter]));
+        this._hmac.update(this._counter);
 
         // Output result to buffer and clean HMAC instance.
         this._hmac.finish(this._buffer);
-
-        // Increment counter.
-        this._counter++;
 
         // Reset buffer position.
         this._bufpos = 0;
@@ -103,8 +109,8 @@ export class HKDF {
     clean(): void {
         this._hmac.clean();
         wipe(this._buffer);
+        wipe(this._counter);
         this._bufpos = 0;
-        this._counter = 0;
     }
 }
 
