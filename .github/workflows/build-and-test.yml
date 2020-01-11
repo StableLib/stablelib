@@ -1,0 +1,23 @@
+name: Build and tesst
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install dependencies
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+      - name: Build
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: build
+      - name: Test
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: test
