@@ -1,6 +1,6 @@
 name: Build and tesst
 
-on: [push]
+on: [push, push, pull_request]
 
 jobs:
   build:
