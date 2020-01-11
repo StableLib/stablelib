@@ -1,4 +1,4 @@
-name: Build and tesst
+name: Build and test
 
 on: [push, push, pull_request]
 
