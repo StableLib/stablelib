@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package sha3 implements SHA3 hash function and SHAKE extended output functions.
+ */
+
 // Based on Tiny-SHA3 implementation by Markku-Juhani O. Saarinen.
 // https://github.com/mjosaarinen/tiny_sha3
 //

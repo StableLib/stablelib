@@ -7,5 +7,9 @@
 // license that can be found in the LICENSE file.
 // https://github.com/golang/snappy/blob/master/LICENSE
 
+/**
+ * Package snappy implements Snappy compression and decompression.
+ */
+
 export * from "./compress";
 export * from "./decompress";

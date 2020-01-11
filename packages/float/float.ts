@@ -1,6 +1,10 @@
 // Copyright (C) 2017 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package float provides helper functions for floating-point numbers.
+ */
+
 interface ObjectWithIs extends Object {
     is?: (a: any, b: any) => boolean;
 }

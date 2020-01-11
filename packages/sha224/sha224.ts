@@ -1,13 +1,17 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package sha224 implements SHA-2-224 cryptographic hash function.
+ */
+
 import { SHA256 } from "@stablelib/sha256";
 
 export const DIGEST_LENGTH = 28;
 export const BLOCK_SIZE = 64;
 
 /**
- * SHA2-224 cryptographic hash algorithm.
+ * SHA-2-224 cryptographic hash algorithm.
  *
  * SHA-224 is the same algorithm as SHA-256, but with
  * different initialization vectors and digest length.

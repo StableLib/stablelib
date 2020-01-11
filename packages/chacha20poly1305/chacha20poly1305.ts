@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package chacha20poly1305 implements ChaCha20-Poly1305 AEAD.
+ */
+
 import { AEAD } from "@stablelib/aead";
 import { streamXOR, stream } from "@stablelib/chacha";
 import { Poly1305 } from "@stablelib/poly1305";

@@ -1,13 +1,17 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package base64 implements Base64 encoding and decoding.
+ */
+
 // Invalid character used in decoding to indicate
 // that the character to decode is out of range of
 // alphabet and cannot be decoded.
 const INVALID_BYTE = 256;
 
 /**
- * Implements standard Base64-encoding.
+ * Implements standard Base64 encoding.
  *
  * Operates in constant time.
  */

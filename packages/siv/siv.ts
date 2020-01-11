@@ -1,6 +1,10 @@
 // Copyright (C) 2017 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package siv implements SIV authenticated encryption.
+ */
+
 import { BlockCipher, BlockCipherContructor } from "@stablelib/blockcipher";
 import { CMAC, dbl } from "@stablelib/cmac";
 import { CTR } from "@stablelib/ctr";

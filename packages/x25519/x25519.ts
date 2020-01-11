@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package x25519 implements X25519 key agreement.
+ */
+
 import { randomBytes, RandomSource } from "@stablelib/random";
 import { wipe } from "@stablelib/wipe";
 import { KeyAgreement } from "@stablelib/keyagreement";

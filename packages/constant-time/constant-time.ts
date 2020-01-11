@@ -2,6 +2,10 @@
 // MIT License. See LICENSE file for details.
 
 /**
+ * Package constant-time provides functions for performing algorithmically constant-time operations.
+ */
+
+/**
  * NOTE! Due to the inability to guarantee real constant time evaluation of
  * anything in JavaScript VM, this is module is the best effort.
  */

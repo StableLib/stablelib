@@ -10,7 +10,7 @@ export interface RandomSource {
     isAvailable: boolean;
 
     /**
-     * Fill out with random bytes and return it.
+     * Returns a byte array of the given length filled with random bytes.
      */
     randomBytes(length: number): Uint8Array;
 }

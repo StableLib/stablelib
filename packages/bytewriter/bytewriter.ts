@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package bytewriter implements byte array writer.
+ */
+
 import { wipe } from "@stablelib/wipe";
 import { isSafeInteger } from "@stablelib/int";
 import {
@@ -31,6 +35,9 @@ export class ByteWriter {
         this._view = new DataView(this._arr.buffer);
     }
 
+    /**
+     * Returns the current total length of byte array.
+     */
     get length(): number {
         return this._len;
     }
@@ -52,10 +59,10 @@ export class ByteWriter {
         }
 
         // Not enough space for new addition.
-        // Remember this byte array and create new.
+        // Remember this byte array and create a new one.
         this._prev.push(this._arr.subarray(0, this._pos));
 
-        // Allocate new byte array double the size of the previous.
+        // Allocate new byte array double the size of the previous one.
         let newCap = Math.max(this._arr.length * 2, MIN_CAPACITY);
         // If it's not enough, just allocate as asked.
         if (newCap < add) {
@@ -77,6 +84,9 @@ export class ByteWriter {
         return this._resize(add);
     }
 
+    /**
+     * Resets position.
+     */
     reset(): this {
         // _arr and _view stay the same, everything else is reset.
         wipe(this._arr);
@@ -87,6 +97,9 @@ export class ByteWriter {
         return this;
     }
 
+    /**
+     * Returns the resulting byte array.
+     */
     finish(): Uint8Array {
         if (this._finished) {
             throw new Error("ByteWriter is already finished");

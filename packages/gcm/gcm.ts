@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package gcm implements GCM mode for block ciphers.
+ */
+
 import { AEAD } from "@stablelib/aead";
 import { BlockCipher } from "@stablelib/blockcipher";
 import { CTR } from "@stablelib/ctr";

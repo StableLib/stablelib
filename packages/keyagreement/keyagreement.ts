@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package keyagreement provides interface for key agreement.
+ */
+
 export interface KeyAgreement {
     /** Offer message length in bytes */
     readonly offerMessageLength: number;

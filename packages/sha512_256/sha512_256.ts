@@ -1,6 +1,10 @@
 // Copyright (C) 2017 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package sha512_256 implements SHA-2-512/256 cryptographic hash function.
+ */
+
 import { SHA512 } from "@stablelib/sha512";
 
 export const DIGEST_LENGTH = 32;

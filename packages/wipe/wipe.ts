@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package wipe implements functions for zeroing arrays.
+ */
+
 export type NumericArray = number[] | Uint8Array | Int8Array | Uint16Array
     | Int16Array | Uint32Array | Int32Array | Float32Array | Float64Array;
 

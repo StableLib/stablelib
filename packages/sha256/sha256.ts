@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package sha256 implements SHA-2-256 cryptographic hash function.
+ */
+
 import { SerializableHash } from "@stablelib/hash";
 import { readUint32BE, writeUint32BE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";

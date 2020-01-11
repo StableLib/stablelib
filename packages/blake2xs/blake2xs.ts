@@ -2,12 +2,16 @@ import { Hash } from "@stablelib/hash";
 import { BLAKE2s, DIGEST_LENGTH, BLOCK_SIZE, Config } from "@stablelib/blake2s";
 import { wipe } from "@stablelib/wipe";
 
+/**
+ * Package blake2xs implements BLAKE2Xs extensible output function (XOF).
+ */
+
 export { BLOCK_SIZE };
 
 /** Maximum output length */
 export const MAX_DIGEST_LENGTH = 65534;
 
-/** Indicates when ouput length is unknown */
+/** Indicates unknown output length  */
 const UNKNOWN_DIGEST_LENGTH = 65535;
 
 function nodeOffsetWithXOFDigestLength(nodeOffset: number, digestLength: number): number {
@@ -18,6 +22,9 @@ function nodeOffsetWithXOFDigestLength(nodeOffset: number, digestLength: number)
     return digestLength * 0x100000000 + nodeOffset;
 }
 
+/**
+ * BLAKE2Xs extensible output function.
+ */
 export class BLAKE2Xs implements Hash {
     readonly blockSize = BLOCK_SIZE;
 

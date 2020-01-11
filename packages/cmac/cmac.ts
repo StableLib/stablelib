@@ -1,10 +1,17 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package cmac implements CMAC message authentication function.
+ */
+
 import { BlockCipher } from "@stablelib/blockcipher";
 import { select } from "@stablelib/constant-time";
 import { wipe } from "@stablelib/wipe";
 
+/**
+ * CMAC message authentication code using a 128-bit block cipher.
+ */
 export class CMAC {
     readonly blockSize = 16;
     readonly digestLength = 16;
@@ -19,6 +26,10 @@ export class CMAC {
 
     private _cipher: BlockCipher;
 
+    /**
+     * Constructs a new CMAC instance with the given
+     * 128-bit block cipher.
+     */
     constructor(cipher: BlockCipher) {
         // CMAC is defined for 64-bit and 128-bit block ciphers,
         // but nobody should use 64-bit block ciphers anymore.

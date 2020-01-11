@@ -1,11 +1,17 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package hmac implements HMAC algorithm.
+ */
+
 import { Hash, SerializableHash, isSerializableHash } from "@stablelib/hash";
 import { equal as constantTimeEqual } from "@stablelib/constant-time";
 import { wipe } from "@stablelib/wipe";
 
-// HMAC implements hash-based message authentication algorithm.
+/**
+ *  HMAC implements hash-based message authentication algorithm.
+ */
 export class HMAC implements SerializableHash {
     readonly blockSize: number;
     readonly digestLength: number;
@@ -20,6 +26,9 @@ export class HMAC implements SerializableHash {
     private _innerKeyedState: any | undefined;
     private _outerKeyedState: any | undefined;
 
+    /**
+     * Constructs a new HMAC with the given Hash and secret key.
+     */
     constructor(hash: new () => Hash | SerializableHash, key: Uint8Array) {
         // Initialize inner and outer hashes.
         this._inner = new hash();
@@ -73,9 +82,11 @@ export class HMAC implements SerializableHash {
         wipe(pad);
     }
 
-    // Returns HMAC state to the state initialized with key
-    // to make it possible to run HMAC over the other data with the same
-    // key without creating a new instance.
+    /**
+     * Returns HMAC state to the state initialized with key
+     * to make it possible to run HMAC over the other data with the same
+     * key without creating a new instance.
+     */
     reset(): this {
         if (!isSerializableHash(this._inner) || !isSerializableHash(this._outer)) {
             throw new Error("hmac: can't reset() because hash doesn't implement restoreState()");
@@ -87,7 +98,9 @@ export class HMAC implements SerializableHash {
         return this;
     }
 
-    // Cleans HMAC state.
+    /**
+     * Cleans HMAC state.
+     */
     clean() {
         if (isSerializableHash(this._inner)) {
             this._inner.cleanSavedState(this._innerKeyedState);
@@ -99,13 +112,17 @@ export class HMAC implements SerializableHash {
         this._outer.clean();
     }
 
-    // Updates state with provided data.
+    /**
+     * Updates state with provided data.
+     */
     update(data: Uint8Array): this {
         this._inner.update(data);
         return this;
     }
 
-    // Finalizes HMAC and puts the result in out.
+    /**
+     * Finalizes HMAC and puts the result in out.
+     */
     finish(out: Uint8Array): this {
         if (this._finished) {
             // If HMAC was finalized, outer hash is also finalized,
@@ -125,15 +142,19 @@ export class HMAC implements SerializableHash {
         return this;
     }
 
-    // Returns message authentication code.
+    /**
+     * Returns the computed message authentication code.
+     */
     digest(): Uint8Array {
         const out = new Uint8Array(this.digestLength);
         this.finish(out);
         return out;
     }
 
-    // Saves HMAC state.
-    // This function is needed for PBKDF2 optimization.
+    /**
+     * Saves HMAC state.
+     * This function is needed for PBKDF2 optimization.
+     */
     saveState(): any {
         if (!isSerializableHash(this._inner)) {
             throw new Error("hmac: can't saveState() because hash doesn't implement it");
@@ -172,7 +193,7 @@ export function hmac(hash: new () => Hash, key: Uint8Array, data: Uint8Array): U
 
 /**
  * Returns true if two HMAC digests are equal.
- * Uses contant-time comparison to avoid leaking timing information.
+ * Uses constant-time comparison to avoid leaking timing information.
  *
  * Example:
  *

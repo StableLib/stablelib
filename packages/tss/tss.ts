@@ -1,6 +1,20 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package tss implements Threshold Secret Sharing.
+ *
+ * TSS provides a way to split a byte array into N byte arrays,
+ * any M ("threshold") of which can be combined to restore the
+ * original byte array. It is typically used to split secret
+ * cryptographic keys between people to provide shared access
+ * to data.
+ *
+ * This package implements IETF Internet-Draft
+ * https://tools.ietf.org/html/draft-mcgrew-tss-03
+ */
+
+
 import { Hash } from "@stablelib/hash";
 import { SHA256 } from "@stablelib/sha256";
 import { randomBytes, RandomSource } from "@stablelib/random";
@@ -16,19 +30,6 @@ export const HASH_ID_VENDOR_MIN = 128;
 export const IDENTIFIER_LENGTH = 16;
 export const MAX_SECRET_LENGTH = 65534;
 export const MAX_SHARES = 255;
-
-/**
- * Threshold Secret Sharing.
- *
- * TSS provides a way to split a byte array into N byte arrays,
- * any M ("threshold") of which can be combined to restore the
- * original byte array. It is typically used to split secret
- * cryptographic keys between people to provide shared access
- * to data.
- *
- * This module implements IETF Internet-Draft
- * https://tools.ietf.org/html/draft-mcgrew-tss-03
- */
 
 /**
  * Split secret into the given number of raw shares, threshold number of

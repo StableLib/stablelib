@@ -58,7 +58,6 @@ export function secretBox(key: Uint8Array, nonce: Uint8Array, data: Uint8Array):
     return result;
 }
 
-
 export function openSecretBox(key: Uint8Array, nonce: Uint8Array, box: Uint8Array): Uint8Array | null {
     if (nonce.length !== 24) {
         throw new Error("secretBox nonce must be 24 bytes");
@@ -118,7 +117,7 @@ export function openSecretBox(key: Uint8Array, nonce: Uint8Array, box: Uint8Arra
     return result;
 }
 
-/** Generates 32-byte random secret key.  */
+/** Generates a 32-byte random secret key.  */
 export function generateKey(prng?: RandomSource): Uint8Array {
     return randomBytes(32, prng);
 }

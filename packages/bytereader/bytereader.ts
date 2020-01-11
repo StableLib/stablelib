@@ -1,9 +1,16 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package bytereader implements byte array reader.
+ */
+
 import { readUint64BE, readUint64LE, readInt64BE, readInt64LE,
     readUintBE, readUintLE } from "@stablelib/binary";
 
+/**
+ * ByteReader reads values from a byte array, keeping track of position.
+ */
 export class ByteReader {
     private _arr: Uint8Array;
     private _view: DataView; // created on-demand

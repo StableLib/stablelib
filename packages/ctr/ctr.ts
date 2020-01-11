@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package ctr implements counter cipher mode for block ciphers.
+ */
+
 import { BlockCipher } from "@stablelib/blockcipher";
 import { wipe } from "@stablelib/wipe";
 

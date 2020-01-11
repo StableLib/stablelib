@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package xsalsa20 implements XSalsa20 stream cipher.
+ */
+
 import { writeUint32LE } from "@stablelib/binary";
 import { streamXOR as salsaStreamXOR } from "@stablelib/salsa20";
 import { wipe } from "@stablelib/wipe";
@@ -66,7 +70,7 @@ const ROUNDS = 20;
 /**
  * HSalsa20 is a one-way function used in XSalsa20 to extend nonce,
  * and in NaCl to hash X25519 shared keys. It takes 32-byte key and
- * 16-bytes src and writes 32-byte result into dst and returns it.
+ * 16-byte src and writes 32-byte result into dst and returns it.
  */
 export function hsalsa(key: Uint8Array, src: Uint8Array, dst: Uint8Array): Uint8Array {
     let x0 = 0x61707865; // "expa"

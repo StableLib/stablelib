@@ -2,6 +2,10 @@
 // MIT License. See LICENSE file for details.
 
 /**
+ * Package hash provides interface for hash functions.
+ */
+
+/**
  * Hash interface describes properties of
  * cryptographic hash functions.
  */

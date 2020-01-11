@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package chacha-drbg implements ChaCha-based digital random byte generator.
+ */
+
 import { defaultRandomSource, RandomSource } from "@stablelib/random";
 import { streamXOR, stream } from "@stablelib/chacha";
 import { wipe } from "@stablelib/wipe";
@@ -9,7 +13,7 @@ import { wipe } from "@stablelib/wipe";
 const RESEED_MAX_BYTES = 1024 * 1024; // 1 MiB
 
 /**
- * ChaCha DRBG
+ * ChaCha DRBG.
  */
 export class ChaChaDRBG implements RandomSource {
     isAvailable = false;
@@ -47,7 +51,7 @@ export class ChaChaDRBG implements RandomSource {
 
     private _reseed() {
         // Get random bytes from system.
-        let tmp = this._entropySource.randomBytes(32);
+        const tmp = this._entropySource.randomBytes(32);
 
         // Encrypt these bytes with current key.
         streamXOR(this._key, this._reseedNonce, tmp, tmp);
@@ -76,7 +80,7 @@ export class ChaChaDRBG implements RandomSource {
     // rekeying if PRNG state is leaked.
     rekey() {
         // Generate stream to temporary space.
-        let tmp = new Uint8Array(32);
+        const tmp = new Uint8Array(32);
 
         stream(tmp, this._rekeyNonce, tmp);
 

@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package scrypt implements scrypt password-based key derivation function.
+ */
+
 import { deriveKey as pbkdf2 } from "@stablelib/pbkdf2";
 import { SHA256 } from "@stablelib/sha256";
 import { isInteger } from "@stablelib/int";

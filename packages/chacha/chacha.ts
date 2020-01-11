@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package chacha implements ChaCha stream cipher.
+ */
+
 import { writeUint32LE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";
 

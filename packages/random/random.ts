@@ -1,6 +1,11 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package random provides functions to access system's
+ * cryptographically secure random byte generator.
+ */
+
 import { RandomSource } from "./source";
 import { SystemRandomSource } from "./source/system";
 import { readUint32LE } from "@stablelib/binary";
@@ -14,6 +19,9 @@ export function randomBytes(length: number, prng: RandomSource = defaultRandomSo
     return prng.randomBytes(length);
 }
 
+/**
+ * Returns a uniformly random unsigned 32-bit integer.
+ */
 export function randomUint32(prng: RandomSource = defaultRandomSource): number {
     // Generate 4-byte random buffer.
     const buf = randomBytes(4, prng);
@@ -33,7 +41,7 @@ export function randomUint32(prng: RandomSource = defaultRandomSource): number {
 const ALPHANUMERIC = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 /**
- * Returns uniform random string of the given length
+ * Returns a uniform random string of the given length
  * with characters from the given charset.
  *
  * Charset must not have more than 256 characters.

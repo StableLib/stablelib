@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package blake2s implements BLAKE2s cryptographic hash function.
+ */
+
 import { SerializableHash } from "@stablelib/hash";
 import { readUint32LE, writeUint32LE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";
@@ -16,6 +20,9 @@ export const MAX_NODE_OFFSET = Math.pow(2, 48) - 1;
 export const MAX_FANOUT = 255;
 export const MAX_MAX_DEPTH = 255; // not a typo
 
+/**
+ * Configuration for hash function.
+ */
 export type Config = {
     key?: Uint8Array;
     salt?: Uint8Array;
@@ -23,6 +30,9 @@ export type Config = {
     tree?: Tree;
 };
 
+/**
+ * Tree hashing parameters.
+ */
 export type Tree = {
     fanout: number; // fanout
     maxDepth: number; // maximal depth
@@ -38,6 +48,9 @@ const IV = new Uint32Array([
     0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
 ]);
 
+/**
+ * BLAKE2s hash function.
+ */
 export class BLAKE2s implements SerializableHash {
     readonly blockSize = BLOCK_SIZE;
 
@@ -1507,7 +1520,6 @@ export class BLAKE2s implements SerializableHash {
         this._state[6] ^= v6 ^ v14;
         this._state[7] ^= v7 ^ v15;
     }
-
 }
 
 export type SavedState = {

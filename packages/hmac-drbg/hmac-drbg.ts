@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package hmac-drbg implements NIST's HMAC-based digital random byte generator.
+ */
+
 import { defaultRandomSource, RandomSource } from "@stablelib/random";
 import { HMAC } from "@stablelib/hmac";
 import { Hash } from "@stablelib/hash";

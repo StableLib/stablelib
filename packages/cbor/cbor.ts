@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package cbor implements CBOR (Concise Binary Object Representation) encoder and decoder.
+ */
+
 import * as utf8 from "@stablelib/utf8";
 import { ByteWriter } from "@stablelib/bytewriter";
 import { ByteReader } from "@stablelib/bytereader";
@@ -39,7 +43,9 @@ const AI_STOP = 31;
 
 const STOP_BYTE = 0xff;
 
-// Common tags.
+/**
+ * Common tags.
+ */
 export enum Tags {
     DateString = 0,  // automatically decoded to Date
     DateNumber = 1,  // automatically decoded to Date
@@ -220,6 +226,9 @@ export const DEFAULT_ENCODER_OPTIONS: EncoderOptions = {
     taggedEncoders: DEFAULT_TAGGED_ENCODERS
 };
 
+/**
+ * Encoder encodes values into CBOR format.
+ */
 export class Encoder {
     private _buf: ByteWriter;
     private _opt: EncoderOptions;
@@ -518,6 +527,9 @@ export const DEFAULT_DECODER_OPTIONS: DecoderOptions = {
     taggedDecoders: DEFAULT_TAGGED_DECODERS
 };
 
+/**
+ * Decoder decodes values from CBOR format.
+ */
 export class Decoder {
     private _r: ByteReader;
     private _opt: DecoderOptions;

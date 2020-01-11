@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package int provides helper functions for integerss.
+ */
+
 // Shim using 16-bit pieces.
 function imulShim(a: number, b: number): number {
     const ah = (a >>> 16) & 0xffff, al = a & 0xffff;

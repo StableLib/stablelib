@@ -1,6 +1,10 @@
 // Copyright (C) 2017 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package halfsiphash implements HalfSipHash-2-4 experimental PRF.
+ */
+
 import { readUint32LE, writeUint32LE } from "@stablelib/binary";
 import { add, rotl } from "@stablelib/int";
 

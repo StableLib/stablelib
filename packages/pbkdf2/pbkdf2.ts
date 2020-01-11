@@ -1,11 +1,19 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package pbkdf2 implements PBKDF2 password-based key derivation function.
+ */
+
 import { SerializableHash } from "@stablelib/hash";
 import { HMAC } from "@stablelib/hmac";
 import { writeUint32BE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";
 
+/**
+ * Derives key from password with PBKDF2 algorithm using
+ * the given hash function in HMAC construction.
+ */
 export function deriveKey(hash: new () => SerializableHash, password: Uint8Array,
     salt: Uint8Array, iterations: number, length: number): Uint8Array {
     const prf = new HMAC(hash, password);

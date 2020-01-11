@@ -1,6 +1,10 @@
 // Copyright (C) 2017 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package blake2b implements BLAKE2b cryptographic hash function.
+ */
+
 import { SerializableHash } from "@stablelib/hash";
 import { readUint32LE, writeUint32LE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";
@@ -15,6 +19,9 @@ export const MAX_LEAF_SIZE = Math.pow(2, 32) - 1;
 export const MAX_FANOUT = 255;
 export const MAX_MAX_DEPTH = 255; // not a typo
 
+/**
+ * Configuration for hash function.
+ */
 export type Config = {
     key?: Uint8Array;
     salt?: Uint8Array;
@@ -22,6 +29,9 @@ export type Config = {
     tree?: Tree;
 };
 
+/**
+ * Tree hashing parameters.
+ */
 export type Tree = {
     fanout: number; // fanout
     maxDepth: number; // maximal depth
@@ -62,6 +72,9 @@ const SIGMA = [
     [28, 20, 8, 16, 18, 30, 26, 12, 2, 24, 0, 4, 22, 14, 10, 6]
 ];
 
+/**
+ * BLAKE2b hash function.
+ */
 export class BLAKE2b implements SerializableHash {
     readonly blockSize = BLOCK_SIZE;
 
@@ -348,7 +361,7 @@ export class BLAKE2b implements SerializableHash {
             vld = v[dl],
             vhd = v[dh];
 
-        // va += vb
+        // 64-bit: va += vb
         let w = vla & 0xffff,
             x = vla >>> 16,
             y = vha & 0xffff,
@@ -364,7 +377,7 @@ export class BLAKE2b implements SerializableHash {
         vha = (y & 0xffff) | (z << 16);
         vla = (w & 0xffff) | (x << 16);
 
-        // va += m[sigma[r][2 * i + 0]]
+        // 64-bit: va += m[sigma[r][2 * i + 0]]
         w = vla & 0xffff; x = vla >>> 16;
         y = vha & 0xffff; z = vha >>> 16;
 
@@ -378,13 +391,13 @@ export class BLAKE2b implements SerializableHash {
         vha = (y & 0xffff) | (z << 16);
         vla = (w & 0xffff) | (x << 16);
 
-        // vd ^= va
+        // 64-bit: vd ^= va
         vld ^= vla; vhd ^= vha;
 
-        // rot(vd, 32)
+        // 64-bit: rot(vd, 32)
         w = vhd; vhd = vld; vld = w;
 
-        // vc += vd
+        // 64-bit: vc += vd
         w = vlc & 0xffff; x = vlc >>> 16;
         y = vhc & 0xffff; z = vhc >>> 16;
 
@@ -398,15 +411,15 @@ export class BLAKE2b implements SerializableHash {
         vhc = (y & 0xffff) | (z << 16);
         vlc = (w & 0xffff) | (x << 16);
 
-        // vb ^= vc
+        // 64-bit: vb ^= vc
         vlb ^= vlc; vhb ^= vhc;
 
-        // rot(vb, 24)
+        // 64-bit: rot(vb, 24)
         w = vlb << 8 | vhb >>> 24;
         vlb = vhb << 8 | vlb >>> 24;
         vhb = w;
 
-        // va += vb
+        // 64-bit: va += vb
         w = vla & 0xffff; x = vla >>> 16;
         y = vha & 0xffff; z = vha >>> 16;
 
@@ -420,7 +433,7 @@ export class BLAKE2b implements SerializableHash {
         vha = (y & 0xffff) | (z << 16);
         vla = (w & 0xffff) | (x << 16);
 
-        // va += m[sigma[r][2 * i + 1]
+        // 64-bit: va += m[sigma[r][2 * i + 1]
         w = vla & 0xffff; x = vla >>> 16;
         y = vha & 0xffff; z = vha >>> 16;
 
@@ -434,15 +447,15 @@ export class BLAKE2b implements SerializableHash {
         vha = (y & 0xffff) | (z << 16);
         vla = (w & 0xffff) | (x << 16);
 
-        // vd ^= va
+        // 64-bit: vd ^= va
         vld ^= vla; vhd ^= vha;
 
-        // rot(vd, 16)
+        // 64-bit: rot(vd, 16)
         w = vld << 16 | vhd >>> 16;
         vld = vhd << 16 | vld >>> 16;
         vhd = w;
 
-        // vc += vd
+        // 64-bit: vc += vd
         w = vlc & 0xffff; x = vlc >>> 16;
         y = vhc & 0xffff; z = vhc >>> 16;
 
@@ -456,10 +469,10 @@ export class BLAKE2b implements SerializableHash {
         vhc = (y & 0xffff) | (z << 16);
         vlc = (w & 0xffff) | (x << 16);
 
-        // vb ^= vc
+        // 64-bit: vb ^= vc
         vlb ^= vlc; vhb ^= vhc;
 
-        // rot(vb, 63)
+        // 64-bit: rot(vb, 63)
         w = vhb << 1 | vlb >>> 31;
         vlb = vlb << 1 | vhb >>> 31;
         vhb = w;

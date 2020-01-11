@@ -2,7 +2,11 @@
 // MIT License. See LICENSE file for details.
 
 /**
- * Authenticated Encryption with Associated Data.
+ * Package aead provides interface for authentication encryption with associated data.
+ */
+
+/**
+ * AEAD is a common interface for authenticated encryption with associated Data.
  */
 export interface AEAD {
     /**
@@ -11,7 +15,7 @@ export interface AEAD {
     nonceLength: number;
 
     /**
-     * Byte length of authentication tag in the sealed ciphertext.
+     * Byte length of authentication tag included in the sealed ciphertext.
      * Result of seal() will be longer than plaintext for this number of bytes.
      */
     tagLength: number;
@@ -28,7 +32,7 @@ export interface AEAD {
 
     /**
      * Authenticates ciphertext (which includes authentication tag) and
-     * associated data, decrypts ciphertext and returns decrypted plaintext.
+     * associated data, decrypts ciphertext, and returns decrypted plaintext.
      *
      * If authentication fails, it returns null.
      *
@@ -40,7 +44,7 @@ export interface AEAD {
 
     /**
      * Wipes state from memory.
-     * This doesn't wipe the underlying block cipher state.
+     * Doesn't wipe the underlying block cipher state.
      */
     clean(): this;
 }

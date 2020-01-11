@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package utf8 implements UTF-8 encoding and decoding.
+ */
+
 const INVALID_UTF16 = "utf8: invalid string";
 const INVALID_UTF8 = "utf8: invalid source encoding";
 

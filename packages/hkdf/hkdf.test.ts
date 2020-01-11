@@ -63,7 +63,7 @@ describe("HKDF", () => {
         // Full expansion.
         const full = new HKDF(SHA256, key, salt, info).expand(300);
 
-        // Sliced expantions.
+        // Sliced expansions.
         const h = new HKDF(SHA256, key, salt, info);
         const s1 = h.expand(1);   // 1
         const s2 = h.expand(100); // 101

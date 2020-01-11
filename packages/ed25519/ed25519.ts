@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package ed25519 implements Ed25519 public-key signature algorithm.
+ */
+
 import { randomBytes, RandomSource } from "@stablelib/random";
 import { hash, SHA512 } from "@stablelib/sha512";
 import { wipe } from "@stablelib/wipe";
@@ -10,7 +14,7 @@ export const PUBLIC_KEY_LENGTH = 32;
 export const SECRET_KEY_LENGTH = 64;
 export const SEED_LENGTH = 32;
 
-// TODO(dchest): some functions ara copies of ../kex/x25519.
+// TODO(dchest): some functions are copies of ../kex/x25519.
 // Find a way to combine them without opening up to public.
 
 // Ported from TweetNaCl.js, which was ported from TweetNaCl

@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package sha384 implements SHA-2-384 cryptographic hash function.
+ */
+
 import { SHA512 } from "@stablelib/sha512";
 
 export const DIGEST_LENGTH = 48;

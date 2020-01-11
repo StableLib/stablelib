@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package binary provides functions for encoding and decoding numbers in byte arrays.
+ */
+
 import { isSafeInteger } from "@stablelib/int";
 
 // TODO(dchest): add asserts for correct value ranges and array offsets.
@@ -156,7 +160,7 @@ export const writeInt32LE = writeUint32LE;
  *
  * IMPORTANT: due to JavaScript limitation, supports exact
  * numbers in range -9007199254740991 to 9007199254740991.
- * If the number stored in th byte array is outside this range,
+ * If the number stored in the byte array is outside this range,
  * the result is not exact.
  */
 export function readInt64BE(array: Uint8Array, offset = 0): number {
@@ -183,7 +187,7 @@ export function readUint64BE(array: Uint8Array, offset = 0): number {
  *
  * IMPORTANT: due to JavaScript limitation, supports exact
  * numbers in range -9007199254740991 to 9007199254740991.
- * If the number stored in th byte array is outside this range,
+ * If the number stored in the byte array is outside this range,
  * the result is not exact.
  */
 export function readInt64LE(array: Uint8Array, offset = 0): number {
@@ -248,7 +252,7 @@ export const writeInt64LE = writeUint64LE;
  * Supports bit lengths divisible by 8, up to 48.
  */
 export function readUintBE(bitLength: number, array: Uint8Array, offset = 0): number {
-    // TODO(dchest): implement support for bitLenghts non-divisible by 8
+    // TODO(dchest): implement support for bitLengths non-divisible by 8
     if (bitLength % 8 !== 0) {
         throw new Error("readUintBE supports only bitLengths divisible by 8");
     }
@@ -271,7 +275,7 @@ export function readUintBE(bitLength: number, array: Uint8Array, offset = 0): nu
  * Supports bit lengths divisible by 8, up to 48.
  */
 export function readUintLE(bitLength: number, array: Uint8Array, offset = 0): number {
-    // TODO(dchest): implement support for bitLenghts non-divisible by 8
+    // TODO(dchest): implement support for bitLengths non-divisible by 8
     if (bitLength % 8 !== 0) {
         throw new Error("readUintLE supports only bitLengths divisible by 8");
     }
@@ -299,7 +303,7 @@ export function readUintLE(bitLength: number, array: Uint8Array, offset = 0): nu
  */
 export function writeUintBE(bitLength: number, value: number,
     out = new Uint8Array(bitLength / 8), offset = 0): Uint8Array {
-    // TODO(dchest): implement support for bitLenghts non-divisible by 8
+    // TODO(dchest): implement support for bitLengths non-divisible by 8
     if (bitLength % 8 !== 0) {
         throw new Error("writeUintBE supports only bitLengths divisible by 8");
     }
@@ -326,7 +330,7 @@ export function writeUintBE(bitLength: number, value: number,
  */
 export function writeUintLE(bitLength: number, value: number,
     out = new Uint8Array(bitLength / 8), offset = 0): Uint8Array {
-    // TODO(dchest): implement support for bitLenghts non-divisible by 8
+    // TODO(dchest): implement support for bitLengths non-divisible by 8
     if (bitLength % 8 !== 0) {
         throw new Error("writeUintLE supports only bitLengths divisible by 8");
     }

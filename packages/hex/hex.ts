@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package hex implements hex encoder and decoder.
+ */
+
 //        0123456789  ABCDEF  | abcdef
 // Index:    0 - 9    10-15   | 10-15
 // ASCII:   48 - 57   65-70   | 97-102

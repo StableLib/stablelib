@@ -2,7 +2,11 @@
 // MIT License. See LICENSE file for details.
 
 /**
- * Block cipher.
+ * Package blockcipher provides block cipher interface.
+ */
+
+/**
+ * Block cipher interface.
  */
 export interface BlockCipher {
     /**

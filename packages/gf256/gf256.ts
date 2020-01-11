@@ -2,9 +2,8 @@
 // MIT License. See LICENSE file for details.
 
 /**
- * Arithmetic in GF(256).
- *
- * Useful for Threshold Secret Sharing and Reed-Solomon
+ * Package gf256 implements arithmetic in GF(256)
+ * as used in Threshold Secret Sharing and Reed-Solomon
  * error correction codes.
  */
 

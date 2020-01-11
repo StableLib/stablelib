@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package aes implements AES block cipher.
+ */
+
 // Ported from Go implementation
 //
 // Copyright 2009 The Go Authors. All rights reserved.
@@ -78,8 +82,7 @@ function initialize() {
         for (let k = 1; k < 0x100 && j !== 0; k <<= 1) {
             // Invariant: k == 1<<n, i == b * x^n
             if ((j & k) !== 0) {
-                // s += i in GF(2); xor in binary
-                s ^= i;
+                s ^= i; // xor in binary is s += i in GF(2)
                 j ^= k; // turn off bit to end loop early
             }
             // i *= x in GF(2) modulo the polynomial
@@ -130,9 +133,9 @@ function initialize() {
 /**
  * AES block cipher.
  *
- * This implementation uses lookup tables, so it's susceptible to cache-timing
- * side-channel attacks. A constant-time version we tried was super slow (a few
- * kilobytes per second), so we'll have to live with it.
+ * WARNING: This implementation uses lookup tables, so it's susceptible to cache-timing
+ * side-channel attacks. (A constant-time version we tried was super slow: a few
+ * kilobytes per second)
  *
  * Key size: 16, 24 or 32 bytes, block size: 16 bytes.
  */
@@ -157,7 +160,6 @@ export class AES implements BlockCipher {
      * If noDecryption is true, decryption key will not expanded,
      * saving time and memory for cipher modes when decryption
      * is not used (such as AES-CTR).
-     *
      */
     constructor(key: Uint8Array, noDecryption = false) {
         if (!isInitialized) {
@@ -168,7 +170,7 @@ export class AES implements BlockCipher {
     }
 
     /**
-     * Re-initializes this instance with the new key.
+     * Re-initializes this instance with a new key.
      *
      * This is helpful to avoid allocations.
      */
@@ -199,7 +201,7 @@ export class AES implements BlockCipher {
     }
 
     /**
-     * Cleans expanded keys from memory, setting them to zeros.
+     * Erases expanded keys from memory.
      */
     clean(): this {
         if (this._encKey) {
@@ -211,10 +213,10 @@ export class AES implements BlockCipher {
         return this;
     }
 
-    // TODO(dchest): specify if blocks can be the same array.
-
     /**
      * Encrypt 16-byte block src into 16-byte block dst.
+     *
+     * Source and destination may point to the same byte array.
      *
      * This function should not be used to encrypt data without any
      * cipher mode! It should only be used to implement a cipher mode.
@@ -236,6 +238,8 @@ export class AES implements BlockCipher {
 
     /**
      * Decrypt 16-byte block src into 16-byte block dst.
+     *
+     * Source and destination may point to the same byte array.
      *
      * This function should not be used to encrypt data without any
      * cipher mode! It should only be used to implement a cipher mode.

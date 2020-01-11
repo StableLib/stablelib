@@ -79,7 +79,6 @@ export class HKDF {
         }
 
         // Hash in the counter.
-        // TODO(dchest): avoid allocation.
         this._hmac.update(this._counter);
 
         // Output result to buffer and clean HMAC instance.

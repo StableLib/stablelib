@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package uuid implements UUID generator.
+ */
+
 import { randomBytes, RandomSource } from "@stablelib/random";
 import { encode } from "@stablelib/hex";
 import { wipe } from "@stablelib/wipe";

@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package sha512 implements SHA-2-512 cryptographic hash function.
+ */
+
 import { SerializableHash } from "@stablelib/hash";
 import { readUint32BE, writeUint32BE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";
@@ -9,7 +13,7 @@ export const DIGEST_LENGTH = 64;
 export const BLOCK_SIZE = 128;
 
 /**
- * SHA2-512 cryptographic hash algorithm.
+ * SHA-2-512 cryptographic hash algorithm.
  */
 export class SHA512 implements SerializableHash {
     /** Length of hash output */

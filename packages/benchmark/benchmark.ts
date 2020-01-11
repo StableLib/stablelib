@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package benchmark provides functions for benchmarking code.
+ */
+
 export interface Results {
     iterations: number;
     msPerOp: number;

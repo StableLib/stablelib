@@ -1,6 +1,10 @@
 // Copyright (C) 2019 Kyle Den Hartog
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package xchacha20 implements XChaCha20 stream cipher.
+ */
+
 import { writeUint32LE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";
 import { streamXOR as chachaStreamXOR } from "@stablelib/chacha";
@@ -22,7 +26,7 @@ const ROUNDS = 20;
 export function streamXOR(key: Uint8Array, nonce: Uint8Array, src: Uint8Array,
     dst: Uint8Array): Uint8Array {
     if (nonce.length !== 24) {
-        throw new Error("XChacha20 nonce must be 24 bytes");
+        throw new Error("XChaCha20 nonce must be 24 bytes");
     }
 
     // Use HChaCha one-way function to transform first 16 bytes of
@@ -62,12 +66,11 @@ export function stream(key: Uint8Array, nonce: Uint8Array,
 }
 
 /**
- * Applies the HChaCha core function to 16-byte input,
- * 32-byte key key, and puts the result into 64-byte array out.
- * This function is used to generate the first subkey based on
- * the first 16 bytes of the nonce and the key.
+ * HChaCha is a one-way function used in XChaCha to extend nonce.
+ *
+ * It takes 32-byte key and 16-byte src and writes 32-byte result
+ * into dst and returns it.
  */
-
 export function hchacha(
     key: Uint8Array,
     src: Uint8Array,

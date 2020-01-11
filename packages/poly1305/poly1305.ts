@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package poly1305 implements Poly1305 one-time message authentication algorithm.
+ */
+
 import { equal as constantTimeEqual } from "@stablelib/constant-time";
 import { wipe } from "@stablelib/wipe";
 

@@ -1,6 +1,10 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+/**
+ * Package newhope implements NewHope post-quantum key agreement function.
+ */
+
 // Implementation ported from BoringSSL:
 // https://boringssl.googlesource.com/boringssl/+/master/crypto/newhope/
 // https://boringssl.googlesource.com/boringssl/+/master/ssl/test/runner/newhope/
