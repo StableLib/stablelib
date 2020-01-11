@@ -10,10 +10,10 @@ A stable library of useful TypeScript/JavaScript code.
 Principles
 ----------
 
-* Correctness first, perfomance later.
+* Correctness first, performance later.
 * Clear code is better than short.
 * Better usability means fewer bugs.
-* Typing is good, but not too much.
+* Types are good, but not too much.
 
 
 Documentation
