@@ -7,13 +7,12 @@
 
 import { randomBytes, RandomSource } from "@stablelib/random";
 import { wipe } from "@stablelib/wipe";
-import { KeyAgreement } from "@stablelib/keyagreement";
 
 export const PUBLIC_KEY_LENGTH = 32;
 export const SECRET_KEY_LENGTH = 32;
 export const SHARED_KEY_LENGTH = 32;
 
-// TODO(dchest): some functions ara copies of ../sign/ed25519.
+// TODO(dchest): some functions are copies of ../sign/ed25519.
 // Find a way to combine them without opening up to public.
 
 // Ported from TweetNaCl.js, which is ported from TweetNaCl
@@ -602,8 +601,8 @@ export function generateKeyPair(prng?: RandomSource): KeyPair {
  * From RFC 7748:
  *
  * > Protocol designers using Diffie-Hellman over the curves defined in
- * > this document must not assume "contributory behaviour".  Specially,
- * > contributory behaviour means that both parties' private keys
+ * > this document must not assume "contributory behavior".  Specially,
+ * > contributory behavior means that both parties' private keys
  * > contribute to the resulting shared key.  Since curve25519 and
  * > curve448 have cofactors of 8 and 4 (respectively), an input point of
  * > small order will eliminate any contribution from the other party's
@@ -611,7 +610,7 @@ export function generateKeyPair(prng?: RandomSource): KeyPair {
  * > zero output, which implementations MAY do, as specified in Section 6.
  * > However, a large number of existing implementations do not do this.
  *
- * Important: the returned key is a raw result of scalar multiplication.
+ * IMPORTANT: the returned key is a raw result of scalar multiplication.
  * To use it as a key material, hash it with a cryptographic hash function.
  */
 export function sharedKey(mySecretKey: Uint8Array, theirPublicKey: Uint8Array, rejectZero = false): Uint8Array {
@@ -635,91 +634,4 @@ export function sharedKey(mySecretKey: Uint8Array, theirPublicKey: Uint8Array, r
     }
 
     return result;
-}
-
-
-/** Constants for key agreement */
-export const OFFER_MESSAGE_LENGTH = PUBLIC_KEY_LENGTH;
-export const ACCEPT_MESSAGE_LENGTH = PUBLIC_KEY_LENGTH;
-export const SAVED_STATE_LENGTH = SECRET_KEY_LENGTH;
-export const SECRET_SEED_LENGTH = SECRET_KEY_LENGTH;
-
-/**
- * X25519 key agreement using ephemeral key pairs.
- *
- * Note that unless this key agreement is combined withan authentication
- * method, such as public key signatures, it's vulnerable to man-in-the-middle
- * attacks.
- */
-export class X25519KeyAgreement implements KeyAgreement {
-    readonly offerMessageLength = OFFER_MESSAGE_LENGTH;
-    readonly acceptMessageLength = ACCEPT_MESSAGE_LENGTH;
-    readonly sharedKeyLength = SHARED_KEY_LENGTH;
-    readonly savedStateLength = SAVED_STATE_LENGTH;
-
-    private _secretKey: Uint8Array;
-    private _sharedKey: Uint8Array | undefined;
-    private _offered = false;
-
-    constructor(secretSeed?: Uint8Array, prng?: RandomSource) {
-        this._secretKey = secretSeed || randomBytes(SECRET_KEY_LENGTH, prng);
-    }
-
-    saveState(): Uint8Array {
-        return new Uint8Array(this._secretKey);
-    }
-
-    restoreState(savedState: Uint8Array): this {
-        this._secretKey = new Uint8Array(savedState);
-        return this;
-    }
-
-    clean(): void {
-        if (this._secretKey) {
-            wipe(this._secretKey);
-        }
-        if (this._sharedKey) {
-            wipe(this._sharedKey);
-        }
-    }
-
-    offer(): Uint8Array {
-        this._offered = true;
-        const keyPair = generateKeyPairFromSeed(this._secretKey);
-        return keyPair.publicKey;
-    }
-
-    accept(offerMsg: Uint8Array): Uint8Array {
-        if (this._offered) {
-            throw new Error("X25519KeyAgreement: accept shouldn't be called by offering party");
-        }
-        if (offerMsg.length !== this.offerMessageLength) {
-            throw new Error("X25519KeyAgreement: incorrect offer message length");
-        }
-        const keyPair = generateKeyPairFromSeed(this._secretKey);
-        this._sharedKey = sharedKey(keyPair.secretKey, offerMsg);
-        wipe(keyPair.secretKey);
-        return keyPair.publicKey;
-    }
-
-    finish(acceptMsg: Uint8Array): this {
-        if (acceptMsg.length !== this.acceptMessageLength) {
-            throw new Error("X25519KeyAgreement: incorrect accept message length");
-        }
-        if (!this._secretKey) {
-            throw new Error("X25519KeyAgreement: no offer state");
-        }
-        if (this._sharedKey) {
-            throw new Error("X25519KeyAgreement: finish was already called");
-        }
-        this._sharedKey = sharedKey(this._secretKey, acceptMsg);
-        return this;
-    }
-
-    getSharedKey(): Uint8Array {
-        if (!this._sharedKey) {
-            throw new Error("X25519KeyAgreement: no shared key established");
-        }
-        return new Uint8Array(this._sharedKey);
-    }
 }

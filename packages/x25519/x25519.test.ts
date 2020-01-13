@@ -4,8 +4,9 @@
 import { RandomSource } from "@stablelib/random";
 import { encode, decode } from "@stablelib/hex";
 import {
-    scalarMultBase, sharedKey, generateKeyPair, X25519KeyAgreement
+    scalarMultBase, sharedKey, generateKeyPair
 } from "./x25519";
+import { X25519KeyAgreement } from './keyagreement';
 
 describe("x25519.scalarMultBase", () => {
     it("should return correct result", () => {

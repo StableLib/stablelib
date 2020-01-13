@@ -1,7 +1,8 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { scalarMultBase, X25519KeyAgreement } from "./x25519";
+import { scalarMultBase } from "./x25519";
+import { X25519KeyAgreement } from "./keyagreement";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 const r = new Uint8Array(32); r[0] = 1;
