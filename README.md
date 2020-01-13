@@ -10,13 +10,13 @@ Principles
 * Correctness first, performance later.
 * Clear code is better than short.
 * Better usability means fewer bugs.
-* Types are good, but not too much.
+* Typing is good, but not too much.
 
 
 Documentation
 -------------
 
-Working on it.
+See https://www.stablelib.com
 
 
 Support
