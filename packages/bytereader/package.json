@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/bytereader",
-  "version": "0.10.7",
+  "version": "1.0.0",
   "description": "Byte reader",
   "main": "./lib/bytereader.js",
   "typings": "./lib/bytereader.d.ts",
@@ -15,9 +15,9 @@
     "bench": "node ./lib/bytereader.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^0.7.2"
+    "@stablelib/binary": "^1.0.0"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.5.0"
+    "@stablelib/benchmark": "^1.0.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/chacha",
-  "version": "0.7.2",
+  "version": "1.0.0",
   "description": "ChaCha stream cipher",
   "main": "./lib/chacha.js",
   "typings": "./lib/chacha.d.ts",
@@ -15,11 +15,11 @@
     "bench": "node ./lib/chacha.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^0.7.2",
-    "@stablelib/wipe": "^0.5.0"
+    "@stablelib/binary": "^1.0.0",
+    "@stablelib/wipe": "^1.0.0"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.5.0",
-    "@stablelib/hex": "^0.5.0"
+    "@stablelib/benchmark": "^1.0.0",
+    "@stablelib/hex": "^1.0.0"
   }
 }

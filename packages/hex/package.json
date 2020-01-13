@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/hex",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Hex (Base16) encoding and decoding",
   "main": "./lib/hex.js",
   "typings": "./lib/hex.d.ts",
@@ -15,6 +15,6 @@
     "bench": "node ./lib/hex.bench.js"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.5.0"
+    "@stablelib/benchmark": "^1.0.0"
   }
 }

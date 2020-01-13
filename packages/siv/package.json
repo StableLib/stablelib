@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/siv",
-  "version": "0.7.3",
+  "version": "1.0.0",
   "description": "Synthetic Initialization Vector (SIV) authenticated encryption",
   "main": "./lib/siv.js",
   "typings": "./lib/siv.d.ts",
@@ -15,15 +15,15 @@
     "bench": "node ./lib/siv.bench.js"
   },
   "dependencies": {
-    "@stablelib/blockcipher": "^0.5.0",
-    "@stablelib/cmac": "^0.7.3",
-    "@stablelib/constant-time": "^0.5.0",
-    "@stablelib/ctr": "^0.8.0",
-    "@stablelib/wipe": "^0.5.0"
+    "@stablelib/blockcipher": "^1.0.0",
+    "@stablelib/cmac": "^1.0.0",
+    "@stablelib/constant-time": "^1.0.0",
+    "@stablelib/ctr": "^1.0.0",
+    "@stablelib/wipe": "^1.0.0"
   },
   "devDependencies": {
-    "@stablelib/aes": "^0.7.3",
-    "@stablelib/benchmark": "^0.5.0",
-    "@stablelib/hex": "^0.5.0"
+    "@stablelib/aes": "^1.0.0",
+    "@stablelib/benchmark": "^1.0.0",
+    "@stablelib/hex": "^1.0.0"
   }
 }

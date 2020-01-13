@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/chacha-drbg",
-  "version": "0.7.4",
+  "version": "1.0.0",
   "description": "ChaCha20-based DRBG (digital random byte generator)",
   "main": "./lib/chacha-drbg.js",
   "typings": "./lib/chacha-drbg.d.ts",
@@ -15,12 +15,12 @@
     "bench": "node ./lib/chacha-drbg.bench.js"
   },
   "dependencies": {
-    "@stablelib/chacha": "^0.7.2",
-    "@stablelib/random": "^0.7.4",
-    "@stablelib/wipe": "^0.5.0"
+    "@stablelib/chacha": "^1.0.0",
+    "@stablelib/random": "^1.0.0",
+    "@stablelib/wipe": "^1.0.0"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^0.5.0",
-    "@stablelib/hex": "^0.5.0"
+    "@stablelib/benchmark": "^1.0.0",
+    "@stablelib/hex": "^1.0.0"
   }
 }
