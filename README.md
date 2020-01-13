@@ -19,6 +19,18 @@ Documentation
 See https://www.stablelib.com
 
 
+Usage
+-----
+
+Install packages via npm from `@stablelib` namespace, for example:
+
+```
+npm install @stablelib/base64
+```
+
+[See all packages](https://www.npmjs.com/search?q=%40stablelib).
+
+
 Support
 -------
 
