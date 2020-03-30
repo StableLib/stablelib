@@ -1,0 +1,33 @@
+{
+  "name": "@stablelib/aes-kw",
+  "version": "1.0.0",
+  "description": "AES KW (Advanced Encryption Standard Key Wrapping)",
+  "main": "./lib/aes-kw.js",
+  "typings": "./lib/aes-kw.d.ts",
+  "contributors": [
+    {
+      "name": "Dmitry Chestnykh"
+    },
+    {
+      "name": "Tobias Looker"
+    }
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+  },
+  "dependencies": {
+    "@stablelib/aes": "^1.0.0",
+    "@stablelib/binary": "^1.0.0",
+    "@stablelib/blockcipher": "^1.0.0",
+    "@stablelib/constant-time": "^1.0.0",
+    "@stablelib/wipe": "^1.0.0"
+  },
+  "devDependencies": {
+    "@stablelib/hex": "^1.0.0"
+  }
+}
