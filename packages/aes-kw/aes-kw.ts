@@ -105,15 +105,16 @@ export class AESKW {
         let A = wrappedKey.subarray(0,8);
         // Initialize the length of the key data, size always equals N
         const keyData = new Uint8Array(8*(N));
+        const encryptedKeyData = new Uint8Array(wrappedKey);
 
         for (let j = 5; j >= 0; j--) {
             for (let i = N; i >= 1; i--) {
                 this.xor(A, writeUint64BE(i + j*N));
                 this._inputBuffer.set(A);
-                this._inputBuffer.set(wrappedKey.subarray((i)*8,(i+1)*8),8);
+                this._inputBuffer.set(encryptedKeyData.subarray((i)*8,(i+1)*8),8);
                 this._cipher.decryptBlock(this._inputBuffer, this._outputBuffer);
                 A.set(this._outputBuffer.subarray(0,8));
-                wrappedKey.set(this._outputBuffer.subarray(8,16), i*8);
+                encryptedKeyData.set(this._outputBuffer.subarray(8,16), i*8);
             }
         }
 
@@ -123,12 +124,12 @@ export class AESKW {
             throw new Error("aeskw: unwrapped data does not contain the default iv");
         }
 
-        keyData.set(wrappedKey.subarray(8))
+        keyData.set(encryptedKeyData.subarray(8))
         return keyData;
     }
 
     /**
-     * Internal method for bitwise XOR of two Uint8Arrays
+     * Internal method for bitwise XOR of b into a
      */
     private xor(a: Uint8Array, b: Uint8Array) {
         for (let i = 0; i < b.length; i++) {
