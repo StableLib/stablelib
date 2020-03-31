@@ -35,7 +35,7 @@ export class AESKW {
         this._inputBuffer = new Uint8Array(this._cipher.blockSize);
         this._outputBuffer = new Uint8Array(this._cipher.blockSize);
     }
-    
+
     /**
      * Cleans the buffers and underlying memory associated to the cipher
      */
@@ -52,7 +52,7 @@ export class AESKW {
      * @param keyData: The key data to wrap with the key encryption key
      */
     wrapKey(keyData: Uint8Array): Uint8Array {
-        // Floor divide the length of the key data to determine 
+        // Floor divide the length of the key data to determine
         // how many 64 bit data blocks it contains
         const N = (keyData.length - (keyData.length % 8)) / 8;
 
@@ -62,7 +62,7 @@ export class AESKW {
         }
 
         // Set A to the initial value
-        let A = this._iv;
+        let A = new Uint8Array(this._iv);
         // Initialize the length of the wrapped key, size always equals N+1
         const wrappedKey = new Uint8Array(8*(N+1));
         // Set the plain text into the wrapped key array offset by one
@@ -74,7 +74,7 @@ export class AESKW {
                 this._inputBuffer.set(A);
                 this._inputBuffer.set(wrappedKey.subarray(i*8,(i+1)*8),8);
                 this._cipher.encryptBlock(this._inputBuffer, this._outputBuffer);
-                A = writeUint64BE(i + j*N);
+                writeUint64BE(i + j*N, A);
                 this.xor(A, this._outputBuffer.subarray(0,8));
                 wrappedKey.set(this._outputBuffer.subarray(8,16), i*8);
             }
@@ -90,12 +90,12 @@ export class AESKW {
      * @param wrappedKey: The wrapped key to un-wrap with the key encryption key
      */
     unwrapKey(wrappedKey: Uint8Array): Uint8Array {
-        // Floor divide the length of the unwrapped key to determine 
+        // Floor divide the length of the unwrapped key to determine
         // how many 64 bit data blocks it contains, N represents the number
         // of 64 bit data blocks of the plain text which is always one less
         // than the cipher text
         const N = ((wrappedKey.length - (wrappedKey.length % 8)) / 8) - 1;
-        
+
         // The keyData must be at minimum 128 bit (16 bytes) in length
         if (N <= 1) {
             throw new Error("aeskw: key data insufficient length must be a minimum of 128 bits or 16 bytes");
