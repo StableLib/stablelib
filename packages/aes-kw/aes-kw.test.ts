@@ -58,9 +58,9 @@ describe("wrapKey", () => {
     });
 
     it("should throw an error wrapping keyData that does not have sufficient length", () => {
-        const aeskw = new AESKW(decode(keyEncryptionKey)); 
+        const aeskw = new AESKW(decode(keyEncryptionKey));
         expect(() => aeskw.wrapKey(decode(tooShortKeyData)))
-                          .toThrowError("aeskw: key data insufficient length must be a minimum of 128 bits or 16 bytes");
+                          .toThrowError(/16 bytes/);
     });
 });
 
@@ -74,14 +74,14 @@ describe("unWrapKey", () => {
     });
 
     it("should throw an error un-wrapping a wrapped key that does not have sufficient length", () => {
-        const aeskw = new AESKW(decode(keyEncryptionKey)); 
+        const aeskw = new AESKW(decode(keyEncryptionKey));
         expect(() => aeskw.unwrapKey(decode(tooShortKeyData)))
-                          .toThrowError("aeskw: key data insufficient length must be a minimum of 128 bits or 16 bytes");
+                          .toThrowError(/16 bytes/);
     });
-    
+
     it("should throw an error unWrapping a wrapped key that does not contain the default IV", () => {
-        const aeskw = new AESKW(decode(keyEncryptionKey)); 
+        const aeskw = new AESKW(decode(keyEncryptionKey));
         expect(() => aeskw.unwrapKey(decode("E2EF32C0BBC36B6D236C2FD28E68FCDA8E24204C59F98754889D1ED24364A4D130AF535D350B9243")))
-                          .toThrowError("aeskw: unwrapped data does not contain the default iv");
+                          .toThrowError(/integrity/);
     });
 });

@@ -58,13 +58,13 @@ export class AESKW {
 
         // The keyData must be at minimum 128 bit (16 bytes) in length
         if (N <= 1) {
-            throw new Error("aeskw: key data insufficient length must be a minimum of 128 bits or 16 bytes");
+            throw new Error("AESKW: key size must be at least 16 bytes");
         }
 
         // Set A to the initial value
-        let A = new Uint8Array(this._iv);
+        const A = new Uint8Array(this._iv);
         // Initialize the length of the wrapped key, size always equals N+1
-        const wrappedKey = new Uint8Array(8*(N+1));
+        const wrappedKey = new Uint8Array(8 * (N + 1));
         // Set the plain text into the wrapped key array offset by one
         // 64 bit data block
         wrappedKey.set(keyData, 8);
@@ -72,15 +72,16 @@ export class AESKW {
         for (let j = 0; j < 6; j++) {
             for (let i = 1; i <= N; i++) {
                 this._inputBuffer.set(A);
-                this._inputBuffer.set(wrappedKey.subarray(i*8,(i+1)*8),8);
+                this._inputBuffer.set(wrappedKey.subarray(i * 8, (i + 1) * 8), 8);
                 this._cipher.encryptBlock(this._inputBuffer, this._outputBuffer);
-                writeUint64BE(i + j*N, A);
-                this.xor(A, this._outputBuffer.subarray(0,8));
-                wrappedKey.set(this._outputBuffer.subarray(8,16), i*8);
+                writeUint64BE(i + j * N, A);
+                xor(A, this._outputBuffer.subarray(0, 8));
+                wrappedKey.set(this._outputBuffer.subarray(8, 16), i * 8);
             }
         }
 
         wrappedKey.set(A);
+        wipe(A);
         return wrappedKey;
     }
 
@@ -98,42 +99,46 @@ export class AESKW {
 
         // The keyData must be at minimum 128 bit (16 bytes) in length
         if (N <= 1) {
-            throw new Error("aeskw: key data insufficient length must be a minimum of 128 bits or 16 bytes");
+            throw new Error("AESKW: key size must be at least 16 bytes");
         }
 
         // Set A to the first 64 bit data block of the wrapped key
-        let A = wrappedKey.subarray(0,8);
+        const A = new Uint8Array(wrappedKey.subarray(0, 8));
+        const tmp = new Uint8Array(8);
         // Initialize the length of the key data, size always equals N
-        const keyData = new Uint8Array(8*(N));
+        const keyData = new Uint8Array(8 * N);
         const encryptedKeyData = new Uint8Array(wrappedKey);
 
         for (let j = 5; j >= 0; j--) {
             for (let i = N; i >= 1; i--) {
-                this.xor(A, writeUint64BE(i + j*N));
+                writeUint64BE(i + j * N, tmp);
+                xor(A, tmp);
                 this._inputBuffer.set(A);
-                this._inputBuffer.set(encryptedKeyData.subarray((i)*8,(i+1)*8),8);
+                this._inputBuffer.set(encryptedKeyData.subarray((i) * 8, (i + 1) * 8), 8);
                 this._cipher.decryptBlock(this._inputBuffer, this._outputBuffer);
-                A.set(this._outputBuffer.subarray(0,8));
-                encryptedKeyData.set(this._outputBuffer.subarray(8,16), i*8);
+                A.set(this._outputBuffer.subarray(0, 8));
+                encryptedKeyData.set(this._outputBuffer.subarray(8, 16), i * 8);
             }
         }
 
         // Integrity check, the A component of the un-wrapped key buffer should
         // equal the default initial value
         if (compare(A, this._iv) == 0) {
-            throw new Error("aeskw: unwrapped data does not contain the default iv");
+            throw new Error("AESKW: integrity check failed");
         }
 
-        keyData.set(encryptedKeyData.subarray(8))
+        keyData.set(encryptedKeyData.subarray(8));
+        wipe(encryptedKeyData);
+        wipe(A);
         return keyData;
     }
+}
 
-    /**
-     * Internal method for bitwise XOR of b into a
-     */
-    private xor(a: Uint8Array, b: Uint8Array) {
-        for (let i = 0; i < b.length; i++) {
-            a[i] ^= b[i];
-        }
+/**
+ * Xors b into a.
+ */
+function xor(a: Uint8Array, b: Uint8Array) {
+    for (let i = 0; i < b.length; i++) {
+        a[i] ^= b[i];
     }
 }
