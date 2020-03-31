@@ -130,6 +130,7 @@ export class AESKW {
         keyData.set(encryptedKeyData.subarray(8));
         wipe(encryptedKeyData);
         wipe(A);
+        wipe(tmp);
         return keyData;
     }
 }
