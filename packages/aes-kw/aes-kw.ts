@@ -20,7 +20,8 @@ export class AESKW {
     private _iv: Uint8Array;
 
     /**
-     * Constructs a class capable of advance encryption standard key wrapping
+     * Constructs AESKW instance with the given key.
+     *
      * @param key: The key encryption key used to wrap and un-wrap
      */
     constructor(key: Uint8Array) {
@@ -31,13 +32,13 @@ export class AESKW {
         // @see https://tools.ietf.org/html/rfc3394#section-2.2.3.1
         this._iv = new Uint8Array([0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6]);
 
-        // Initialize the input and output buffers
+        // Initialize the input and output buffers.
         this._inputBuffer = new Uint8Array(this._cipher.blockSize);
         this._outputBuffer = new Uint8Array(this._cipher.blockSize);
     }
 
     /**
-     * Cleans the buffers and underlying memory associated to the cipher
+     * Cleans the buffers and underlying memory associated to the cipher.
      */
     clean(): this {
         wipe(this._inputBuffer);
@@ -47,26 +48,28 @@ export class AESKW {
     }
 
     /**
-     * Wraps supplied key data with the key encryption key supplied in the
-     * constructor
+     * Wraps supplied key data with the key encryption key supplied in the constructor.
+     *
      * @param keyData: The key data to wrap with the key encryption key
      */
     wrapKey(keyData: Uint8Array): Uint8Array {
         // Floor divide the length of the key data to determine
-        // how many 64 bit data blocks it contains
+        // how many 64 bit data blocks it contains.
         const N = (keyData.length - (keyData.length % 8)) / 8;
 
-        // The keyData must be at minimum 128 bit (16 bytes) in length
+        // The keyData must be at minimum 128 bit (16 bytes) in length.
         if (N <= 1) {
             throw new Error("AESKW: key size must be at least 16 bytes");
         }
 
-        // Set A to the initial value
+        // Set A to the initial value.
         const A = new Uint8Array(this._iv);
-        // Initialize the length of the wrapped key, size always equals N+1
+
+        // Initialize the length of the wrapped key, size always equals N+1.
         const wrappedKey = new Uint8Array(8 * (N + 1));
-        // Set the plain text into the wrapped key array offset by one
-        // 64 bit data block
+
+        // Set the plain text into the wrapped key array offset
+        // by one 64 bit data block.
         wrappedKey.set(keyData, 8);
 
         for (let j = 0; j < 6; j++) {
@@ -102,10 +105,13 @@ export class AESKW {
             throw new Error("AESKW: key size must be at least 16 bytes");
         }
 
-        // Set A to the first 64 bit data block of the wrapped key
+        // Set A to the first 64 bit data block of the wrapped key.
         const A = new Uint8Array(wrappedKey.subarray(0, 8));
+
+        // Allocate temporary array.
         const tmp = new Uint8Array(8);
-        // Initialize the length of the key data, size always equals N
+
+        // Initialize the length of the key data, size always equals N.
         const keyData = new Uint8Array(8 * N);
         const encryptedKeyData = new Uint8Array(wrappedKey);
 
@@ -122,7 +128,7 @@ export class AESKW {
         }
 
         // Integrity check, the A component of the un-wrapped key buffer should
-        // equal the default initial value
+        // equal the default initial value.
         if (compare(A, this._iv) == 0) {
             throw new Error("AESKW: integrity check failed");
         }
