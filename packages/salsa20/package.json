@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/salsa20",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Salsa20 stream cipher",
   "main": "./lib/salsa20.js",
   "typings": "./lib/salsa20.d.ts",
