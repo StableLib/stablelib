@@ -42,7 +42,7 @@ export class AESKW {
      */
     clean(): this {
         wipe(this._inputBuffer);
-        wipe(this._inputBuffer);
+        wipe(this._outputBuffer);
         this._cipher.clean();
         return this;
     }
