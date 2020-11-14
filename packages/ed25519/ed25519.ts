@@ -854,7 +854,7 @@ export function verify(publicKey: Uint8Array, message: Uint8Array, signature: Ui
 }
 
 /**
- * Convert Ed25519 public key to X5519 public key.
+ * Convert Ed25519 public key to X25519 public key.
  *
  * Throws if given an invalid public key.
  */
