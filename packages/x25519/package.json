@@ -6,6 +6,10 @@
   "typings": "./lib/x25519.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/StableLib/stablelib"
+  },
+  "homepage": "https://github.com/StableLib/stablelib/tree/master/packages/x25519",
   "publishConfig": {
     "access": "public"
   },

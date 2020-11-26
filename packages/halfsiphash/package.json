@@ -6,6 +6,10 @@
   "typings": "./lib/halfsiphash.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/StableLib/stablelib"
+  },
+  "homepage": "https://github.com/StableLib/stablelib/tree/master/packages/halfsiphash",
   "publishConfig": {
     "access": "public"
   },
