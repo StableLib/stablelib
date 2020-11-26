@@ -6,6 +6,10 @@
   "typings": "./lib/base64.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/StableLib/stablelib"
+  },
+  "homepage": "https://github.com/StableLib/stablelib/tree/master/packages/base64",
   "publishConfig": {
     "access": "public"
   },

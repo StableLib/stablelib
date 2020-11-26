@@ -13,6 +13,10 @@
     }
   ],
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/StableLib/stablelib"
+  },
+  "homepage": "https://github.com/StableLib/stablelib/tree/master/packages/xchacha20",
   "publishConfig": {
     "access": "public"
   },
