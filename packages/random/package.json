@@ -25,6 +25,9 @@
     "@stablelib/benchmark": "^1.0.0",
     "@stablelib/hex": "^1.0.0"
   },
+  "browser": {
+    "crypto": false
+  },
   "react-native": {
     "crypto": false
   }
