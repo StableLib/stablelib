@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/newhope",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "NewHope post-quantum secure key agreement",
   "main": "./lib/newhope.js",
   "typings": "./lib/newhope.d.ts",
@@ -19,17 +19,17 @@
     "bench": "node ./lib/newhope.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^1.0.0",
-    "@stablelib/bytes": "^1.0.0",
-    "@stablelib/chacha": "^1.0.0",
-    "@stablelib/hash": "^1.0.0",
-    "@stablelib/keyagreement": "^1.0.0",
-    "@stablelib/random": "^1.0.0",
-    "@stablelib/sha3": "^1.0.0",
-    "@stablelib/wipe": "^1.0.0"
+    "@stablelib/binary": "^1.0.1",
+    "@stablelib/bytes": "^1.0.1",
+    "@stablelib/chacha": "^1.0.1",
+    "@stablelib/hash": "^1.0.1",
+    "@stablelib/keyagreement": "^1.0.1",
+    "@stablelib/random": "^1.0.1",
+    "@stablelib/sha3": "^1.0.1",
+    "@stablelib/wipe": "^1.0.1"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^1.0.0",
-    "@stablelib/hex": "^1.0.0"
+    "@stablelib/benchmark": "^1.0.1",
+    "@stablelib/hex": "^1.0.1"
   }
 }

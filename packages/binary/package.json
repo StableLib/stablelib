@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/binary",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Binary encoding and decoding",
   "main": "./lib/binary.js",
   "typings": "./lib/binary.d.ts",
@@ -18,6 +18,6 @@
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
-    "@stablelib/int": "^1.0.0"
+    "@stablelib/int": "^1.0.1"
   }
 }

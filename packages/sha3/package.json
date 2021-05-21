@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/sha3",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SHA-3 cryptographic hash function",
   "main": "./lib/sha3.js",
   "typings": "./lib/sha3.d.ts",
@@ -19,12 +19,12 @@
     "bench": "node ./lib/sha3.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^1.0.0",
-    "@stablelib/hash": "^1.0.0",
-    "@stablelib/wipe": "^1.0.0"
+    "@stablelib/binary": "^1.0.1",
+    "@stablelib/hash": "^1.0.1",
+    "@stablelib/wipe": "^1.0.1"
   },
   "devDependencies": {
-    "@stablelib/base64": "^1.0.0",
-    "@stablelib/benchmark": "^1.0.0"
+    "@stablelib/base64": "^1.0.1",
+    "@stablelib/benchmark": "^1.0.1"
   }
 }

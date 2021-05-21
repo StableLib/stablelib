@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/pbkdf2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PBKDF2 (Password-based key derivation function)",
   "main": "./lib/pbkdf2.js",
   "typings": "./lib/pbkdf2.d.ts",
@@ -19,18 +19,18 @@
     "bench": "node ./lib/pbkdf2.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^1.0.0",
-    "@stablelib/hash": "^1.0.0",
-    "@stablelib/hmac": "^1.0.0",
-    "@stablelib/wipe": "^1.0.0"
+    "@stablelib/binary": "^1.0.1",
+    "@stablelib/hash": "^1.0.1",
+    "@stablelib/hmac": "^1.0.1",
+    "@stablelib/wipe": "^1.0.1"
   },
   "devDependencies": {
-    "@stablelib/base64": "^1.0.0",
-    "@stablelib/benchmark": "^1.0.0",
-    "@stablelib/hex": "^1.0.0",
-    "@stablelib/sha224": "^1.0.0",
-    "@stablelib/sha256": "^1.0.0",
-    "@stablelib/sha3": "^1.0.0",
-    "@stablelib/sha512": "^1.0.0"
+    "@stablelib/base64": "^1.0.1",
+    "@stablelib/benchmark": "^1.0.1",
+    "@stablelib/hex": "^1.0.1",
+    "@stablelib/sha224": "^1.0.1",
+    "@stablelib/sha256": "^1.0.1",
+    "@stablelib/sha3": "^1.0.1",
+    "@stablelib/sha512": "^1.0.1"
   }
 }

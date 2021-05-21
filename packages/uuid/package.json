@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/uuid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "UUID v4 (random) generator",
   "main": "./lib/uuid.js",
   "typings": "./lib/uuid.d.ts",
@@ -18,8 +18,8 @@
     "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
-    "@stablelib/hex": "^1.0.0",
-    "@stablelib/random": "^1.0.0",
-    "@stablelib/wipe": "^1.0.0"
+    "@stablelib/hex": "^1.0.1",
+    "@stablelib/random": "^1.0.1",
+    "@stablelib/wipe": "^1.0.1"
   }
 }

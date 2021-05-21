@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/wipe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wipes bytes and arrays (sets all values to zero)",
   "main": "./lib/wipe.js",
   "typings": "./lib/wipe.d.ts",

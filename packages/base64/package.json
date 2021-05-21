@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/base64",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Base64 encoding and decoding",
   "main": "./lib/base64.js",
   "typings": "./lib/base64.d.ts",
@@ -19,6 +19,6 @@
     "bench": "node ./lib/base64.bench.js"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^1.0.0"
+    "@stablelib/benchmark": "^1.0.1"
   }
 }

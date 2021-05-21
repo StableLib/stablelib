@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/blake2b",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "BLAKE2b cryptographic hash function",
   "main": "./lib/blake2b.js",
   "typings": "./lib/blake2b.d.ts",
@@ -19,12 +19,12 @@
     "bench": "node ./lib/blake2b.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^1.0.0",
-    "@stablelib/hash": "^1.0.0",
-    "@stablelib/wipe": "^1.0.0"
+    "@stablelib/binary": "^1.0.1",
+    "@stablelib/hash": "^1.0.1",
+    "@stablelib/wipe": "^1.0.1"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^1.0.0",
-    "@stablelib/hex": "^1.0.0"
+    "@stablelib/benchmark": "^1.0.1",
+    "@stablelib/hex": "^1.0.1"
   }
 }
