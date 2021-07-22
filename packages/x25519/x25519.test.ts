@@ -79,7 +79,7 @@ const testVector = {
     "6D54CC9C397E31691401110F58DA1E182A635D7E44C21DC2D7BE93624652AB15"
 };
 
-describe("X25518KeyAgreement", () => {
+describe("X25519KeyAgreement", () => {
     it("should establish shared key", () => {
         for (let i = 0; i < 5; i++) {
             const server = new X25519KeyAgreement();
