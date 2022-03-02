@@ -82,7 +82,7 @@ export class ChaChaDRBG implements RandomSource {
         // Generate stream to temporary space.
         const tmp = new Uint8Array(32);
 
-        stream(tmp, this._rekeyNonce, tmp);
+        stream(this._key, this._rekeyNonce, tmp);
 
         // Set result as new key.
         this._key.set(tmp);
