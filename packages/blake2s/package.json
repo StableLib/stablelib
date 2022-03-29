@@ -3,9 +3,14 @@
   "version": "1.0.1",
   "description": "BLAKE2s cryptographic hash function",
   "main": "./lib/blake2s.js",
-  "typings": "./lib/blake2s.d.ts",
+  "module": "./lib/blake2s.mjs",
+  "types": "./lib/blake2s.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
+  "files": [
+    "LICENSE",
+    "lib"
+  ],
   "repository": {
     "url": "https://github.com/StableLib/stablelib"
   },
@@ -15,8 +20,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/blake2s.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./blake2s.bench.ts"
   },
   "dependencies": {
     "@stablelib/binary": "^1.0.1",

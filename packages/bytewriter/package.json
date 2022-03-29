@@ -3,9 +3,14 @@
   "version": "1.0.1",
   "description": "Byte writer",
   "main": "./lib/bytewriter.js",
-  "typings": "./lib/bytewriter.d.ts",
+  "module": "./lib/bytewriter.mjs",
+  "types": "./lib/bytewriter.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
+  "files": [
+    "LICENSE",
+    "lib"
+  ],
   "repository": {
     "url": "https://github.com/StableLib/stablelib"
   },
@@ -15,8 +20,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/bytewriter.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./bytewriter.bench.ts"
   },
   "dependencies": {
     "@stablelib/binary": "^1.0.1",
