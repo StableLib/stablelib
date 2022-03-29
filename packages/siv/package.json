@@ -7,6 +7,10 @@
   "types": "./lib/siv.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
+  "files": [
+    "LICENSE",
+    "lib"
+  ],
   "repository": {
     "url": "https://github.com/StableLib/stablelib"
   },
