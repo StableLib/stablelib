@@ -177,5 +177,8 @@
         "packages/xsalsa20/xsalsa20.ts"
       ],
     }
-  }
+  },
+  "exclude": [
+    "packages/**/lib/*.d.ts"
+  ]
 }
