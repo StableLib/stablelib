@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "AES KW (Advanced Encryption Standard Key Wrapping)",
   "main": "./lib/aes-kw.js",
-  "typings": "./lib/aes-kw.d.ts",
+  "module": "./lib/aes-kw.mjs",
+  "types": "./lib/aes-kw.d.ts",
   "contributors": [
     {
       "name": "Dmitry Chestnykh"
@@ -22,7 +23,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
     "@stablelib/aes": "^1.0.1",

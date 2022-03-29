@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "Cryptographic hash function interface declarations",
   "main": "./lib/hash.js",
-  "typings": "./lib/hash.d.ts",
+  "module": "./lib/hash.mjs",
+  "types": "./lib/hash.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {

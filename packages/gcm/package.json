@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "GCM authenticated encryption mode with associated data (AEAD)",
   "main": "./lib/gcm.js",
-  "typings": "./lib/gcm.d.ts",
+  "module": "./lib/gcm.mjs",
+  "types": "./lib/gcm.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/gcm.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./gcm.bench.ts"
   },
   "dependencies": {
     "@stablelib/aead": "^1.0.1",

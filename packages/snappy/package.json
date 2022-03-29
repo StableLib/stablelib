@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "Snappy compression algorithm",
   "main": "./lib/snappy.js",
-  "typings": "./lib/snappy.d.ts",
+  "module": "./lib/snappy.mjs",
+  "types": "./lib/snappy.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/snappy.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./snappy.bench.ts"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^1.0.1",

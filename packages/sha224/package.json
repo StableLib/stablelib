@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "SHA-224 cryptographic hash function",
   "main": "./lib/sha224.js",
-  "typings": "./lib/sha224.d.ts",
+  "module": "./lib/sha224.mjs",
+  "types": "./lib/sha224.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
     "@stablelib/sha256": "^1.0.1"

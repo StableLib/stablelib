@@ -3,7 +3,8 @@
   "version": "1.0.3",
   "description": "Implementation of secretbox and box from NaCl (Networking and Cryptography Library)",
   "main": "./lib/nacl.js",
-  "typings": "./lib/nacl.d.ts",
+  "module": "./lib/nacl.mjs",
+  "types": "./lib/nacl.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/secretbox.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./secretbox.bench.ts"
   },
   "dependencies": {
     "@stablelib/poly1305": "^1.0.1",

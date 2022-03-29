@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "CMAC message authentication code",
   "main": "./lib/cmac.js",
-  "typings": "./lib/cmac.d.ts",
+  "module": "./lib/cmac.mjs",
+  "types": "./lib/cmac.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/cmac.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./cmac.bench.ts"
   },
   "dependencies": {
     "@stablelib/blockcipher": "^1.0.1",

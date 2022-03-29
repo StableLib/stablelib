@@ -3,7 +3,8 @@
   "version": "1.0.2",
   "description": "X25519 key agreement (Curve25519)",
   "main": "./lib/x25519.js",
-  "typings": "./lib/x25519.d.ts",
+  "module": "./lib/x25519.mjs",
+  "types": "./lib/x25519.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/x25519.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./x25519.bench.ts"
   },
   "dependencies": {
     "@stablelib/keyagreement": "^1.0.1",

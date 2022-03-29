@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "Base64 encoding and decoding",
   "main": "./lib/base64.js",
-  "typings": "./lib/base64.d.ts",
+  "module": "./lib/base64.mjs",
+  "types": "./lib/base64.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/base64.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./base64.bench.ts"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^1.0.1"

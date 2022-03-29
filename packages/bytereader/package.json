@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "Byte reader",
   "main": "./lib/bytereader.js",
-  "typings": "./lib/bytereader.d.ts",
+  "module": "./lib/bytereader.mjs",
+  "types": "./lib/bytereader.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/bytereader.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./bytereader.bench.ts"
   },
   "dependencies": {
     "@stablelib/binary": "^1.0.1"

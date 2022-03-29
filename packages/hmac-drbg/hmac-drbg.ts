@@ -19,12 +19,12 @@ const MAX_BYTES_PER_REQUEST = 65536;
  * http://csrc.nist.gov/publications/nistpubs/800-90A/SP800-90A.pdf
  */
 export class HMACDRBG implements RandomSource {
-    private _K: Uint8Array;
-    private _V: Uint8Array;
-    private _reseedCounter: number;
+    private _K!: Uint8Array;
+    private _V!: Uint8Array;
+    private _reseedCounter!: number;
     private _byteZero = new Uint8Array([0x00]);
     private _byteOne = new Uint8Array([0x01]);
-    private _digestLength: number;
+    private _digestLength!: number;
 
     isAvailable = false;
     isInstantiated = false;

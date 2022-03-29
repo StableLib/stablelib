@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "Key agreement interface declaration and utilities",
   "main": "./lib/keyagreement.js",
-  "typings": "./lib/keyagreement.d.ts",
+  "module": "./lib/keyagreement.mjs",
+  "types": "./lib/keyagreement.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {

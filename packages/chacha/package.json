@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "ChaCha stream cipher",
   "main": "./lib/chacha.js",
-  "typings": "./lib/chacha.d.ts",
+  "module": "./lib/chacha.mjs",
+  "types": "./lib/chacha.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/chacha.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./chacha.bench.ts"
   },
   "dependencies": {
     "@stablelib/binary": "^1.0.1",

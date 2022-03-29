@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "XChaCha20-Poly1305 AEAD (draft-irtf-cfrg-xchacha-01)",
   "main": "./lib/xchacha20poly1305.js",
-  "typings": "./lib/xchacha20poly1305.d.ts",
+  "module": "./lib/xchacha20poly1305.mjs",
+  "types": "./lib/xchacha20poly1305.d.ts",
   "contributors": [
     {
       "name": "Dmitry Chestnykh"
@@ -22,8 +23,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/xchacha20poly1305.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./xchacha20poly1305.bench.ts"
   },
   "dependencies": {
     "@stablelib/aead": "^1.0.1",

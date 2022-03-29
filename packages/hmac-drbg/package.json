@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "HMAC DRBG (digital random byte generator, NIST)",
   "main": "./lib/hmac-drbg.js",
-  "typings": "./lib/hmac-drbg.d.ts",
+  "module": "./lib/hmac-drbg.mjs",
+  "types": "./lib/hmac-drbg.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -16,7 +17,7 @@
   "scripts": {
     "build": "tsc",
     "test": "echo 'TODO: hmac-drbg test'",
-    "bench": "node ./lib/hmac-drbg.bench.js"
+    "bench": "ts-node ./hmac-drbg.bench.ts"
   },
   "dependencies": {
     "@stablelib/hash": "^1.0.1",

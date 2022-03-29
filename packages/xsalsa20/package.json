@@ -3,7 +3,8 @@
   "version": "1.0.2",
   "description": "XSalsa20 (eXtended-nonce Salsa20) stream cipher",
   "main": "./lib/xsalsa20.js",
-  "typings": "./lib/xsalsa20.d.ts",
+  "module": "./lib/xsalsa20.mjs",
+  "types": "./lib/xsalsa20.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/xsalsa20.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./xsalsa20.bench.ts"
   },
   "dependencies": {
     "@stablelib/binary": "^1.0.1",

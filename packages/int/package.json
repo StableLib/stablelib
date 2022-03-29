@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "Integer number utilities",
   "main": "./lib/int.js",
-  "typings": "./lib/int.d.ts",
+  "module": "./lib/int.mjs",
+  "types": "./lib/int.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,6 +16,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   }
 }

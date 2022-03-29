@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "UUID v4 (random) generator",
   "main": "./lib/uuid.js",
-  "typings": "./lib/uuid.d.ts",
+  "module": "./lib/uuid.mjs",
+  "types": "./lib/uuid.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
   },
   "dependencies": {
     "@stablelib/hex": "^1.0.1",

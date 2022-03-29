@@ -3,7 +3,8 @@
   "version": "1.0.2",
   "description": "ChaCha20-based DRBG (digital random byte generator)",
   "main": "./lib/chacha-drbg.js",
-  "typings": "./lib/chacha-drbg.d.ts",
+  "module": "./lib/chacha-drbg.mjs",
+  "types": "./lib/chacha-drbg.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -16,7 +17,7 @@
   "scripts": {
     "build": "tsc",
     "test": "echo 'TODO: chacha-drbg test'",
-    "bench": "node ./lib/chacha-drbg.bench.js"
+    "bench": "ts-node ./chacha-drbg.bench.ts"
   },
   "dependencies": {
     "@stablelib/chacha": "^1.0.1",

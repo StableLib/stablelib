@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "Arithmetic in GF(256)",
   "main": "./lib/gf256.js",
-  "typings": "./lib/gf256.d.ts",
+  "module": "./lib/gf256.mjs",
+  "types": "./lib/gf256.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/gf256.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./gf256.bench.ts"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^1.0.1"

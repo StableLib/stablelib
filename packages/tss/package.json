@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "Threshold Secret Sharing (TSS and RTSS, IETF draft-mcgrew-tss-03)",
   "main": "./lib/tss.js",
-  "typings": "./lib/tss.d.ts",
+  "module": "./lib/tss.mjs",
+  "types": "./lib/tss.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/tss.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./tss.bench.ts"
   },
   "dependencies": {
     "@stablelib/constant-time": "^1.0.1",

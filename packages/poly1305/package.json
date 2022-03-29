@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "Poly1305 one-time message authentication code",
   "main": "./lib/poly1305.js",
-  "typings": "./lib/poly1305.d.ts",
+  "module": "./lib/poly1305.mjs",
+  "types": "./lib/poly1305.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/poly1305.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./poly1305.bench.ts"
   },
   "dependencies": {
     "@stablelib/constant-time": "^1.0.1",

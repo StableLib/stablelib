@@ -1,0 +1,181 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "commonjs",
+    "strict": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "newLine": "LF",
+    "baseUrl": "./",
+    "paths": {
+      "@stablelib/aead": [
+        "packages/aead/aead.ts"
+      ],
+      "@stablelib/aes": [
+        "packages/aes/aes.ts"
+      ],
+      "@stablelib/aes-kw": [
+        "packages/aes-kw/aes-kw.ts"
+      ],
+      "@stablelib/base64": [
+        "packages/base64/base64.ts"
+      ],
+      "@stablelib/benchmark": [
+        "packages/benchmark/benchmark.ts"
+      ],
+      "@stablelib/binary": [
+        "packages/binary/binary.ts"
+      ],
+      "@stablelib/blake2b": [
+        "packages/blake2b/blake2b.ts"
+      ],
+      "@stablelib/blake2s": [
+        "packages/blake2s/blake2s.ts"
+      ],
+      "@stablelib/blake2xs": [
+        "packages/blake2xs/blake2xs.ts"
+      ],
+      "@stablelib/blockcipher": [
+        "packages/blockcipher/blockcipher.ts"
+      ],
+      "@stablelib/bytereader": [
+        "packages/bytereader/bytereader.ts"
+      ],
+      "@stablelib/bytes": [
+        "packages/bytes/bytes.ts"
+      ],
+      "@stablelib/bytewriter": [
+        "packages/bytewriter/bytewriter.ts"
+      ],
+      "@stablelib/cbor": [
+        "packages/cbor/cbor.ts"
+      ],
+      "@stablelib/chacha": [
+        "packages/chacha/chacha.ts"
+      ],
+      "@stablelib/chacha-drbg": [
+        "packages/chacha-drbg/chacha-drbg.ts"
+      ],
+      "@stablelib/chacha20poly1305": [
+        "packages/chacha20poly1305/chacha20poly1305.ts"
+      ],
+      "@stablelib/cmac": [
+        "packages/cmac/cmac.ts"
+      ],
+      "@stablelib/constant-time": [
+        "packages/constant-time/constant-time.ts"
+      ],
+      "@stablelib/ctr": [
+        "packages/ctr/ctr.ts"
+      ],
+      "@stablelib/ed25519": [
+        "packages/ed25519/ed25519.ts"
+      ],
+      "@stablelib/float": [
+        "packages/float/float.ts"
+      ],
+      "@stablelib/gcm": [
+        "packages/gcm/gcm.ts"
+      ],
+      "@stablelib/gf256": [
+        "packages/gf256/gf256.ts"
+      ],
+      "@stablelib/halfsiphash": [
+        "packages/halfsiphash/halfsiphash.ts"
+      ],
+      "@stablelib/hash": [
+        "packages/hash/hash.ts"
+      ],
+      "@stablelib/hex": [
+        "packages/hex/hex.ts"
+      ],
+      "@stablelib/hkdf": [
+        "packages/hkdf/hkdf.ts"
+      ],
+      "@stablelib/hmac": [
+        "packages/hmac/hmac.ts"
+      ],
+      "@stablelib/hmac-drbg": [
+        "packages/hmac-drbg/hmac-drbg.ts"
+      ],
+      "@stablelib/int": [
+        "packages/int/int.ts"
+      ],
+      "@stablelib/keyagreement": [
+        "packages/keyagreement/keyagreement.ts"
+      ],
+      "@stablelib/nacl": [
+        "packages/nacl/nacl.ts"
+      ],
+      "@stablelib/newhope": [
+        "packages/newhope/newhope.ts"
+      ],
+      "@stablelib/pbkdf2": [
+        "packages/pbkdf2/pbkdf2.ts"
+      ],
+      "@stablelib/poly1305": [
+        "packages/poly1305/poly1305.ts"
+      ],
+      "@stablelib/random": [
+        "packages/random/random.ts"
+      ],
+      "@stablelib/salsa20": [
+        "packages/salsa20/salsa20.ts"
+      ],
+      "@stablelib/scrypt": [
+        "packages/scrypt/scrypt.ts"
+      ],
+      "@stablelib/sha224": [
+        "packages/sha224/sha224.ts"
+      ],
+      "@stablelib/sha256": [
+        "packages/sha256/sha256.ts"
+      ],
+      "@stablelib/sha3": [
+        "packages/sha3/sha3.ts"
+      ],
+      "@stablelib/sha384": [
+        "packages/sha384/sha384.ts"
+      ],
+      "@stablelib/sha512": [
+        "packages/sha512/sha512.ts"
+      ],
+      "@stablelib/sha512_256": [
+        "packages/sha512_256/sha512_256.ts"
+      ],
+      "@stablelib/siv": [
+        "packages/siv/siv.ts"
+      ],
+      "@stablelib/snappy": [
+        "packages/snappy/snappy.ts"
+      ],
+      "@stablelib/tss": [
+        "packages/tss/tss.ts"
+      ],
+      "@stablelib/utf8": [
+        "packages/utf8/utf8.ts"
+      ],
+      "@stablelib/uuid": [
+        "packages/uuid/uuid.ts"
+      ],
+      "@stablelib/wipe": [
+        "packages/wipe/wipe.ts"
+      ],
+      "@stablelib/x25519": [
+        "packages/x25519/x25519.ts"
+      ],
+      "@stablelib/xchacha20": [
+        "packages/xchacha20/xchacha20.ts"
+      ],
+      "@stablelib/xchacha20poly1305": [
+        "packages/xchacha20poly1305/xchacha20poly1305.ts"
+      ],
+      "@stablelib/xsalsa20": [
+        "packages/xsalsa20/xsalsa20.ts"
+      ],
+    }
+  }
+}

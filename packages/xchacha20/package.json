@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "XChaCha20 stream cipher",
   "main": "./lib/xchacha20.js",
-  "typings": "./lib/xchacha20.d.ts",
+  "module": "./lib/xchacha20.mjs",
+  "types": "./lib/xchacha20.d.ts",
   "contributors": [
     {
       "name": "Dmitry Chestnykh"
@@ -22,8 +23,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/xchacha20.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./xchacha20.bench.ts"
   },
   "dependencies": {
     "@stablelib/binary": "^1.0.1",

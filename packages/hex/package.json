@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "Hex (Base16) encoding and decoding",
   "main": "./lib/hex.js",
-  "typings": "./lib/hex.d.ts",
+  "module": "./lib/hex.mjs",
+  "types": "./lib/hex.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
   "repository": {
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
-    "bench": "node ./lib/hex.bench.js"
+    "test": "ts-node ../../node_modules/.bin/jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "ts-node ./hex.bench.ts"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^1.0.1"
