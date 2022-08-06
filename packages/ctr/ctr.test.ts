@@ -28,6 +28,26 @@ describe("AES-CTR", () => {
         expect(encode(dst2)).toBe(v.dst2);
     });
 
+    it("should produce correct stream", () => {
+        const cipher = new AES(decode(v.key));
+        const ctr = new CTR(cipher, decode(v.iv));
+        const dst1 = new Uint8Array(decode(v.dst1).length);
+        const src1 = decode(v.src1);
+        ctr.stream(dst1);
+        for (let i = 0; i < dst1.length; i++ ) {
+            dst1[i] ^= src1[i]
+        }
+        expect(encode(dst1)).toBe(v.dst1);
+        // Continue the same stream.
+        const dst2 = new Uint8Array(decode(v.dst2).length);
+        const src2 = decode(v.src2);
+        ctr.stream(dst2);
+        for (let i = 0; i < dst2.length; i++ ) {
+            dst2[i] ^= src2[i]
+        }
+        expect(encode(dst2)).toBe(v.dst2);
+    });
+
     it("should generate succession when calling multiple times", () => {
        const cipher = new AES(decode(v.key));
        const dst1 = new Uint8Array(100);

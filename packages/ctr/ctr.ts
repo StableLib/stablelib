@@ -80,7 +80,7 @@ export class CTR {
 
     stream(dst: Uint8Array): void {
         for (let i = 0; i < dst.length; i++) {
-            if (this._bufpos === this._counter.length) {
+            if (this._bufpos === this._buffer.length) {
                 this.fillBuffer();
             }
             dst[i] = this._buffer[this._bufpos++];
