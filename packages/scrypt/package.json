@@ -28,6 +28,7 @@
   "devDependencies": {
     "@stablelib/base64": "^1.0.1",
     "@stablelib/benchmark": "^1.0.1",
-    "@stablelib/utf8": "^1.0.1"
+    "@stablelib/utf8": "^1.0.1",
+    "@types/node": "^18.7.6"
   }
 }
