@@ -16,7 +16,7 @@ export class BrowserRandomSource implements RandomSource {
             ? (self.crypto || (self as { msCrypto?: any }).msCrypto) // IE11 has msCrypto
             : null;
 
-        if (browserCrypto && browserCrypto.getRandomValues) {
+        if (browserCrypto && browserCrypto.getRandomValues !== undefined) {
             this._crypto = browserCrypto;
             this.isAvailable = true;
             this.isInstantiated = true;
