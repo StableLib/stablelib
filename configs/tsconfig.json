@@ -12,15 +12,10 @@
         "newLine": "LF",
         "sourceMap": true,
         "declaration": true,
-        "outDir": "lib",
         "lib": [
             "es2015",
             "dom",
             "scripthost"
         ]
     },
-    "exclude": [
-        "node_modules",
-        "lib"
-    ]
 }
