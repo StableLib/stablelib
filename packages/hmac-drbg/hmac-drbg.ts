@@ -18,7 +18,8 @@ const MAX_BYTES_PER_REQUEST = 65536;
  * HMAC_DRBG from NIST SP800 90A.
  * http://csrc.nist.gov/publications/nistpubs/800-90A/SP800-90A.pdf
  */
-export class HMACDRBG implements RandomSource {
+
+class HMACDRBGInstance {
     private _K: Uint8Array;
     private _V: Uint8Array;
     private _reseedCounter: number;
@@ -26,19 +27,12 @@ export class HMACDRBG implements RandomSource {
     private _byteOne = new Uint8Array([0x01]);
     private _digestLength: number;
 
-    isAvailable = false;
-    isInstantiated = false;
-
     constructor(
-        private _entropySource: RandomSource = defaultRandomSource,
-        private _hash: new () => Hash = SHA256,
-        private _personalization = new Uint8Array(0),
-        private _reseedInterval = RESEED_INTERVAL // set to 0 to disable reseeding (not recommended)
+        private _entropySource: RandomSource,
+        private _hash: new () => Hash,
+        private _personalization: Uint8Array,
+        private _reseedInterval: number // set to 0 to disable reseeding (not recommended)
     ) {
-        this.isAvailable = this._entropySource.isAvailable;
-    }
-
-    private _instantiate() {
         if (!this._entropySource.isAvailable) {
             throw new Error("HMACDRBG: entropy source is not available");
         }
@@ -73,8 +67,6 @@ export class HMACDRBG implements RandomSource {
         // Cleanup.
         wipe(entropy);
         wipe(initialSeed);
-
-        this.isInstantiated = true;
     }
 
     private _reseed() {
@@ -139,13 +131,37 @@ export class HMACDRBG implements RandomSource {
     }
 
     randomBytes(length: number): Uint8Array {
-        if (!this.isInstantiated) {
-            this._instantiate();
-        }
         const out = new Uint8Array(length);
         for (let i = 0; i < out.length; i += MAX_BYTES_PER_REQUEST) {
             this._generate(out.subarray(i, i + Math.min(out.length - i, MAX_BYTES_PER_REQUEST)));
         }
         return out;
+    }
+}
+
+export class HMACDRBG implements RandomSource {
+    private _inst?: HMACDRBGInstance;
+
+    public get isInstantiated(): boolean {
+        return this._inst !== undefined;
+    }
+
+    public get isAvailable(): boolean {
+        return this._entropySource.isAvailable;
+    }
+
+    constructor(
+        private _entropySource: RandomSource = defaultRandomSource,
+        private _hash: new () => Hash = SHA256,
+        private _personalization = new Uint8Array(0),
+        private _reseedInterval = RESEED_INTERVAL // set to 0 to disable reseeding (not recommended)
+    ) {
+    }
+
+    randomBytes(length: number): Uint8Array {
+        if (!this._inst) {
+            this._inst = new HMACDRBGInstance(this._entropySource, this._hash, this._personalization, this._reseedInterval);
+        }
+        return this._inst.randomBytes(length);
     }
 }
