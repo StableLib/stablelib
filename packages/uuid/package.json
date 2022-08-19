@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/uuid",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "UUID v4 (random) generator",
   "main": "./lib/uuid.js",
   "typings": "./lib/uuid.d.ts",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@stablelib/hex": "^1.0.1",
-    "@stablelib/random": "^1.0.1",
+    "@stablelib/random": "^1.0.2",
     "@stablelib/wipe": "^1.0.1"
   }
 }

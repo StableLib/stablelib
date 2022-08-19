@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/siv",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Synthetic Initialization Vector (SIV) authenticated encryption",
   "main": "./lib/siv.js",
   "typings": "./lib/siv.d.ts",
@@ -22,7 +22,7 @@
     "@stablelib/blockcipher": "^1.0.1",
     "@stablelib/cmac": "^1.0.1",
     "@stablelib/constant-time": "^1.0.1",
-    "@stablelib/ctr": "^1.0.1",
+    "@stablelib/ctr": "^1.0.2",
     "@stablelib/wipe": "^1.0.1"
   },
   "devDependencies": {

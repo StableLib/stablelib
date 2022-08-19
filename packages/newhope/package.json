@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/newhope",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NewHope post-quantum secure key agreement",
   "main": "./lib/newhope.js",
   "typings": "./lib/newhope.d.ts",
@@ -24,7 +24,7 @@
     "@stablelib/chacha": "^1.0.1",
     "@stablelib/hash": "^1.0.1",
     "@stablelib/keyagreement": "^1.0.1",
-    "@stablelib/random": "^1.0.1",
+    "@stablelib/random": "^1.0.2",
     "@stablelib/sha3": "^1.0.1",
     "@stablelib/wipe": "^1.0.1"
   },

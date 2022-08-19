@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/random",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cryptographically-secure pseudorandom number generator",
   "main": "./lib/random.js",
   "typings": "./lib/random.d.ts",
