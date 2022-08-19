@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "^4.0.3",
+    "@types/node": "^18.7.6",
     "jasmine": "^4.1.0",
     "lerna": "^5.0.0",
     "tslint": "^6.1.3",
