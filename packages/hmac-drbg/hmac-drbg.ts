@@ -140,10 +140,10 @@ class HMACDRBGInstance {
 }
 
 export class HMACDRBG implements RandomSource {
-    private _inst?: HMACDRBGInstance;
+    private _instance?: HMACDRBGInstance;
 
     public get isInstantiated(): boolean {
-        return this._inst !== undefined;
+        return this._instance !== undefined;
     }
 
     public get isAvailable(): boolean {
@@ -159,9 +159,9 @@ export class HMACDRBG implements RandomSource {
     }
 
     randomBytes(length: number): Uint8Array {
-        if (!this._inst) {
-            this._inst = new HMACDRBGInstance(this._entropySource, this._hash, this._personalization, this._reseedInterval);
+        if (!this._instance) {
+            this._instance = new HMACDRBGInstance(this._entropySource, this._hash, this._personalization, this._reseedInterval);
         }
-        return this._inst.randomBytes(length);
+        return this._instance.randomBytes(length);
     }
 }
