@@ -6,6 +6,8 @@
  */
 
 import { randomBytes, RandomSource } from "@stablelib/random";
+import { BLAKE2b } from "@stablelib/blake2b";
+import { Hash } from "@stablelib/hash";
 import { wipe } from "@stablelib/wipe";
 
 export const PUBLIC_KEY_LENGTH = 32;
@@ -634,4 +636,61 @@ export function sharedKey(mySecretKey: Uint8Array, theirPublicKey: Uint8Array, r
     }
 
     return result;
+}
+
+const SESSION_KEY_LENGTH = 32;
+
+export interface SessionKeys {
+    rx: Uint8Array;
+    tx: Uint8Array;
+}
+
+/**
+ * Generates server-side session encryption keys from the shared key obtained during agreement phase.
+ */
+export function serverSessionKeysFromSharedKey(sharedKey: Uint8Array, myPublicKey: Uint8Array, theirPublicKey: Uint8Array, hash: new() => Hash = BLAKE2b): SessionKeys {
+    const state = new hash();
+    if (state.digestLength !== SESSION_KEY_LENGTH * 2) {
+        throw new Error("X25519: incorrect digest length");
+    }
+    let h = new Uint8Array(0);
+    state.update(sharedKey).update(theirPublicKey).update(myPublicKey).finish(h);
+
+    return {
+        tx: h.subarray(0, SESSION_KEY_LENGTH),
+        rx: h.subarray(SESSION_KEY_LENGTH),
+    };
+}
+
+/**
+ * Generates client-side session encryption keys from the shared key obtained during agreement phase.
+ */
+export function clientSessionKeysFromSharedKey(sharedKey: Uint8Array, myPublicKey: Uint8Array, theirPublicKey: Uint8Array, hash: new() => Hash = BLAKE2b): SessionKeys {
+    const state = new hash();
+    if (state.digestLength !== SESSION_KEY_LENGTH * 2) {
+        throw new Error("X25519: incorrect digest length");
+    }
+    let h = new Uint8Array(0);
+    state.update(sharedKey).update(myPublicKey).update(theirPublicKey).finish(h);
+
+    return {
+        rx: h.subarray(0, SESSION_KEY_LENGTH),
+        tx: h.subarray(SESSION_KEY_LENGTH),
+    };
+}
+
+/**
+ * Generates server-side session encryption keys. Uses a key pair and a peer's public key to generate the shared key.
+ */
+export function serverSessionKeys(myKeyPair: KeyPair, theirPublicKey: Uint8Array, hash: new() => Hash = BLAKE2b): SessionKeys {
+    const sk = sharedKey(myKeyPair.secretKey, theirPublicKey);
+    return serverSessionKeysFromSharedKey(sk, myKeyPair.publicKey, theirPublicKey, hash);
+}
+
+/**
+ * Generates client-side session encryption keys. Uses a key pair and a peer's public key to generate the shared key.
+ */
+ export function clientSessionKeys(myKeyPair: KeyPair, theirPublicKey: Uint8Array, hash: new() => Hash = BLAKE2b): SessionKeys {
+    const sk = sharedKey(myKeyPair.secretKey, theirPublicKey);
+    return clientSessionKeysFromSharedKey(sk, myKeyPair.publicKey, theirPublicKey, hash);
 }

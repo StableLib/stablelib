@@ -21,10 +21,12 @@
   "dependencies": {
     "@stablelib/keyagreement": "^1.0.1",
     "@stablelib/random": "^1.0.1",
-    "@stablelib/wipe": "^1.0.1"
+    "@stablelib/wipe": "^1.0.1",
+    "@stablelib/blake2b": "^1.0.1"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^1.0.1",
-    "@stablelib/hex": "^1.0.1"
+    "@stablelib/hex": "^1.0.1",
+    "@stablelib/hash": "^1.0.1"
   }
 }
