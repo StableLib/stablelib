@@ -648,7 +648,10 @@ export interface SessionKeys {
 /**
  * Generates server-side session encryption keys from the shared key obtained during agreement phase.
  */
-export function serverSessionKeysFromSharedKey(sharedKey: Uint8Array, myPublicKey: Uint8Array, theirPublicKey: Uint8Array, hash: new() => Hash = BLAKE2b): SessionKeys {
+export function serverSessionKeysFromSharedKey(sharedKey: Uint8Array,
+    myPublicKey: Uint8Array,
+    theirPublicKey: Uint8Array,
+    hash: new() => Hash = BLAKE2b): SessionKeys {
     const state = new hash();
     if (state.digestLength !== SESSION_KEY_LENGTH * 2) {
         throw new Error("X25519: incorrect digest length");
@@ -665,7 +668,10 @@ export function serverSessionKeysFromSharedKey(sharedKey: Uint8Array, myPublicKe
 /**
  * Generates client-side session encryption keys from the shared key obtained during agreement phase.
  */
-export function clientSessionKeysFromSharedKey(sharedKey: Uint8Array, myPublicKey: Uint8Array, theirPublicKey: Uint8Array, hash: new() => Hash = BLAKE2b): SessionKeys {
+export function clientSessionKeysFromSharedKey(sharedKey: Uint8Array,
+    myPublicKey: Uint8Array,
+    theirPublicKey: Uint8Array,
+    hash: new() => Hash = BLAKE2b): SessionKeys {
     const state = new hash();
     if (state.digestLength !== SESSION_KEY_LENGTH * 2) {
         throw new Error("X25519: incorrect digest length");
@@ -690,7 +696,7 @@ export function serverSessionKeys(myKeyPair: KeyPair, theirPublicKey: Uint8Array
 /**
  * Generates client-side session encryption keys. Uses a key pair and a peer's public key to generate the shared key.
  */
- export function clientSessionKeys(myKeyPair: KeyPair, theirPublicKey: Uint8Array, hash: new() => Hash = BLAKE2b): SessionKeys {
+export function clientSessionKeys(myKeyPair: KeyPair, theirPublicKey: Uint8Array, hash: new() => Hash = BLAKE2b): SessionKeys {
     const sk = sharedKey(myKeyPair.secretKey, theirPublicKey);
     return clientSessionKeysFromSharedKey(sk, myKeyPair.publicKey, theirPublicKey, hash);
 }
