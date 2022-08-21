@@ -101,7 +101,7 @@ describe("X25519KeyAgreement", () => {
             expect(encode(serverKey)).toEqual(encode(clientKey));
 
             const serverSessionKeys = server.getSessionKeys();
-            const clientSessionKeys = server.getSessionKeys();
+            const clientSessionKeys = client.getSessionKeys();
 
             expect(encode(serverSessionKeys.tx)).not.toEqual(encode(serverSessionKeys.rx));
             expect(encode(serverSessionKeys.tx)).toEqual(encode(clientSessionKeys.rx));

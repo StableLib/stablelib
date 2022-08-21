@@ -656,8 +656,7 @@ export function serverSessionKeysFromSharedKey(sharedKey: Uint8Array,
     if (state.digestLength !== SESSION_KEY_LENGTH * 2) {
         throw new Error("X25519: incorrect digest length");
     }
-    let h = new Uint8Array(0);
-    state.update(sharedKey).update(theirPublicKey).update(myPublicKey).finish(h);
+    const h = state.update(sharedKey).update(theirPublicKey).update(myPublicKey).digest();
 
     return {
         tx: h.subarray(0, SESSION_KEY_LENGTH),
@@ -676,8 +675,7 @@ export function clientSessionKeysFromSharedKey(sharedKey: Uint8Array,
     if (state.digestLength !== SESSION_KEY_LENGTH * 2) {
         throw new Error("X25519: incorrect digest length");
     }
-    let h = new Uint8Array(0);
-    state.update(sharedKey).update(myPublicKey).update(theirPublicKey).finish(h);
+    const h = state.update(sharedKey).update(myPublicKey).update(theirPublicKey).digest();
 
     return {
         rx: h.subarray(0, SESSION_KEY_LENGTH),
