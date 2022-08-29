@@ -1,0 +1,33 @@
+{
+  "name": "@stablelib/x25519-session",
+  "version": "1.0.3",
+  "description": "libsodium compatible session keys generation based on X25519 key agreement",
+  "main": "./lib/x25519-session.js",
+  "typings": "./lib/x25519-session.d.ts",
+  "author": "Dmitry Chestnykh",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/StableLib/stablelib"
+  },
+  "homepage": "https://github.com/StableLib/stablelib/tree/master/packages/x25519-session",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "bench": "node ./lib/x25519-session.bench.js"
+  },
+  "dependencies": {
+    "@stablelib/keyagreement": "^1.0.1",
+    "@stablelib/random": "^1.0.2",
+    "@stablelib/wipe": "^1.0.1",
+    "@stablelib/x25519": "^1.0.3",
+    "@stablelib/blake2b": "^1.0.1"
+  },
+  "devDependencies": {
+    "@stablelib/benchmark": "^1.0.1",
+    "@stablelib/hex": "^1.0.1",
+    "@stablelib/hash": "^1.0.1"
+  }
+}
