@@ -83,7 +83,7 @@ export class X25519Session implements KeyAgreement {
         }
         const keyPair = generateKeyPairFromSeed(this._seed);
         this._sharedKey = sharedKey(keyPair.secretKey, offerMsg);
-        this._sessionKeys = clientSessionKeysFromSharedKey(this.getSharedKey(), keyPair.publicKey, offerMsg);
+        this._sessionKeys = clientSessionKeysFromSharedKey(this._sharedKey, keyPair.publicKey, offerMsg);
         wipe(keyPair.secretKey);
         return keyPair.publicKey;
     }
@@ -99,7 +99,7 @@ export class X25519Session implements KeyAgreement {
             throw new Error("X25519Session: finish was already called");
         }
         this._sharedKey = sharedKey(this._keyPair.secretKey, acceptMsg);
-        this._sessionKeys = serverSessionKeysFromSharedKey(this.getSharedKey(), this._keyPair.publicKey, acceptMsg);
+        this._sessionKeys = serverSessionKeysFromSharedKey(this._sharedKey, this._keyPair.publicKey, acceptMsg);
         return this;
     }
 
