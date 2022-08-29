@@ -6,14 +6,8 @@ import { encode } from "@stablelib/hex";
 import { X25519Session } from './keyagreement';
 
 // For testing with generated test vectors, instead of proper PRNG
-// use the same deterministic generator that generates byte sequences
+// use the deterministic generator that generates byte sequences
 // of 0, 1, 2, 3, ... that was used to create vectors.
-//
-// Note: in the original implementation to generate test vectors
-// poly.c, crypto_stream_chacha20 needs to be replaced with randombytes,
-// and randombytes must generate the same sequence as this. It also
-// needs to be reset to 0 for server part of handshake and 64 for
-// client part, like in the test below.
 class BadSource implements RandomSource {
     isAvailable = true;
 
