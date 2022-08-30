@@ -10,7 +10,7 @@
     "bench": "lerna run bench",
     "lint": "tslint packages/**/*.ts",
     "publish-all": "lerna publish",
-    "docs": "typedoc --mode modules --disableOutputCheck --out ../stablelib.github.io/ --ignoreCompilerErrors --excludeExternals --excludePrivate --excludeNotExported --externalPattern '**/node_modules/**' --exclude '**/*.+(test|test-data|bench).ts' --name 'StableLib' --module commonjs ."
+    "docs": "NODE_OPTIONS=\"--max_old_space_size=8192\" typedoc --out ../stablelib.github.io/ --excludeExternals --excludePrivate --externalPattern '**/node_modules/**' --exclude '**/*.+(test|test-data|bench).ts' --name 'StableLib' --entryPointStrategy packages ./packages/*"
   },
   "author": "Dmitry Chestnykh",
   "license": "MIT",
