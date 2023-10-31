@@ -281,3 +281,29 @@ export const maxDecodedLength = (length: number) =>
 
 export const decodedLength = (s: string) =>
     stdCoder.decodedLength(s);
+
+
+// BEGIN API Compatibility with base64-js
+
+/**
+ * Alias for ``decodedLength``, included for ``base64-js`` API compatibility
+ */
+export function byteLength(b64: string): number {
+    return stdCoder.decodedLength(b64);
+}
+
+/**
+ * Alias for ``decode``, included for ``base64-js`` API compatibility
+ */
+export function toByteArray(b64: string): Uint8Array {
+    return stdCoder.decode(b64);
+}
+
+/**
+ * Alias for ``encode``, included for ``base64-js`` API compatibility
+ */
+export function fromByteArray(uint8: Uint8Array): string {
+    return stdCoder.encode(uint8);
+}
+
+// END API Compatibility with base64-js
