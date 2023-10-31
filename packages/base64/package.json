@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/base64",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Base64 encoding and decoding",
   "main": "./lib/base64.js",
   "typings": "./lib/base64.d.ts",
