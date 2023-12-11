@@ -13,7 +13,8 @@ describe("utf8", () => {
             "abcгдеjzy123",
             "こんにちは世界",
             "test 测试 тест",
-            "𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡"
+            "𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡",
+            "❤️"
         ];
         const encoded = tests.map(encode);
         const decoded = encoded.map(decode);

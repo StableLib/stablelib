@@ -14,32 +14,30 @@ const INVALID_UTF8 = "utf8: invalid source encoding";
  */
 export function encode(s: string): Uint8Array {
     // Calculate result length and allocate output array.
-    // encodedLength() also validates string and throws errors,
+    // encodedLength() validates string and throws errors,
     // so we don't need repeat validation here.
     const arr = new Uint8Array(encodedLength(s));
 
     let pos = 0;
     for (let i = 0; i < s.length; i++) {
         let c = s.charCodeAt(i);
+        if (c >= 0xd800 && c <= 0xdbff) {
+            c = ((c - 0xd800) << 10) + (s.charCodeAt(++i) - 0xdc00) + 0x10000;
+        }
         if (c < 0x80) {
             arr[pos++] = c;
         } else if (c < 0x800) {
-            arr[pos++] = 0xc0 | c >> 6;
-            arr[pos++] = 0x80 | c & 0x3f;
-        } else if (c < 0xd800) {
-            arr[pos++] = 0xe0 | c >> 12;
-            arr[pos++] = 0x80 | (c >> 6) & 0x3f;
-            arr[pos++] = 0x80 | c & 0x3f;
+            arr[pos++] = 0xc0 | (c >> 6);
+            arr[pos++] = 0x80 | (c & 0x3f);
+        } else if (c < 0x10000) {
+            arr[pos++] = 0xe0 | (c >> 12);
+            arr[pos++] = 0x80 | ((c >> 6) & 0x3f);
+            arr[pos++] = 0x80 | (c & 0x3f);
         } else {
-            i++; // get one more character
-            c = (c & 0x3ff) << 10;
-            c |= s.charCodeAt(i) & 0x3ff;
-            c += 0x10000;
-
-            arr[pos++] = 0xf0 | c >> 18;
-            arr[pos++] = 0x80 | (c >> 12) & 0x3f;
-            arr[pos++] = 0x80 | (c >> 6) & 0x3f;
-            arr[pos++] = 0x80 | c & 0x3f;
+            arr[pos++] = 0xf0 | (c >> 18);
+            arr[pos++] = 0x80 | ((c >> 12) & 0x3f);
+            arr[pos++] = 0x80 | ((c >> 6) & 0x3f);
+            arr[pos++] = 0x80 | (c & 0x3f);
         }
     }
     return arr;
@@ -52,21 +50,29 @@ export function encode(s: string): Uint8Array {
 export function encodedLength(s: string): number {
     let result = 0;
     for (let i = 0; i < s.length; i++) {
-        const c = s.charCodeAt(i);
+        let c = s.charCodeAt(i);
+
+        if (c >= 0xd800 && c <= 0xdbff) {
+            // surrogate pair
+            if (i === s.length - 1) {
+                throw new Error(INVALID_UTF16);
+            }
+            i++;
+            const c2 = s.charCodeAt(i);
+            if (c2 < 0xdc00 || c2 > 0xdfff) {
+                throw new Error(INVALID_UTF16);
+            }
+            c = ((c - 0xd800) << 10) + (c2 - 0xdc00) + 0x10000;
+        }
+
         if (c < 0x80) {
             result += 1;
         } else if (c < 0x800) {
             result += 2;
-        } else if (c < 0xd800) {
+        } else if (c < 0x10000) {
             result += 3;
-        } else if (c <= 0xdfff) {
-            if (i >= s.length - 1) {
-                throw new Error(INVALID_UTF16);
-            }
-            i++; // "eat" next character
-            result += 4;
         } else {
-            throw new Error(INVALID_UTF16);
+            result += 4;
         }
     }
     return result;
