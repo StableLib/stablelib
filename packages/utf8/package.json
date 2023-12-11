@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/utf8",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "UTF-8 encoder and decoder",
   "main": "./lib/utf8.js",
   "typings": "./lib/utf8.d.ts",
