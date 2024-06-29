@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/cmac",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "CMAC message authentication code",
   "main": "./lib/cmac.js",
   "type": "module",
@@ -20,13 +20,13 @@
     "bench": "node ./lib/cmac.bench.js"
   },
   "dependencies": {
-    "@stablelib/blockcipher": "^1.0.1",
-    "@stablelib/constant-time": "^1.0.1",
-    "@stablelib/wipe": "^1.0.1"
+    "@stablelib/blockcipher": "^2.0.0",
+    "@stablelib/constant-time": "^2.0.0",
+    "@stablelib/wipe": "^2.0.0"
   },
   "devDependencies": {
-    "@stablelib/aes": "^1.0.1",
-    "@stablelib/benchmark": "^1.0.1",
-    "@stablelib/hex": "^1.0.1"
+    "@stablelib/aes": "^2.0.0",
+    "@stablelib/benchmark": "^2.0.0",
+    "@stablelib/hex": "^2.0.0"
   }
 }

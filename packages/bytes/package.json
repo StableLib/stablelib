@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/bytes",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Byte utilities",
   "main": "./lib/bytes.js",
   "type": "module",
@@ -20,6 +20,6 @@
     "bench": "node ./lib/bytes.bench.js"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^1.0.1"
+    "@stablelib/benchmark": "^2.0.0"
   }
 }

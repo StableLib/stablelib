@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/random",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Cryptographically-secure pseudorandom number generator",
   "main": "./lib/random.js",
   "type": "module",
@@ -19,12 +19,12 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@stablelib/binary": "^1.0.1",
-    "@stablelib/wipe": "^1.0.1"
+    "@stablelib/binary": "^2.0.0",
+    "@stablelib/wipe": "^2.0.0"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^1.0.1",
-    "@stablelib/hex": "^1.0.1"
+    "@stablelib/benchmark": "^2.0.0",
+    "@stablelib/hex": "^2.0.0"
   },
   "browser": {
     "crypto": false

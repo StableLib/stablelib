@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/sha224",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "SHA-224 cryptographic hash function",
   "main": "./lib/sha224.js",
   "type": "module",
@@ -19,9 +19,9 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@stablelib/sha256": "^1.0.1"
+    "@stablelib/sha256": "^2.0.0"
   },
   "devDependencies": {
-    "@stablelib/base64": "^1.0.1"
+    "@stablelib/base64": "^2.0.0"
   }
 }

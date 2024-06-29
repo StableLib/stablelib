@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/wipe",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Wipes bytes and arrays (sets all values to zero)",
   "main": "./lib/wipe.js",
   "type": "module",

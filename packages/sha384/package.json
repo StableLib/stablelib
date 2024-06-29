@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/sha384",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "SHA-384 cryptographic hash function",
   "main": "./lib/sha384.js",
   "type": "module",
@@ -19,9 +19,9 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@stablelib/sha512": "^1.0.1"
+    "@stablelib/sha512": "^2.0.0"
   },
   "devDependencies": {
-    "@stablelib/base64": "^1.0.1"
+    "@stablelib/base64": "^2.0.0"
   }
 }

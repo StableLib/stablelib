@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/xchacha20",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "XChaCha20 stream cipher",
   "main": "./lib/xchacha20.js",
   "type": "module",
@@ -27,12 +27,12 @@
     "bench": "node ./lib/xchacha20.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^1.0.1",
-    "@stablelib/chacha": "^1.0.1",
-    "@stablelib/wipe": "^1.0.1"
+    "@stablelib/binary": "^2.0.0",
+    "@stablelib/chacha": "^2.0.0",
+    "@stablelib/wipe": "^2.0.0"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^1.0.1",
-    "@stablelib/hex": "^1.0.1"
+    "@stablelib/benchmark": "^2.0.0",
+    "@stablelib/hex": "^2.0.0"
   }
 }

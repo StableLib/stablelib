@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/constant-time",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Algorithmically constant-time utility functions",
   "main": "./lib/constant-time.js",
   "type": "module",

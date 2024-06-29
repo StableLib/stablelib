@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/aes",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "AES block cipher (Advanced Encryption Standard)",
   "main": "./lib/aes.js",
   "type": "module",
@@ -20,12 +20,12 @@
     "bench": "node ./lib/aes.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^1.0.1",
-    "@stablelib/blockcipher": "^1.0.1",
-    "@stablelib/wipe": "^1.0.1"
+    "@stablelib/binary": "^2.0.0",
+    "@stablelib/blockcipher": "^2.0.0",
+    "@stablelib/wipe": "^2.0.0"
   },
   "devDependencies": {
-    "@stablelib/benchmark": "^1.0.1",
-    "@stablelib/hex": "^1.0.1"
+    "@stablelib/benchmark": "^2.0.0",
+    "@stablelib/hex": "^2.0.0"
   }
 }
