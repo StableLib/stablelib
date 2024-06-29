@@ -8,12 +8,11 @@
 /**
  * Concatenates byte arrays.
  */
-export function concat(...arrays: Uint8Array[]): Uint8Array;
-export function concat(): Uint8Array {
+export function concat(...arrays: Uint8Array[]): Uint8Array {
     // Calculate sum of lengths of all arrays.
     let totalLength = 0;
-    for (let i = 0; i < arguments.length; i++) {
-        totalLength += arguments[i].length;
+    for (let i = 0; i < arrays.length; i++) {
+        totalLength += arrays[i].length;
     }
 
     // Allocate new array of calculated length.
@@ -21,8 +20,8 @@ export function concat(): Uint8Array {
 
     // Copy all arrays into result.
     let offset = 0;
-    for (let i = 0; i < arguments.length; i++) {
-        const arg = arguments[i];
+    for (let i = 0; i < arrays.length; i++) {
+        const arg = arrays[i];
         result.set(arg, offset);
         offset += arg.length;
     }
