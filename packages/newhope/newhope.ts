@@ -26,9 +26,10 @@
 // Reimplemented from the public domain reference implementation
 // at https://github.com/tpoeppelmann/newhope.
 
-import { RandomSource } from "@stablelib/random";
+import type { RandomSource } from "@stablelib/random";
 import { SHAKE128, SHA3256 } from "@stablelib/sha3";
-import { SeedExpander, CustomNewHope } from "./custom";
+import type { SeedExpander} from "./custom";
+import { CustomNewHope } from "./custom";
 
 export {
     PUBLIC_SEED_LENGTH,

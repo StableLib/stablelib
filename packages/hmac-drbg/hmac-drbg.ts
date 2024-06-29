@@ -5,9 +5,10 @@
  * Package hmac-drbg implements NIST's HMAC-based digital random byte generator.
  */
 
-import { defaultRandomSource, RandomSource } from "@stablelib/random";
+import type { RandomSource } from "@stablelib/random";
+import { defaultRandomSource } from "@stablelib/random";
 import { HMAC } from "@stablelib/hmac";
-import { Hash } from "@stablelib/hash";
+import type { Hash } from "@stablelib/hash";
 import { SHA256 } from "@stablelib/sha256";
 import { wipe } from "@stablelib/wipe";
 

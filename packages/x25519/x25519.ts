@@ -5,7 +5,8 @@
  * Package x25519 implements X25519 key agreement.
  */
 
-import { randomBytes, RandomSource } from "@stablelib/random";
+import type { RandomSource } from "@stablelib/random";
+import { randomBytes } from "@stablelib/random";
 import { wipe } from "@stablelib/wipe";
 
 export const PUBLIC_KEY_LENGTH = 32;

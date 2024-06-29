@@ -5,8 +5,8 @@
  * Package gcm implements GCM mode for block ciphers.
  */
 
-import { AEAD } from "@stablelib/aead";
-import { BlockCipher } from "@stablelib/blockcipher";
+import type { AEAD } from "@stablelib/aead";
+import type { BlockCipher } from "@stablelib/blockcipher";
 import { CTR } from "@stablelib/ctr";
 import { wipe } from "@stablelib/wipe";
 import { writeUint32BE } from "@stablelib/binary";

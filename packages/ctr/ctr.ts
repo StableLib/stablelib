@@ -5,7 +5,7 @@
  * Package ctr implements counter cipher mode for block ciphers.
  */
 
-import { BlockCipher } from "@stablelib/blockcipher";
+import type { BlockCipher } from "@stablelib/blockcipher";
 import { wipe } from "@stablelib/wipe";
 
 /**

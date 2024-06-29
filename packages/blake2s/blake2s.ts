@@ -5,7 +5,7 @@
  * Package blake2s implements BLAKE2s cryptographic hash function.
  */
 
-import { SerializableHash } from "@stablelib/hash";
+import type { SerializableHash } from "@stablelib/hash";
 import { readUint32LE, writeUint32LE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";
 

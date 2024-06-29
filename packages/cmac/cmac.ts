@@ -5,7 +5,7 @@
  * Package cmac implements CMAC message authentication function.
  */
 
-import { BlockCipher } from "@stablelib/blockcipher";
+import type { BlockCipher } from "@stablelib/blockcipher";
 import { select } from "@stablelib/constant-time";
 import { wipe } from "@stablelib/wipe";
 

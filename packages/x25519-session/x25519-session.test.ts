@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { RandomSource } from "@stablelib/random";
+import type { RandomSource } from "@stablelib/random";
 import { encode } from "@stablelib/hex";
 import { X25519Session } from './keyagreement';
 

@@ -5,7 +5,7 @@
  * Package chacha20poly1305 implements ChaCha20-Poly1305 AEAD.
  */
 
-import { AEAD } from "@stablelib/aead";
+import type { AEAD } from "@stablelib/aead";
 import { streamXOR, stream } from "@stablelib/chacha";
 import { Poly1305 } from "@stablelib/poly1305";
 import { wipe } from "@stablelib/wipe";

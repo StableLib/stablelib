@@ -5,7 +5,7 @@
  * Package xchacha20poly1305 implements XChaCha20-Poly1305 AEAD.
  */
 
-import { AEAD } from "@stablelib/aead";
+import type { AEAD } from "@stablelib/aead";
 import { hchacha } from "@stablelib/xchacha20";
 import { ChaCha20Poly1305 } from "@stablelib/chacha20poly1305";
 import { wipe } from "@stablelib/wipe";

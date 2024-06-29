@@ -5,7 +5,7 @@
  * Package pbkdf2 implements PBKDF2 password-based key derivation function.
  */
 
-import { SerializableHash } from "@stablelib/hash";
+import type { SerializableHash } from "@stablelib/hash";
 import { HMAC } from "@stablelib/hmac";
 import { writeUint32BE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";

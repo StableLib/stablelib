@@ -4,8 +4,9 @@
 import { describe, expect, it } from 'vitest';
 import * as hex from "@stablelib/hex";
 import { concat } from "@stablelib/bytes";
+import type { TaggedEncoder, TaggedDecoder} from "./cbor";
 import {
-    encode, decode, Simple, Tagged, TaggedEncoder, TaggedDecoder,
+    encode, decode, Simple, Tagged,
     DEFAULT_TAGGED_ENCODERS, DEFAULT_TAGGED_DECODERS
 } from "./cbor";
 

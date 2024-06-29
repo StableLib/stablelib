@@ -5,7 +5,8 @@
  * Package ed25519 implements Ed25519 public-key signature algorithm.
  */
 
-import { randomBytes, RandomSource } from "@stablelib/random";
+import type { RandomSource } from "@stablelib/random";
+import { randomBytes } from "@stablelib/random";
 import { hash, SHA512 } from "@stablelib/sha512";
 import { wipe } from "@stablelib/wipe";
 

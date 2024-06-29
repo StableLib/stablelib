@@ -12,8 +12,6 @@ export interface Results {
     bytesPerSecond?: number;
 }
 
-declare var process: any;
-
 const getTime = (() => {
     if (typeof performance !== "undefined") {
         return performance.now.bind(performance);

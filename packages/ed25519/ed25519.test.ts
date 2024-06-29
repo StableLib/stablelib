@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { encode, decode } from "@stablelib/base64";
 import { sign, verify, generateKeyPair, extractPublicKeyFromSecretKey, convertPublicKeyToX25519, convertSecretKeyToX25519 } from "./ed25519";
 
-/* tslint:disable */
+/* eslint:disable */
 const testVectors = [
     [
         "nWGxne/9WmC6hEr0kuwsxERJxWl7MmkZcDusAxyuf2DXWpgBgrEKt9VL/tPJZAc6DuFy89qmIyWvAhpo9wdRGg==",
@@ -5128,7 +5128,7 @@ const testVectors = [
         "CqtMkAUBs+JNfN9GYzJqOoffXkhDssvbZ8v25GD+w1CqU3GxUI+fRSjs6iPENtlLXo/NT2geMKasAKlwShiKAw=="
     ]
 ];
-/* tslint:enable */
+/* enlint:enable */
 
 describe("ed25519", () => {
     it("should sign and open test vectors", () => {

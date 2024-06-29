@@ -1,16 +1,19 @@
 // Copyright (C) 2020 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { KeyAgreement } from "@stablelib/keyagreement";
-import { randomBytes, RandomSource } from "@stablelib/random";
+import type { KeyAgreement } from "@stablelib/keyagreement";
+import type { RandomSource } from "@stablelib/random";
+import { randomBytes } from "@stablelib/random";
 import { wipe } from "@stablelib/wipe";
+import type {
+    KeyPair } from "@stablelib/x25519";
 import { PUBLIC_KEY_LENGTH,
     SECRET_KEY_LENGTH,
     SHARED_KEY_LENGTH,
     generateKeyPairFromSeed,
-    sharedKey,
-    KeyPair } from "@stablelib/x25519";
-import { SessionKeys, clientSessionKeysFromSharedKey, serverSessionKeysFromSharedKey } from "./x25519-session";
+    sharedKey } from "@stablelib/x25519";
+import type { SessionKeys} from "./x25519-session";
+import { clientSessionKeysFromSharedKey, serverSessionKeysFromSharedKey } from "./x25519-session";
 
 /** Constants for key agreement */
 export const OFFER_MESSAGE_LENGTH = PUBLIC_KEY_LENGTH;

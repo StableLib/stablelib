@@ -3,7 +3,7 @@
 
 import { AES } from "@stablelib/aes";
 import { writeUint64BE } from "@stablelib/binary";
-import { BlockCipher } from "@stablelib/blockcipher";
+import type { BlockCipher } from "@stablelib/blockcipher";
 import { wipe } from "@stablelib/wipe";
 import { compare } from "@stablelib/constant-time";
 

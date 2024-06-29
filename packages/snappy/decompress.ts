@@ -136,7 +136,7 @@ export function decompress(src: Uint8Array, dst?: Uint8Array): Uint8Array {
                 s += length;
                 continue;
             }
-            case TAG_COPY1: { // tslint:disable-line
+            case TAG_COPY1: {
                 s += 2;
                 if (s > slen) {
                     throw new Error(CORRUPT);
@@ -145,7 +145,7 @@ export function decompress(src: Uint8Array, dst?: Uint8Array): Uint8Array {
                 offset = ((src[s - 2] & 0xe0) << 3) | (src[s - 1]);
                 break;
             }
-            case TAG_COPY2: { // tslint:disable-line
+            case TAG_COPY2: {
                 s += 3;
                 if (s > slen) {
                     throw new Error(CORRUPT);
@@ -154,7 +154,7 @@ export function decompress(src: Uint8Array, dst?: Uint8Array): Uint8Array {
                 offset = (src[s - 2]) | ((src[s - 1]) << 8);
                 break;
             }
-            case TAG_COPY4: { // tslint:disable-line
+            case TAG_COPY4: {
                 s += 5;
                 if (s > slen) {
                     throw new Error(CORRUPT);

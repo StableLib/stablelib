@@ -6,7 +6,7 @@
  * cryptographically secure random byte generator.
  */
 
-import { RandomSource } from "./source";
+import type { RandomSource } from "./source";
 import { SystemRandomSource } from "./source/system";
 import { readUint32LE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";

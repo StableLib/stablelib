@@ -4,7 +4,8 @@
 import { streamXOR, stream } from "@stablelib/xsalsa20";
 import { oneTimeAuth, equal as authEqual } from "@stablelib/poly1305";
 import { wipe } from "@stablelib/wipe";
-import { randomBytes, RandomSource } from "@stablelib/random";
+import type { RandomSource } from "@stablelib/random";
+import { randomBytes } from "@stablelib/random";
 
 export function secretBox(key: Uint8Array, nonce: Uint8Array, data: Uint8Array): Uint8Array {
     if (nonce.length !== 24) {

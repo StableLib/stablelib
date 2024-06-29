@@ -11,8 +11,6 @@ report("Base64 encode", benchmark(() => encode(buf), buf.length));
 // Decode benchmark reports MiB/s for decoded MiB, not input.
 report("Base64 decode", benchmark(() => decode(encBuf), buf.length));
 
-declare var Buffer: any;
-
 if (typeof Buffer !== "undefined") {
     // For comparison with Node.js buffer speed.
     const nodeBuf = Buffer.from(buf);

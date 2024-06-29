@@ -1,5 +1,6 @@
-import { Hash } from "@stablelib/hash";
-import { BLAKE2s, DIGEST_LENGTH, BLOCK_SIZE, Config } from "@stablelib/blake2s";
+import type { Hash } from "@stablelib/hash";
+import type { Config } from "@stablelib/blake2s";
+import { BLAKE2s, DIGEST_LENGTH, BLOCK_SIZE } from "@stablelib/blake2s";
 import { wipe } from "@stablelib/wipe";
 
 /**

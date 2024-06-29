@@ -5,7 +5,8 @@
  * Package chacha-drbg implements ChaCha-based digital random byte generator.
  */
 
-import { defaultRandomSource, RandomSource } from "@stablelib/random";
+import type { RandomSource } from "@stablelib/random";
+import { defaultRandomSource } from "@stablelib/random";
 import { streamXOR, stream } from "@stablelib/chacha";
 import { wipe } from "@stablelib/wipe";
 

@@ -5,7 +5,8 @@
  * Package uuid implements UUID generator.
  */
 
-import { randomBytes, RandomSource } from "@stablelib/random";
+import type { RandomSource } from "@stablelib/random";
+import { randomBytes } from "@stablelib/random";
 import { encode } from "@stablelib/hex";
 import { wipe } from "@stablelib/wipe";
 

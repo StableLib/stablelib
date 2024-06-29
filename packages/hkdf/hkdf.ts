@@ -5,7 +5,7 @@
  * Package hkdf implements HKDF key derivation function.
  */
 
-import { Hash } from "@stablelib/hash";
+import type { Hash } from "@stablelib/hash";
 import { HMAC, hmac } from "@stablelib/hmac";
 import { wipe } from "@stablelib/wipe";
 

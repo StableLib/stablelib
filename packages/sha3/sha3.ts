@@ -30,7 +30,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { SerializableHash } from "@stablelib/hash";
+import type { SerializableHash } from "@stablelib/hash";
 import { readUint32LE, writeUint32LE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";
 

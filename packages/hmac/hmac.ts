@@ -5,7 +5,8 @@
  * Package hmac implements HMAC algorithm.
  */
 
-import { Hash, SerializableHash, isSerializableHash } from "@stablelib/hash";
+import type { Hash, SerializableHash} from "@stablelib/hash";
+import { isSerializableHash } from "@stablelib/hash";
 import { equal as constantTimeEqual } from "@stablelib/constant-time";
 import { wipe } from "@stablelib/wipe";
 

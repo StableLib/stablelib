@@ -15,9 +15,10 @@
  */
 
 
-import { Hash } from "@stablelib/hash";
+import type { Hash } from "@stablelib/hash";
 import { SHA256 } from "@stablelib/sha256";
-import { randomBytes, RandomSource } from "@stablelib/random";
+import type { RandomSource } from "@stablelib/random";
+import { randomBytes } from "@stablelib/random";
 import { add, mul, div } from "@stablelib/gf256";
 import { wipe } from "@stablelib/wipe";
 import { equal } from "@stablelib/constant-time";

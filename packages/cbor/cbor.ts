@@ -190,8 +190,8 @@ export class Simple {
     constructor(public value: number) { }
 }
 
-// tslint:disable-next-line: max-line-length
-const ISO_DATE_RX = /^([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)(\.[0-9]+)?(([Zz])|([\+|\-]([01][0-9]|2[0-3]):[0-5][0-9]))$/;
+// eslint:disable-next-line: max-line-length
+const ISO_DATE_RX = /^([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)(\.[0-9]+)?(([Zz])|([+|-]([01][0-9]|2[0-3]):[0-5][0-9]))$/;
 
 /**
  * Specifies options for encoder.
@@ -395,7 +395,7 @@ export class Encoder {
         return this;
     }
 
-    encodeObject(value: Object): this {
+    encodeObject(value: object | null): this {
         if (value === null) {
             return this.encodeNull();
         } else if (Array.isArray(value)) {

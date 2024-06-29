@@ -16,7 +16,7 @@ export const BLOCK_SIZE = 128;
  * SHA-512/256 is the same algorithm as SHA-512, but with
  * different initialization vectors and digest length.
  */
-// tslint:disable-next-line
+// eslint:disable-next-line
 export class SHA512_256 extends SHA512 {
 
     readonly digestLength = DIGEST_LENGTH;

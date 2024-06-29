@@ -22,13 +22,14 @@
 // Reimplemented from the public domain reference implementation
 // at https://github.com/tpoeppelmann/newhope.
 
-import { randomBytes, RandomSource } from "@stablelib/random";
-import { Hash } from "@stablelib/hash";
+import type { RandomSource } from "@stablelib/random";
+import { randomBytes } from "@stablelib/random";
+import type { Hash } from "@stablelib/hash";
 import { readUint16LE, readUint32LE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";
 import { concat } from "@stablelib/bytes";
 import { stream } from "@stablelib/chacha";
-import { KeyAgreement } from "@stablelib/keyagreement";
+import type { KeyAgreement } from "@stablelib/keyagreement";
 
 export interface SeedExpander {
     stream(out: Uint8Array): void;

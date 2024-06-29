@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { KeyAgreement } from "./keyagreement";
+import type { KeyAgreement } from "./keyagreement";
 import { concat } from "@stablelib/bytes";
 
 /**

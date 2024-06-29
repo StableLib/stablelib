@@ -1,8 +1,9 @@
 // Copyright (C) 2020 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { KeyAgreement } from "@stablelib/keyagreement";
-import { randomBytes, RandomSource } from "@stablelib/random";
+import type { KeyAgreement } from "@stablelib/keyagreement";
+import type { RandomSource } from "@stablelib/random";
+import { randomBytes } from "@stablelib/random";
 import { wipe } from "@stablelib/wipe";
 import { PUBLIC_KEY_LENGTH, SECRET_KEY_LENGTH, SHARED_KEY_LENGTH, generateKeyPairFromSeed, sharedKey } from "./x25519";
 

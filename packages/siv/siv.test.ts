@@ -7,7 +7,7 @@ import { AES } from "@stablelib/aes";
 import { encode, decode } from "@stablelib/hex";
 import { byteSeq } from "@stablelib/benchmark";
 
-// tslint:disable
+// eslint:disable
 const vectors = [
     // A.1.  Deterministic Authenticated Encryption Example
     {
@@ -73,7 +73,7 @@ const vectors = [
         output: "85b81673 10038db7 dc4692c0 281ca358 68181b27 62f3c24f 2efa5fb8 0cb14351 6ce6c434 b898a6fd 8eb98a41 8842f51f 66fc67de 43ac185a 66dd7247 5bbb08",
     }
 ];
-// tslint:enable
+// eslint:enable
 
 describe("SIV (AES)", () => {
     const dec = (s: string) => decode(s.replace(/ /g, ""));

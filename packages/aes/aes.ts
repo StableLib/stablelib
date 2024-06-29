@@ -15,7 +15,7 @@
 // by Vincent Rijmen, Antoon Bosselaers, Paulo Barreto
 // (rijndael-alg-fst.c, 3.0, December 2000)
 
-import { BlockCipher } from "@stablelib/blockcipher";
+import type { BlockCipher } from "@stablelib/blockcipher";
 import { wipe } from "@stablelib/wipe";
 import { readUint32BE, writeUint32BE } from "@stablelib/binary";
 

@@ -5,7 +5,7 @@
  * Package siv implements SIV authenticated encryption.
  */
 
-import { BlockCipher, BlockCipherContructor } from "@stablelib/blockcipher";
+import type { BlockCipher, BlockCipherContructor } from "@stablelib/blockcipher";
 import { CMAC, dbl } from "@stablelib/cmac";
 import { CTR } from "@stablelib/ctr";
 import { wipe } from "@stablelib/wipe";

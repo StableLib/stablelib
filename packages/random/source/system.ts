@@ -10,7 +10,7 @@ export class SystemRandomSource implements RandomSource {
     isInstantiated = false;
 
     constructor() {
-        if (crypto !== undefined && 'getRandomValues' in crypto) {
+        if (typeof crypto !== "undefined" && 'getRandomValues' in crypto) {
             this.isAvailable = true;
             this.isInstantiated = true;
         }

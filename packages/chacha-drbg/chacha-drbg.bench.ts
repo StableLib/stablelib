@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { ChaChaDRBG } from "./chacha-drbg";
-import { RandomSource } from "@stablelib/random/source";
+import type { RandomSource } from "@stablelib/random/source";
 import { benchmark, report } from "@stablelib/benchmark";
 
 class XKCDSource implements RandomSource {
