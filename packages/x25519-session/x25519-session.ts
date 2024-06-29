@@ -7,7 +7,7 @@
 
 import { BLAKE2b } from "@stablelib/blake2b";
 import { Hash } from "@stablelib/hash";
-import { sharedKey, KeyPair } from "@stablelib/x25519";
+import { sharedKey as deriveSharedKey, KeyPair } from "@stablelib/x25519";
 export { X25519Session } from "./keyagreement";
 
 const SESSION_KEY_LENGTH = 32;
@@ -59,7 +59,7 @@ export function clientSessionKeysFromSharedKey(sharedKey: Uint8Array,
  * Generates server-side session encryption keys. Uses a key pair and a peer's public key to generate the shared key.
  */
 export function serverSessionKeys(myKeyPair: KeyPair, theirPublicKey: Uint8Array, hash: new() => Hash = BLAKE2b): SessionKeys {
-    const sk = sharedKey(myKeyPair.secretKey, theirPublicKey);
+    const sk = deriveSharedKey(myKeyPair.secretKey, theirPublicKey);
     return serverSessionKeysFromSharedKey(sk, myKeyPair.publicKey, theirPublicKey, hash);
 }
 
@@ -67,6 +67,6 @@ export function serverSessionKeys(myKeyPair: KeyPair, theirPublicKey: Uint8Array
  * Generates client-side session encryption keys. Uses a key pair and a peer's public key to generate the shared key.
  */
 export function clientSessionKeys(myKeyPair: KeyPair, theirPublicKey: Uint8Array, hash: new() => Hash = BLAKE2b): SessionKeys {
-    const sk = sharedKey(myKeyPair.secretKey, theirPublicKey);
+    const sk = deriveSharedKey(myKeyPair.secretKey, theirPublicKey);
     return clientSessionKeysFromSharedKey(sk, myKeyPair.publicKey, theirPublicKey, hash);
 }
