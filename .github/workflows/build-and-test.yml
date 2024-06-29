@@ -6,21 +6,19 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        node-version: [16.x, 17.x, 18.x]
+        node-version: [20.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: install
-      - name: Build
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: build
-      - name: Test
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: test
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build
+    - run: npm test

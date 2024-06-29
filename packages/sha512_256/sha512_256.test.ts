@@ -1,6 +1,7 @@
 // Copyright (C) 2017 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+import { describe, expect, it } from 'vitest';
 import { SHA512_256, hash } from "./sha512_256";
 import { encode } from "@stablelib/base64";
 

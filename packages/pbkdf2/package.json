@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "PBKDF2 (Password-based key derivation function)",
   "main": "./lib/pbkdf2.js",
+  "type": "module",
   "typings": "./lib/pbkdf2.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "test": "vitest run",
     "bench": "node ./lib/pbkdf2.bench.js"
   },
   "dependencies": {

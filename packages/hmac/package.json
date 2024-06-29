@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "Hash-based message authentication code (HMAC)",
   "main": "./lib/hmac.js",
+  "type": "module",
   "typings": "./lib/hmac.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "vitest run"
   },
   "dependencies": {
     "@stablelib/constant-time": "^1.0.1",

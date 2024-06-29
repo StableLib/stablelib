@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "Binary encoding and decoding",
   "main": "./lib/binary.js",
+  "type": "module",
   "typings": "./lib/binary.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "vitest run"
   },
   "dependencies": {
     "@stablelib/int": "^1.0.1"

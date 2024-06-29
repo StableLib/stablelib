@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "StableLib benchmarking suite",
   "main": "./lib/benchmark.js",
+  "type": "module",
   "typings": "./lib/benchmark.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",

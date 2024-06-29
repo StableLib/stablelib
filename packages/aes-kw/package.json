@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "AES KW (Advanced Encryption Standard Key Wrapping)",
   "main": "./lib/aes-kw.js",
+  "type": "module",
   "typings": "./lib/aes-kw.d.ts",
   "contributors": [
     {
@@ -22,7 +23,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "vitest run"
   },
   "dependencies": {
     "@stablelib/aes": "^1.0.1",

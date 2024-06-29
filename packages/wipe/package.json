@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "Wipes bytes and arrays (sets all values to zero)",
   "main": "./lib/wipe.js",
+  "type": "module",
   "typings": "./lib/wipe.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,6 +16,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "yarn build && jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "vitest run"
   }
 }

@@ -1,6 +1,7 @@
 // Copyright (C) 2017 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+import { describe, expect, it } from 'vitest';
 import * as utf8 from "@stablelib/utf8";
 import * as hex from "@stablelib/hex";
 import { byteSeq } from "@stablelib/benchmark";

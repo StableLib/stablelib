@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "AEAD interface declaration (authenticated encryption with associated data)",
   "main": "./lib/aead.js",
+  "type": "module",
   "typings": "./lib/aead.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",

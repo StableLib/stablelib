@@ -1,6 +1,7 @@
 // Copyright (C) 2017 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+import { describe, expect, it } from 'vitest';
 import * as hex from "@stablelib/hex";
 import { halfSipHash } from "./halfsiphash";
 

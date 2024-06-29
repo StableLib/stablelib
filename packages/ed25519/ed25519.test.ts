@@ -1,6 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+import { describe, expect, it } from 'vitest';
 import { encode, decode } from "@stablelib/base64";
 import { sign, verify, generateKeyPair, extractPublicKeyFromSecretKey, convertPublicKeyToX25519, convertSecretKeyToX25519 } from "./ed25519";
 

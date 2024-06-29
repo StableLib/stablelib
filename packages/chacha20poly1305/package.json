@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "ChaCha20-Poly1305 AEAD (RFC 7539)",
   "main": "./lib/chacha20poly1305.js",
+  "type": "module",
   "typings": "./lib/chacha20poly1305.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "test": "vitest run",
     "bench": "node ./lib/chacha20poly1305.bench.js"
   },
   "dependencies": {

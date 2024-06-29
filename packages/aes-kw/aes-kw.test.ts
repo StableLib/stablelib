@@ -1,6 +1,7 @@
 // Copyright (C) 2020 Tobias Looker
 // MIT License. See LICENSE file for details.
 
+import { describe, expect, it } from 'vitest';
 import { AESKW } from "./aes-kw";
 import { encode, decode } from "@stablelib/hex";
 

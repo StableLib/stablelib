@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "Floating-point number utilities",
   "main": "./lib/float.js",
+  "type": "module",
   "typings": "./lib/float.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,6 +16,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "vitest run"
   }
 }

@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "Salsa20 stream cipher",
   "main": "./lib/salsa20.js",
+  "type": "module",
   "typings": "./lib/salsa20.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "test": "vitest run",
     "bench": "node ./lib/salsa20.bench.js"
   },
   "dependencies": {

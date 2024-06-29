@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "HMAC DRBG (digital random byte generator, NIST)",
   "main": "./lib/hmac-drbg.js",
+  "type": "module",
   "typings": "./lib/hmac-drbg.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",

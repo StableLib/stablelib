@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "SHA-384 cryptographic hash function",
   "main": "./lib/sha384.js",
+  "type": "module",
   "typings": "./lib/sha384.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "vitest run"
   },
   "dependencies": {
     "@stablelib/sha512": "^1.0.1"

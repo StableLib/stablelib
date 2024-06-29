@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "XChaCha20-Poly1305 AEAD (draft-irtf-cfrg-xchacha-01)",
   "main": "./lib/xchacha20poly1305.js",
+  "type": "module",
   "typings": "./lib/xchacha20poly1305.d.ts",
   "contributors": [
     {
@@ -22,7 +23,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "test": "vitest run",
     "bench": "node ./lib/xchacha20poly1305.bench.js"
   },
   "dependencies": {

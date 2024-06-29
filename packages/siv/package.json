@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "Synthetic Initialization Vector (SIV) authenticated encryption",
   "main": "./lib/siv.js",
+  "type": "module",
   "typings": "./lib/siv.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "test": "vitest run",
     "bench": "node ./lib/siv.bench.js"
   },
   "dependencies": {

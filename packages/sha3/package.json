@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "SHA-3 cryptographic hash function",
   "main": "./lib/sha3.js",
+  "type": "module",
   "typings": "./lib/sha3.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "test": "vitest run",
     "bench": "node ./lib/sha3.bench.js"
   },
   "dependencies": {

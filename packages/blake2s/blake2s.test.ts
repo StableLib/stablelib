@@ -1,6 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+import { describe, expect, it } from 'vitest';
 import { BLAKE2s } from "./blake2s";
 import { encode } from "@stablelib/hex";
 

@@ -1,6 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+import { describe, expect, it } from 'vitest';
 import { XChaCha20Poly1305 } from "./xchacha20poly1305";
 import { encode, decode } from "@stablelib/hex";
 

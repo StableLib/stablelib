@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "Cryptographically-secure pseudorandom number generator",
   "main": "./lib/random.js",
+  "type": "module",
   "typings": "./lib/random.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json"
+    "test": "vitest run"
   },
   "dependencies": {
     "@stablelib/binary": "^1.0.1",

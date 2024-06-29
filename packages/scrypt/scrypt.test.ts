@@ -1,6 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+import { describe, expect, it } from 'vitest';
 import { encode as encodeBase64 } from "@stablelib/base64";
 import { encode as encodeUTF8 } from "@stablelib/utf8";
 import { deriveKey, deriveKeyNonBlocking } from "./scrypt";
@@ -246,21 +247,13 @@ describe("scrypt.deriveKey", () => {
         });
     });
 
-    it("should derive correct key (non-blocking)", (done) => {
-        function runTests(i: number) {
-            if (i === vectors.length) {
-                done();
-                return;
-            }
-            const v = vectors[i];
+    it("should derive correct key (non-blocking)", async () => {
+        for (const v of vectors) {
             const password = encodeUTF8(v.password);
             const salt = encodeUTF8(v.salt);
-            deriveKeyNonBlocking(password, salt, 1 << v.logN, v.r, v.p, v.dkLen).then((key: Uint8Array) => {
-                expect(encodeBase64(key)).toBe(v.result);
-                runTests(i + 1);
-            });
+            const key = await deriveKeyNonBlocking(password, salt, 1 << v.logN, v.r, v.p, v.dkLen)
+            expect(encodeBase64(key)).toBe(v.result);
         }
-        runTests(0);
     });
 
 });

@@ -1,19 +1,19 @@
 {
     "compilerOptions": {
-        "target": "es2015",
-        "module": "commonjs",
+        "target": "ES2022",
+        "module": "ES2022",
         "strict": true,
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,
         "removeComments": false,
         "preserveConstEnums": true,
-        "moduleResolution": "node",
+        "moduleResolution": "Bundler",
         "newLine": "LF",
         "sourceMap": true,
         "declaration": true,
         "lib": [
-            "es2015",
+            "es2022",
             "dom",
             "scripthost"
         ]

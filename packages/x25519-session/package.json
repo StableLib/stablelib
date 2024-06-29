@@ -3,6 +3,7 @@
   "version": "1.0.4",
   "description": "libsodium compatible session keys generation based on X25519 key agreement",
   "main": "./lib/x25519-session.js",
+  "type": "module",
   "typings": "./lib/x25519-session.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jasmine JASMINE_CONFIG_PATH=../../configs/jasmine.json",
+    "test": "vitest run",
     "bench": "node ./lib/x25519-session.bench.js"
   },
   "dependencies": {

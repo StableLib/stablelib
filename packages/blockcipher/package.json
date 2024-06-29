@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "Block cipher interface declaration",
   "main": "./lib/blockcipher.js",
+  "type": "module",
   "typings": "./lib/blockcipher.d.ts",
   "author": "Dmitry Chestnykh",
   "license": "MIT",

@@ -1,6 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+import { describe, expect, it } from 'vitest';
 import { NewHope } from "./newhope";
 import { stream } from "@stablelib/chacha";
 import * as hex from "@stablelib/hex";

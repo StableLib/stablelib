@@ -1,6 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
+import { describe, expect, it } from 'vitest';
 import { encode, decode, encodeURLSafe, decodeURLSafe } from "./base64";
 
 const testVectors: [number[], string][] = [
