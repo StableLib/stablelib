@@ -5,7 +5,7 @@
   "description": "Code library for TypeScript/JavaScript",
   "main": "index.js",
   "scripts": {
-    "build": "lerna bootstrap && lerna run build",
+    "build": "lerna bootstrap --no-ci && lerna run build",
     "test": "lerna run test",
     "bench": "lerna run bench",
     "lint": "eslint packages/**/*.ts",
