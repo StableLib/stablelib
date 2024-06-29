@@ -1,0 +1,7 @@
+{
+    "excludeExternals": true,
+    "excludePrivate": true,
+    "excludeInternal": true,
+    "readme": "none",
+    "theme": "default"
+}

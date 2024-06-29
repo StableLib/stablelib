@@ -1,0 +1,18 @@
+{
+    "out": "../stablelib.github.io/",
+    "excludeExternals": true,
+    "excludePrivate": true,
+    "excludeInternal": true,
+    "theme": "default",
+    "entryPointStrategy": "packages",
+    "externalPattern": [
+        "**/node_modules/**"
+    ],
+    "exclude": [
+        "**/*.+(test|test-data|bench).ts"
+    ],
+    "name": "StableLib",
+    "entryPoints": [
+        "./packages/*"
+    ]
+}

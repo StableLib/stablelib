@@ -1,0 +1,4 @@
+{
+    "extends": ["../../configs/typedoc.base.json"],
+    "entryPoints": ["xsalsa20.ts"]
+}

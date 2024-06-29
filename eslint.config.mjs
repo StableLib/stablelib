@@ -11,6 +11,7 @@ export default [
   {rules: {
     "prefer-const": "off",
     "prefer-spread": "off",
+    "no-constant-condition": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/consistent-type-imports": "error",
   }},

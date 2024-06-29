@@ -11,7 +11,7 @@
     "lint": "eslint packages/**/*.ts",
     "lintfix": "eslint packages/**/*.ts --fix",
     "publish-all": "lerna publish",
-    "docs": "NODE_OPTIONS=\"--max_old_space_size=8192\" typedoc --out ../stablelib.github.io/ --excludeExternals --excludePrivate --externalPattern '**/node_modules/**' --exclude '**/*.+(test|test-data|bench).ts' --name 'StableLib' --entryPointStrategy packages ./packages/*"
+    "docs": "typedoc"
   },
   "author": "Dmitry Chestnykh",
   "license": "MIT",
@@ -20,11 +20,11 @@
     "buffer": false
   },
   "devDependencies": {
-    "@eslint/js": "^9.6.0",
+    "@eslint/js": "^8.56.0",
     "@lerna/legacy-package-management": "^8.1.5",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.14.9",
-    "eslint": "^9.6.0",
+    "eslint": "^8.56.0",
     "globals": "^15.6.0",
     "lerna": "^8.1.5",
     "string-width": "4.2.3",
