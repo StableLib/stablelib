@@ -5157,6 +5157,13 @@ describe("ed25519", () => {
         expect(ok).toBe(true);
     });
 
+    it("should not sign with secret key of invalid length", () => {
+        const keys = generateKeyPair();
+        const message = new Uint8Array([1, 2, 3]);
+        const secretKey = keys.secretKey.subarray(0, 32);
+        expect(() => sign(secretKey, message)).toThrow();
+    });
+
     it("should extract public key from secret key", () => {
         const keys = generateKeyPair();
         const publicKey = extractPublicKeyFromSecretKey(keys.secretKey);

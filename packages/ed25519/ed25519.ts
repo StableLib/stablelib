@@ -739,6 +739,9 @@ function reduce(r: Uint8Array) {
 
 // Returns 64-byte signature of the message under the 64-byte secret key.
 export function sign(secretKey: Uint8Array, message: Uint8Array): Uint8Array {
+    if (secretKey.length !== SECRET_KEY_LENGTH) {
+        throw new Error(`ed25519: secret key must be ${SECRET_KEY_LENGTH} bytes`);
+    }
     const x = new Float64Array(64);
     const p = [gf(), gf(), gf(), gf()];
 
