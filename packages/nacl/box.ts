@@ -3,7 +3,7 @@
 
 import { scalarMult } from "@stablelib/x25519";
 import { hsalsa } from "@stablelib/xsalsa20";
-import { secretBox, openSecretBox } from "./secretbox";
+import { secretBox, openSecretBox } from "./secretbox.js";
 import { wipe } from "@stablelib/wipe";
 
 export { generateKeyPair } from "@stablelib/x25519";

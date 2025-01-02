@@ -9,7 +9,7 @@ import { BLAKE2b } from "@stablelib/blake2b";
 import type { Hash } from "@stablelib/hash";
 import type { KeyPair } from "@stablelib/x25519";
 import { sharedKey as deriveSharedKey } from "@stablelib/x25519";
-export { X25519Session } from "./keyagreement";
+export { X25519Session } from "./keyagreement.js";
 
 const SESSION_KEY_LENGTH = 32;
 

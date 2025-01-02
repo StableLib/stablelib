@@ -5,7 +5,7 @@ import type { KeyAgreement } from "@stablelib/keyagreement";
 import type { RandomSource } from "@stablelib/random";
 import { randomBytes } from "@stablelib/random";
 import { wipe } from "@stablelib/wipe";
-import { PUBLIC_KEY_LENGTH, SECRET_KEY_LENGTH, SHARED_KEY_LENGTH, generateKeyPairFromSeed, sharedKey } from "./x25519";
+import { PUBLIC_KEY_LENGTH, SECRET_KEY_LENGTH, SHARED_KEY_LENGTH, generateKeyPairFromSeed, sharedKey } from "./x25519.js";
 
 /** Constants for key agreement */
 export const OFFER_MESSAGE_LENGTH = PUBLIC_KEY_LENGTH;
