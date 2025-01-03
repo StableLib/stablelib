@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { encode, decode, encodeURLSafe, decodeURLSafe } from "./base64";
+import { encode, decode, encodeURLSafe, decodeURLSafe } from "./base64.js";
 
 const testVectors: [number[], string][] = [
     // https://tools.ietf.org/html/rfc4648

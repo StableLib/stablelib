@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { SHA3, SHA3256, SHAKE128, SHAKE256 } from "./sha3";
+import { SHA3, SHA3256, SHAKE128, SHAKE256 } from "./sha3.js";
 import { encode } from "@stablelib/base64";
 
 const vectors256 = [

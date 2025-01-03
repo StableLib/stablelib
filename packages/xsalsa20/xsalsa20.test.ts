@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { stream, hsalsa } from "./xsalsa20";
+import { stream, hsalsa } from "./xsalsa20.js";
 import { encode, decode } from "@stablelib/hex";
 
 describe("xsalsa20.hsalsa", () => {

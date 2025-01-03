@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { hash } from "./blake2s";
+import { hash } from "./blake2s.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 let buf1M = byteSeq(1024 << 10);

@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest';
 import {
     randomBytes, randomUint32, randomString, randomStringForEntropy
-} from "./random";
+} from "./random.js";
 
 describe("randomBytes", () => {
     it("should generate random bytes", () => {

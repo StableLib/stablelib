@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { encode, decode, Tagged } from "./cbor";
+import { encode, decode, Tagged } from "./cbor.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 const buf = byteSeq(128);

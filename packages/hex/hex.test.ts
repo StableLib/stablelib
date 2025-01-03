@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { encode, decode } from "./hex";
+import { encode, decode } from "./hex.js";
 
 let buf = new Uint8Array(256);
 for (let i = 0; i < buf.length; i++) {

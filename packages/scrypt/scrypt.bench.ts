@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { deriveKey, deriveKeyNonBlocking, Scrypt } from "./scrypt";
+import { deriveKey, deriveKeyNonBlocking, Scrypt } from "./scrypt.js";
 import { benchmarkPromise, benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 (async () => {

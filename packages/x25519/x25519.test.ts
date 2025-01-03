@@ -6,8 +6,8 @@ import type { RandomSource } from "@stablelib/random";
 import { encode, decode } from "@stablelib/hex";
 import {
     scalarMultBase, sharedKey, generateKeyPair
-} from "./x25519";
-import { X25519KeyAgreement } from './keyagreement';
+} from "./x25519.js";
+import { X25519KeyAgreement } from './keyagreement.js';
 
 describe("x25519.scalarMultBase", () => {
     it("should return correct result", () => {

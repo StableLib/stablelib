@@ -1,7 +1,7 @@
 // Copyright (C) 2017 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { SIV } from "./siv";
+import { SIV } from "./siv.js";
 import { AES } from "@stablelib/aes";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 

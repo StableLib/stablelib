@@ -1,7 +1,7 @@
 // Copyright (C) 2024 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { RandomSource } from "./";
+import type { RandomSource } from "./index.js";
 
 const QUOTA = 65536;
 

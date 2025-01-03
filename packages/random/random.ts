@@ -6,12 +6,12 @@
  * cryptographically secure random byte generator.
  */
 
-import type { RandomSource } from "./source";
-import { SystemRandomSource } from "./source/system";
+import type { RandomSource } from "./source/index.js";
+import { SystemRandomSource } from "./source/system.js";
 import { readUint32LE } from "@stablelib/binary";
 import { wipe } from "@stablelib/wipe";
 
-export { RandomSource } from "./source";
+export type { RandomSource } from "./source/index.js";
 
 export const defaultRandomSource = new SystemRandomSource();
 

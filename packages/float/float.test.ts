@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { isNegativeZero, fround } from "./float";
+import { isNegativeZero, fround } from "./float.js";
 
 describe("isNegativeZero", () => {
     it("should return true for -0", () => {

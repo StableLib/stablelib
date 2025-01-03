@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { NewHope } from "./newhope";
+import { NewHope } from "./newhope.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 const seed = byteSeq(32);

@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 import { describe, expect, it } from 'vitest';
-import { SystemRandomSource } from "./system";
+import { SystemRandomSource } from "./system.js";
 
 describe("SystemRandomSource.randomBytes", () => {
 

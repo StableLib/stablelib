@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { add, sub, mul, div } from "./gf256";
+import { add, sub, mul, div } from "./gf256.js";
 
 
 describe("add/sub", () => {

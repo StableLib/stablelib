@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { uuid } from "./uuid";
+import { uuid } from "./uuid.js";
 
 describe("uuid", () => {
     it("should generate UUID", () => {

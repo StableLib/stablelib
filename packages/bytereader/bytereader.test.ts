@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { ByteReader } from "./bytereader";
+import { ByteReader } from "./bytereader.js";
 
 describe("ByteReader", () => {
     it("should read bytes", () => {

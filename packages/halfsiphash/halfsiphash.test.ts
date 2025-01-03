@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 import * as hex from "@stablelib/hex";
-import { halfSipHash } from "./halfsiphash";
+import { halfSipHash } from "./halfsiphash.js";
 
 const testVectors = [
     "A9359F5B",

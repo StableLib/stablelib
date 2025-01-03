@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { encode, decode } from "./hex";
+import { encode, decode } from "./hex.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 let buf = byteSeq(1024);

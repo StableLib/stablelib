@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { CMAC } from "./cmac";
+import { CMAC } from "./cmac.js";
 import { AES } from "@stablelib/aes";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 

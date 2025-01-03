@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { select, lessOrEqual, compare, equal } from "./constant-time";
+import { select, lessOrEqual, compare, equal } from "./constant-time.js";
 
 describe("constant-time.select", () => {
     it("should select correct value", () => {

@@ -12,8 +12,8 @@ import { PUBLIC_KEY_LENGTH,
     SHARED_KEY_LENGTH,
     generateKeyPairFromSeed,
     sharedKey } from "@stablelib/x25519";
-import type { SessionKeys} from "./x25519-session";
-import { clientSessionKeysFromSharedKey, serverSessionKeysFromSharedKey } from "./x25519-session";
+import type { SessionKeys} from "./x25519-session.js";
+import { clientSessionKeysFromSharedKey, serverSessionKeysFromSharedKey } from "./x25519-session.js";
 
 /** Constants for key agreement */
 export const OFFER_MESSAGE_LENGTH = PUBLIC_KEY_LENGTH;

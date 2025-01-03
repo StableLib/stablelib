@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 import * as hex from "@stablelib/hex";
-import { encode, decode } from "./utf8";
+import { encode, decode } from "./utf8.js";
 
 describe("utf8", () => {
     it("should encode and decode strings", () => {

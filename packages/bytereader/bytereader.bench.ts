@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { ByteReader } from "./bytereader";
+import { ByteReader } from "./bytereader.js";
 import { report, benchmark, byteSeq } from "@stablelib/benchmark";
 
 const buf = byteSeq(8 << 10);

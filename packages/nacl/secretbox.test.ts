@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { secretBox, openSecretBox } from "./secretbox";
+import { secretBox, openSecretBox } from "./secretbox.js";
 import { encode, decode } from "@stablelib/hex";
 
 describe("secretBox", () => {

@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest';
 import { encode, decode } from "@stablelib/hex";
 import { concat } from "@stablelib/bytes";
-import { oneTimeAuth, Poly1305 } from "./poly1305";
+import { oneTimeAuth, Poly1305 } from "./poly1305.js";
 
 const testVectors = [
         {

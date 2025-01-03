@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { AES } from "./aes";
+import { AES } from "./aes.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 const key = byteSeq(32);

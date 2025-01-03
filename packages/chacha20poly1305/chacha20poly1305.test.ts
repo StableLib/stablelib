@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { ChaCha20Poly1305 } from "./chacha20poly1305";
+import { ChaCha20Poly1305 } from "./chacha20poly1305.js";
 import { encode, decode } from "@stablelib/hex";
 
 const testVectors = [

@@ -1,14 +1,15 @@
 {
     "compilerOptions": {
         "target": "ES2022",
-        "module": "ES2022",
+        "module": "node16",
         "strict": true,
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,
         "removeComments": false,
         "preserveConstEnums": true,
-        "moduleResolution": "Bundler",
+        "moduleResolution": "node16",
+        "verbatimModuleSyntax": true,
         "newLine": "LF",
         "sourceMap": true,
         "declaration": true,

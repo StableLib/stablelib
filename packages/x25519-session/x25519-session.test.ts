@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest';
 import type { RandomSource } from "@stablelib/random";
 import { encode } from "@stablelib/hex";
-import { X25519Session } from './keyagreement';
+import { X25519Session } from './keyagreement.js';
 
 // For testing with generated test vectors, instead of proper PRNG
 // use the deterministic generator that generates byte sequences

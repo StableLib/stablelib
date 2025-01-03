@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { deriveKey } from "./pbkdf2";
+import { deriveKey } from "./pbkdf2.js";
 import { SHA256 } from "@stablelib/sha256";
 import { SHA512 } from "@stablelib/sha512";
 import { SHA3512 } from "@stablelib/sha3";

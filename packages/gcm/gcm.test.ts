@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { AES } from "@stablelib/aes";
-import { GCM } from "./gcm";
+import { GCM } from "./gcm.js";
 import { encode, decode } from "@stablelib/hex";
 
 // TODO(dchest): add more test vectors.

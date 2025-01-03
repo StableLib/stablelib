@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { SIV } from "./siv";
+import { SIV } from "./siv.js";
 import { AES } from "@stablelib/aes";
 import { encode, decode } from "@stablelib/hex";
 import { byteSeq } from "@stablelib/benchmark";

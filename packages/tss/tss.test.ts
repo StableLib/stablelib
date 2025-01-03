@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { split, combine, combineRaw } from "./tss";
+import { split, combine, combineRaw } from "./tss.js";
 import { decode } from "@stablelib/hex";
 
 describe("tss", () => {

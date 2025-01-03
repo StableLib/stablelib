@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { deriveKey } from "./pbkdf2";
+import { deriveKey } from "./pbkdf2.js";
 import { SHA256 } from "@stablelib/sha256";
 import { SHA224 } from "@stablelib/sha224";
 import { SHA512 } from "@stablelib/sha512";

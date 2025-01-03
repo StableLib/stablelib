@@ -3,7 +3,7 @@
 
 import { AES } from "@stablelib/aes";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
-import { CTR } from "./ctr";
+import { CTR } from "./ctr.js";
 
 const buf8192 = byteSeq(8192);
 const buf1111 = byteSeq(1111);

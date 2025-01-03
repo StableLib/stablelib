@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { xof } from "./blake2xs";
+import { xof } from "./blake2xs.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 let key = byteSeq(32);

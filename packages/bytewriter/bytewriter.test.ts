@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { ByteWriter } from "./bytewriter";
+import { ByteWriter } from "./bytewriter.js";
 
 describe("ByteWriter", () => {
     it("should write bytes", () => {

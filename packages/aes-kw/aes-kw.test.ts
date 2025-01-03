@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { AESKW } from "./aes-kw";
+import { AESKW } from "./aes-kw.js";
 import { encode, decode } from "@stablelib/hex";
 
 // Test vectors sourced from RFC 3394

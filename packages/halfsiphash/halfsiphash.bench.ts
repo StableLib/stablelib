@@ -1,7 +1,7 @@
 // Copyright (C) 2017 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { halfSipHash } from "./halfsiphash";
+import { halfSipHash } from "./halfsiphash.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 const buf1M = byteSeq(1024 << 10);

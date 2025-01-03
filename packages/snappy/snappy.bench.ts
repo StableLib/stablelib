@@ -2,10 +2,10 @@
 // MIT License. See LICENSE file for details.
 
 import { benchmark, report } from "@stablelib/benchmark";
-import { compress, maxCompressedLength } from "./compress";
-import { decompress } from "./decompress";
+import { compress, maxCompressedLength } from "./compress.js";
+import { decompress } from "./decompress.js";
 import * as zlib from "zlib";
-import data from "./compress.test-data";
+import data from "./compress.test-data.js";
 
 
 const compressedData = compress(data);

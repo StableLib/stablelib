@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { HKDF } from "./hkdf";
+import { HKDF } from "./hkdf.js";
 import { SHA256, DIGEST_LENGTH } from "@stablelib/sha256";
 import { encode, decode } from "@stablelib/hex";
 

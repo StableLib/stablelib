@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest';
 import * as hex from "@stablelib/hex";
 import { concat } from "@stablelib/bytes";
-import { BLAKE2Xs } from "./blake2xs";
+import { BLAKE2Xs } from "./blake2xs.js";
 
 /* eslint:disable */
 const vectors = [

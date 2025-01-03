@@ -5,9 +5,9 @@ import { describe, expect, it } from 'vitest';
 import * as utf8 from "@stablelib/utf8";
 import * as hex from "@stablelib/hex";
 import { byteSeq } from "@stablelib/benchmark";
-import { compress } from "./compress";
-import { decompress } from "./decompress";
-import bigTestData from "./compress.test-data";
+import { compress } from "./compress.js";
+import { decompress } from "./decompress.js";
+import bigTestData from "./compress.test-data.js";
 
 const smallTestData = utf8.encode("aaaaaaaaaabbabbbabbbabbabccccccccbbbbbbbaaaaaaabbabbabba");
 // generated with github.com/golang/snappy

@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { splitRaw, combineRaw, split, combine } from "./tss";
+import { splitRaw, combineRaw, split, combine } from "./tss.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 const secret = byteSeq(32);

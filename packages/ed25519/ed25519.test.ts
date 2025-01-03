@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { encode, decode } from "@stablelib/base64";
-import { sign, verify, generateKeyPair, extractPublicKeyFromSecretKey, convertPublicKeyToX25519, convertSecretKeyToX25519 } from "./ed25519";
+import { sign, verify, generateKeyPair, extractPublicKeyFromSecretKey, convertPublicKeyToX25519, convertSecretKeyToX25519 } from "./ed25519.js";
 
 /* eslint:disable */
 const testVectors = [

@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest';
 import { AES } from "@stablelib/aes";
 import { encode, decode } from "@stablelib/hex";
-import { CTR } from "./ctr";
+import { CTR } from "./ctr.js";
 
 describe("AES-CTR", () => {
     const v = {

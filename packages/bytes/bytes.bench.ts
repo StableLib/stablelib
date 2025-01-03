@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { concat } from "./bytes";
+import { concat } from "./bytes.js";
 import { benchmark, report } from "@stablelib/benchmark";
 
 const a0 = new Uint8Array([1, 2, 3]);

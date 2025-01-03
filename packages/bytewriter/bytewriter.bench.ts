@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { ByteWriter } from "./bytewriter";
+import { ByteWriter } from "./bytewriter.js";
 import { report, benchmark, byteSeq } from "@stablelib/benchmark";
 
 report("ByteWriter write", benchmark(() => benchmarkWrite(8192), 8192));

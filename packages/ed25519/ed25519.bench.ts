@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { sign, verify, generateKeyPairFromSeed, generateKeyPair } from "./ed25519";
+import { sign, verify, generateKeyPairFromSeed, generateKeyPair } from "./ed25519.js";
 import { benchmark, report } from "@stablelib/benchmark";
 
 const k = generateKeyPair();

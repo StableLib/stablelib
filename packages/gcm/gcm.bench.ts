@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { AES } from "@stablelib/aes";
-import { GCM } from "./gcm";
+import { GCM } from "./gcm.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 const buf8192 = byteSeq(8192);

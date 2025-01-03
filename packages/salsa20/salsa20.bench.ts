@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { streamXOR } from "./salsa20";
+import { streamXOR } from "./salsa20.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 const buf8192 = byteSeq(8192);

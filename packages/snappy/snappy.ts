@@ -11,5 +11,5 @@
  * Package snappy implements Snappy compression and decompression.
  */
 
-export * from "./compress";
-export * from "./decompress";
+export * from "./compress.js";
+export * from "./decompress.js";

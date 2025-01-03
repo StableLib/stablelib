@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { streamXOR } from "./xchacha20";
+import { streamXOR } from "./xchacha20.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 const buf16K = byteSeq(16 << 10);

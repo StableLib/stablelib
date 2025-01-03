@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { concat } from "./bytes";
+import { concat } from "./bytes.js";
 
 describe("concat", () => {
     it("should concatenate byte arrays", () => {

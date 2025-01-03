@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { XChaCha20Poly1305 } from "./xchacha20poly1305";
+import { XChaCha20Poly1305 } from "./xchacha20poly1305.js";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";
 
 const buf8192 = byteSeq(8192);

@@ -28,8 +28,8 @@
 
 import type { RandomSource } from "@stablelib/random";
 import { SHAKE128, SHA3256 } from "@stablelib/sha3";
-import type { SeedExpander} from "./custom";
-import { CustomNewHope } from "./custom";
+import type { SeedExpander } from "./custom.js";
+import { CustomNewHope } from "./custom.js";
 
 export {
     PUBLIC_SEED_LENGTH,
@@ -37,7 +37,7 @@ export {
     OFFER_MESSAGE_LENGTH,
     ACCEPT_MESSAGE_LENGTH,
     SAVED_STATE_LENGTH
-} from "./custom";
+} from "./custom.js";
 
 // Byte length of shared key.
 export const SHARED_KEY_LENGTH = 32; // SHA-3 digest length

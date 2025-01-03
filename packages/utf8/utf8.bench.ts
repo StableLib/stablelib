@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { encode, decode } from "./utf8";
+import { encode, decode } from "./utf8.js";
 import { benchmark, report } from "@stablelib/benchmark";
 
 const text = `— Еh bien, mon prince. Gênes et Lucques ne sont plus que des apanages,

@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { hchacha, stream, streamXOR } from "./xchacha20";
+import { hchacha, stream, streamXOR } from "./xchacha20.js";
 import { encode, decode } from "@stablelib/hex";
 
 // test taken from draft-arciszewski-xchacha-03 section 2.2.1

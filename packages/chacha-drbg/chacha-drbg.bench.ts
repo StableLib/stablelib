@@ -1,8 +1,8 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { ChaChaDRBG } from "./chacha-drbg";
-import type { RandomSource } from "@stablelib/random/source";
+import { ChaChaDRBG } from "./chacha-drbg.js";
+import type { RandomSource } from "@stablelib/random/source/index.js";
 import { benchmark, report } from "@stablelib/benchmark";
 
 class XKCDSource implements RandomSource {

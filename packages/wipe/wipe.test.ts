@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { wipe } from "./wipe";
+import { wipe } from "./wipe.js";
 
 describe("wipe", () => {
     it("should wipe bytes", () => {

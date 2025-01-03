@@ -4,11 +4,11 @@
 import { describe, expect, it } from 'vitest';
 import * as hex from "@stablelib/hex";
 import { concat } from "@stablelib/bytes";
-import type { TaggedEncoder, TaggedDecoder} from "./cbor";
+import type { TaggedEncoder, TaggedDecoder} from "./cbor.js";
 import {
     encode, decode, Simple, Tagged,
     DEFAULT_TAGGED_ENCODERS, DEFAULT_TAGGED_DECODERS
-} from "./cbor";
+} from "./cbor.js";
 
 // Test vectors from RFC 7049: Appendix A.  Examples.
 const encoderTestVectors = [

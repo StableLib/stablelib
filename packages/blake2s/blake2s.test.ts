@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { BLAKE2s } from "./blake2s";
+import { BLAKE2s } from "./blake2s.js";
 import { encode } from "@stablelib/hex";
 
 const vectors = [

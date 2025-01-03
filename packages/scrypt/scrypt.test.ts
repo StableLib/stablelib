@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest';
 import { encode as encodeBase64 } from "@stablelib/base64";
 import { encode as encodeUTF8 } from "@stablelib/utf8";
-import { deriveKey, deriveKeyNonBlocking } from "./scrypt";
+import { deriveKey, deriveKeyNonBlocking } from "./scrypt.js";
 
 const vectors = [
     {

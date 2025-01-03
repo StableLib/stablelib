@@ -11,7 +11,7 @@ import {
     readUintLE, writeUintLE, readUintBE, writeUintBE,
     readFloat32BE, writeFloat32BE, readFloat64BE, writeFloat64BE,
     readFloat32LE, writeFloat32LE, readFloat64LE, writeFloat64LE
-} from "./binary";
+} from "./binary.js";
 
 const int16BEVectors: [number, number[]][] = [
     [0, [0, 0]],

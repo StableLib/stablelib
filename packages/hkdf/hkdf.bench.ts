@@ -1,7 +1,7 @@
 // Copyright (C) 2016 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
-import { HKDF } from "./hkdf";
+import { HKDF } from "./hkdf.js";
 import { SHA256 } from "@stablelib/sha256";
 import { SHA512 } from "@stablelib/sha512";
 import { benchmark, report, byteSeq } from "@stablelib/benchmark";

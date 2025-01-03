@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { HMAC, hmac } from "./hmac";
+import { HMAC, hmac } from "./hmac.js";
 import { SHA256 } from "@stablelib/sha256";
 import { SHA224 } from "@stablelib/sha224";
 import { encode } from "@stablelib/base64";

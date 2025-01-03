@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { mul, add, sub } from "./int";
+import { mul, add, sub } from "./int.js";
 
 describe("int.mul", () => {
     it("should overflow", () => {

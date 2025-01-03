@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { streamXOR, stream } from "./salsa20";
+import { streamXOR, stream } from "./salsa20.js";
 import { encode, decode } from "@stablelib/hex";
 
 function seq(len: number): Uint8Array {
