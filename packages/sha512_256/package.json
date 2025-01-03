@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/sha512_256",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "SHA-512/256 cryptographic hash function",
   "main": "./lib/sha512_256.js",
   "type": "module",
@@ -19,9 +19,9 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@stablelib/sha512": "^2.0.0"
+    "@stablelib/sha512": "^2.0.1"
   },
   "devDependencies": {
-    "@stablelib/base64": "^2.0.0"
+    "@stablelib/base64": "^2.0.1"
   }
 }

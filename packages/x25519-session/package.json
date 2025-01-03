@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/x25519-session",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "libsodium compatible session keys generation based on X25519 key agreement",
   "main": "./lib/x25519-session.js",
   "type": "module",
@@ -20,15 +20,15 @@
     "bench": "node ./lib/x25519-session.bench.js"
   },
   "dependencies": {
-    "@stablelib/blake2b": "^2.0.0",
-    "@stablelib/keyagreement": "^2.0.0",
-    "@stablelib/random": "^2.0.0",
-    "@stablelib/wipe": "^2.0.0",
-    "@stablelib/x25519": "^2.0.0"
+    "@stablelib/blake2b": "^2.0.1",
+    "@stablelib/keyagreement": "^2.0.1",
+    "@stablelib/random": "^2.0.1",
+    "@stablelib/wipe": "^2.0.1",
+    "@stablelib/x25519": "^2.0.1"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^2.0.0",
     "@stablelib/hash": "^2.0.0",
-    "@stablelib/hex": "^2.0.0"
+    "@stablelib/hex": "^2.0.1"
   }
 }

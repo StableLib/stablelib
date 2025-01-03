@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/ctr",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Counter block cipher mode (CTR)",
   "main": "./lib/ctr.js",
   "type": "module",
@@ -21,11 +21,11 @@
   },
   "dependencies": {
     "@stablelib/blockcipher": "^2.0.0",
-    "@stablelib/wipe": "^2.0.0"
+    "@stablelib/wipe": "^2.0.1"
   },
   "devDependencies": {
-    "@stablelib/aes": "^2.0.0",
+    "@stablelib/aes": "^2.0.1",
     "@stablelib/benchmark": "^2.0.0",
-    "@stablelib/hex": "^2.0.0"
+    "@stablelib/hex": "^2.0.1"
   }
 }

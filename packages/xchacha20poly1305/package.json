@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/xchacha20poly1305",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "XChaCha20-Poly1305 AEAD (draft-irtf-cfrg-xchacha-01)",
   "main": "./lib/xchacha20poly1305.js",
   "type": "module",
@@ -28,13 +28,13 @@
   },
   "dependencies": {
     "@stablelib/aead": "^2.0.0",
-    "@stablelib/chacha20poly1305": "^2.0.0",
-    "@stablelib/constant-time": "^2.0.0",
-    "@stablelib/wipe": "^2.0.0",
-    "@stablelib/xchacha20": "^2.0.0"
+    "@stablelib/chacha20poly1305": "^2.0.1",
+    "@stablelib/constant-time": "^2.0.1",
+    "@stablelib/wipe": "^2.0.1",
+    "@stablelib/xchacha20": "^2.0.1"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^2.0.0",
-    "@stablelib/hex": "^2.0.0"
+    "@stablelib/hex": "^2.0.1"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/bytewriter",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Byte writer",
   "main": "./lib/bytewriter.js",
   "type": "module",
@@ -20,9 +20,9 @@
     "bench": "node ./lib/bytewriter.bench.js"
   },
   "dependencies": {
-    "@stablelib/binary": "^2.0.0",
-    "@stablelib/int": "^2.0.0",
-    "@stablelib/wipe": "^2.0.0"
+    "@stablelib/binary": "^2.0.1",
+    "@stablelib/int": "^2.0.1",
+    "@stablelib/wipe": "^2.0.1"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^2.0.0"

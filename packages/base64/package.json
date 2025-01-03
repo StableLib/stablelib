@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/base64",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Base64 encoding and decoding",
   "main": "./lib/base64.js",
   "type": "module",

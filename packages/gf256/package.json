@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/gf256",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Arithmetic in GF(256)",
   "main": "./lib/gf256.js",
   "type": "module",

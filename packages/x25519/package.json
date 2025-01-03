@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/x25519",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "X25519 key agreement (Curve25519)",
   "main": "./lib/x25519.js",
   "type": "module",
@@ -20,12 +20,12 @@
     "bench": "node ./lib/x25519.bench.js"
   },
   "dependencies": {
-    "@stablelib/keyagreement": "^2.0.0",
-    "@stablelib/random": "^2.0.0",
-    "@stablelib/wipe": "^2.0.0"
+    "@stablelib/keyagreement": "^2.0.1",
+    "@stablelib/random": "^2.0.1",
+    "@stablelib/wipe": "^2.0.1"
   },
   "devDependencies": {
     "@stablelib/benchmark": "^2.0.0",
-    "@stablelib/hex": "^2.0.0"
+    "@stablelib/hex": "^2.0.1"
   }
 }
