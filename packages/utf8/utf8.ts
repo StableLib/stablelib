@@ -53,7 +53,7 @@ export function encodedLength(s: string): number {
         let c = s.charCodeAt(i);
 
         if (c >= 0xd800 && c <= 0xdbff) {
-            // surrogate pair
+            // High surrogate, must be followed by low surrogate.
             if (i === s.length - 1) {
                 throw new Error(INVALID_UTF16);
             }
@@ -63,6 +63,9 @@ export function encodedLength(s: string): number {
                 throw new Error(INVALID_UTF16);
             }
             c = ((c - 0xd800) << 10) + (c2 - 0xdc00) + 0x10000;
+        } else if (c >= 0xdc00 && c <= 0xdfff) {
+            // Low surrogate without preceding high surrogate.
+            throw new Error(INVALID_UTF16);
         }
 
         if (c < 0x80) {

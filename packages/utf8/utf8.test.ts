@@ -119,4 +119,30 @@ describe("utf8", () => {
         const dec = decode(enc);
         expect(dec).toEqual(s);
     });
+
+    it("should reject invalid UTF-16 strings with unpaired surrogates", () => {
+        // High surrogate without low surrogate
+        expect(() => encode('\ud800')).toThrowError(/invalid string/);
+        expect(() => encode('\udbff')).toThrowError(/invalid string/);
+
+        // Low surrogate without high surrogate
+        expect(() => encode('\udc00')).toThrowError(/invalid string/);
+        expect(() => encode('\udfff')).toThrowError(/invalid string/);
+
+        // High surrogate at the end of string
+        expect(() => encode('hello\ud800')).toThrowError(/invalid string/);
+
+        // Low surrogate at the beginning
+        expect(() => encode('\udc00world')).toThrowError(/invalid string/);
+
+        // Two high surrogates in a row (second one is unpaired)
+        expect(() => encode('\ud800\ud800\udc00')).toThrowError(/invalid string/);
+
+        // Low surrogate followed by high surrogate (wrong order)
+        expect(() => encode('\udc00\ud800')).toThrowError(/invalid string/);
+
+        // Valid surrogate pair should work
+        expect(() => encode('\ud800\udc00')).not.toThrow(); // U+10000
+        expect(() => encode('\udbff\udfff')).not.toThrow(); // U+10FFFF
+    });
 });
