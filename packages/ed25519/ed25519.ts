@@ -79,6 +79,7 @@ const I = gf([
     0xd7a7, 0x3dfb, 0x0099, 0x2b4d, 0xdf0b, 0x4fc1, 0x2480, 0x2b83
 ]);
 
+
 function set25519(r: GF, a: GF) {
     for (let i = 0; i < 16; i++) {
         r[i] = a[i] | 0;
@@ -691,7 +692,7 @@ export function extractPublicKeyFromSecretKey(secretKey: Uint8Array): Uint8Array
     return new Uint8Array(secretKey.subarray(32));
 }
 
-const L = new Float64Array([
+const L = new Uint8Array([
     0xed, 0xd3, 0xf5, 0x5c, 0x1a, 0x63, 0x12, 0x58, 0xd6, 0x9c, 0xf7, 0xa2,
     0xde, 0xf9, 0xde, 0x14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x10
 ]);
@@ -724,6 +725,16 @@ function modL(r: Uint8Array, x: Float64Array) {
         x[i + 1] += x[i] >> 8;
         r[i] = x[i] & 255;
     }
+}
+
+function iscanonical(s: Uint8Array) {
+    let c = 0;
+    let n = 1;
+    for (let i = 31; i >= 0; i--) {
+        c |= ((s[i] - L[i]) >> 8) & n;
+        n &= ((s[i] ^ L[i]) - 1) >> 8;
+    }
+    return c !== 0;
 }
 
 function reduce(r: Uint8Array) {
@@ -835,6 +846,9 @@ export function verify(publicKey: Uint8Array, message: Uint8Array, signature: Ui
         throw new Error(`ed25519: signature must be ${SIGNATURE_LENGTH} bytes`);
     }
 
+    if (!iscanonical(signature.subarray(32))) {
+        return false;
+    }
     if (unpackneg(q, publicKey)) {
         return false;
     }
