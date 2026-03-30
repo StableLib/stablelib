@@ -737,6 +737,15 @@ function iscanonical(s: Uint8Array) {
     return c !== 0;
 }
 
+function ispkcanonical(p: Uint8Array) {
+    let c = ((p[0] - 0xed) >> 8) & 1;
+    for (let i = 1; i < 31; i++) {
+        c |= p[i] ^ 0xff;
+    }
+    c |= (p[31] & 0x7f) ^ 0x7f;
+    return c !== 0;
+}
+
 function reduce(r: Uint8Array) {
     const x = new Float64Array(64);
     for (let i = 0; i < 64; i++) {
@@ -845,8 +854,14 @@ export function verify(publicKey: Uint8Array, message: Uint8Array, signature: Ui
     if (signature.length !== SIGNATURE_LENGTH) {
         throw new Error(`ed25519: signature must be ${SIGNATURE_LENGTH} bytes`);
     }
+    if (publicKey.length !== PUBLIC_KEY_LENGTH) {
+        throw new Error(`ed25519: public key must be ${PUBLIC_KEY_LENGTH} bytes`);
+    }
 
     if (!iscanonical(signature.subarray(32))) {
+        return false;
+    }
+    if (!ispkcanonical(publicKey)) {
         return false;
     }
     if (unpackneg(q, publicKey)) {

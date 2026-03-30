@@ -5188,4 +5188,15 @@ describe("ed25519", () => {
         const xPrivateKey = convertSecretKeyToX25519(edPrivateKey);
         expect(encode(xPrivateKey)).toEqual(xGoodPrivateKey);
     });
+
+    it("should reject non-canonical public key", () => {
+        const canonicalPk = new Uint8Array(32);
+        canonicalPk[0] = 1;
+        const noncanonicalPk = new Uint8Array([0xee, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f]);
+        const message = new Uint8Array([1,2,3]);
+        const signature = new Uint8Array(64);
+        signature[0] = 1;
+        expect(verify(canonicalPk, message, signature)).toBe(true);
+        expect(verify(noncanonicalPk, message, signature)).toBe(false);
+    });
 });
