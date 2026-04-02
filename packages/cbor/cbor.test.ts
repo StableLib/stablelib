@@ -300,4 +300,42 @@ describe("cbor", () => {
         expect(decodedData.two instanceof Date).toBeTruthy();
     });
 
+    it("should throw on invalid map keys", () => {
+        // { "__proto__": { "isAdmin": true } }
+        const payload = new Uint8Array([
+            0xa1,
+            0x69, 0x5f, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x5f, 0x5f,
+            0xa1,
+            0x67, 0x69, 0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e,
+            0xf5
+        ]);
+        expect(() => decode(payload)).toThrowError(/forbidden map key/);
+    });
+
+    it("should throw on __proto__ key in definite map", () => {
+        // { "__proto__": { "polluted": true } }
+        const malicious = hex.decode("a1695f5f70726f746f5f5fa168706f6c6c75746564f5");
+        expect(() => decode(malicious)).toThrowError(/forbidden map key/);
+        expect(({} as any).polluted).toBeUndefined();
+    });
+
+    it("should throw on __proto__ key in indefinite map", () => {
+        //  { "__proto__": { "polluted": true } } break
+        const malicious = hex.decode("bf695f5f70726f746f5f5fa168706f6c6c75746564f5ff");
+        expect(() => decode(malicious)).toThrowError(/forbidden map key/);
+        expect(({} as any).polluted).toBeUndefined();
+    });
+
+    it("should throw on 'constructor' key in map", () => {
+        // { "constructor": { "polluted": true } }
+        const malicious = hex.decode("a16b636f6e7374727563746f72a168706f6c6c75746564f5");
+        expect(() => decode(malicious)).toThrowError(/forbidden map key/);
+    });
+
+    it("should throw on 'prototype' key in map", () => {
+        // { "prototype": { "polluted": true } }
+        const malicious = hex.decode("a16970726f746f74797065a168706f6c6c75746564f5");
+        expect(() => decode(malicious)).toThrowError(/forbidden map key/);
+    });
+
 });

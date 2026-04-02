@@ -748,7 +748,6 @@ export class Decoder {
         return result;
     }
 
-
     private _decodeMap(length: number): { [key: string]: (any | null | undefined) } {
         if (length === Infinity) {
             return this._decodeIndefiniteMap();
@@ -760,8 +759,11 @@ export class Decoder {
                 (typeof key !== "number" && typeof key !== "string")) {
                 throw new Error(`cbor: wrong map key type "${typeof key}"`);
             }
-            if (this._opt.uniqueMapKeys && (key in result)) {
+            if (this._opt.uniqueMapKeys && Object.prototype.hasOwnProperty.call(result, key)) {
                 throw new Error(`cbor: duplicate map key: "${key}"`);
+            }
+            if (key === "__proto__" || key === "constructor" || key === "prototype") {
+                throw new Error(`cbor: forbidden map key: "${key}"`);
             }
             const value = this._decodeValue();
             result[key] = value;
@@ -778,8 +780,11 @@ export class Decoder {
                 (typeof key !== "number" && typeof key !== "string")) {
                 throw new Error(`cbor: wrong map key type "${typeof key}"`);
             }
-            if (this._opt.uniqueMapKeys && (key in result)) {
+            if (this._opt.uniqueMapKeys && Object.prototype.hasOwnProperty.call(result, key)) {
                 throw new Error(`cbor: duplicate map key: "${key}"`);
+            }
+            if (key === "__proto__" || key === "constructor" || key === "prototype") {
+                throw new Error(`cbor: forbidden map key: "${key}"`);
             }
             const value = this._decodeValue();
             result[key] = value;
