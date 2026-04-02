@@ -1,4 +1,4 @@
-// Copyright (C) 2016 Dmitry Chestnykh
+// Copyright (C) 2016-2026 Dmitry Chestnykh
 // MIT License. See LICENSE file for details.
 
 /**
@@ -10,7 +10,6 @@ import { ByteWriter } from "@stablelib/bytewriter";
 import { ByteReader } from "@stablelib/bytereader";
 import { isSafeInteger } from "@stablelib/int";
 import { isNegativeZero, fround } from "@stablelib/float";
-
 
 let decodeUTF8: (data: Uint8Array) => string;
 let encodeUTF8: (str: string) => Uint8Array;

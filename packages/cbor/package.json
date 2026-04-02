@@ -30,5 +30,6 @@
     "@stablelib/benchmark": "^2.0.0",
     "@stablelib/bytes": "^2.0.1",
     "@stablelib/hex": "^2.0.1"
-  }
+  },
+  "gitHead": "1d6e8a8082d93b27431c9947677f2790dba20255"
 }
