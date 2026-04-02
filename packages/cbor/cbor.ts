@@ -11,6 +11,20 @@ import { ByteReader } from "@stablelib/bytereader";
 import { isSafeInteger } from "@stablelib/int";
 import { isNegativeZero, fround } from "@stablelib/float";
 
+
+let decodeUTF8: (data: Uint8Array) => string;
+let encodeUTF8: (str: string) => Uint8Array;
+
+if (typeof TextEncoder === "undefined" || typeof TextDecoder === "undefined") {
+    decodeUTF8 = utf8.decode;
+    encodeUTF8 = utf8.encode;
+} else {
+    const decoder = new TextDecoder("utf-8", { fatal: true })
+    const encoder = new TextEncoder();
+    decodeUTF8 = data => decoder.decode(data);
+    encodeUTF8 = str => encoder.encode(str);
+}
+
 /**
  * CBOR (Concise Binary Object Representation)
  * https://tools.ietf.org/html/rfc7049
@@ -377,7 +391,7 @@ export class Encoder {
     encodeString(value: string): this {
         // TODO(dchest): use byte-by-byte utf8 encoding
         // to (probably) improve performance.
-        const b = utf8.encode(value);
+        const b = encodeUTF8(value);
         this._writeMajorTypeAndLength(MT_TEXT_STRING, b.length);
         this._buf.write(b);
         return this;
@@ -855,7 +869,7 @@ export class Decoder {
         if (length > this._maxByteLength) {
             throw new CBORLengthExceededError(this._maxByteLength);
         }
-        return utf8.decode(this._r.readNoCopy(length));
+        return decodeUTF8(this._r.readNoCopy(length));
     }
 
     private _decodeIndefiniteString(): string {
@@ -874,7 +888,7 @@ export class Decoder {
             if (majorType !== MT_TEXT_STRING || length === Infinity) {
                 throw new CBORInvalidFormatError("cbor: incorrect indefinite string encoding");
             }
-            result += utf8.decode(this._r.readNoCopy(length));
+            result += decodeUTF8(this._r.readNoCopy(length));
         }
         return result;
     }
