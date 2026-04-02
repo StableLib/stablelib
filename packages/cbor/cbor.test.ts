@@ -7,7 +7,10 @@ import { concat } from "@stablelib/bytes";
 import type { TaggedEncoder, TaggedDecoder} from "./cbor.js";
 import {
     encode, decode, Simple, Tagged,
-    DEFAULT_TAGGED_ENCODERS, DEFAULT_TAGGED_DECODERS
+    DEFAULT_TAGGED_ENCODERS, DEFAULT_TAGGED_DECODERS,
+    CBORDecodeError, CBORInvalidFormatError, CBORExtraDataError,
+    CBORMaxDepthExceededError, CBORForbiddenKeyError,
+    CBORDuplicateKeyError, CBORInvalidKeyTypeError
 } from "./cbor.js";
 
 // Test vectors from RFC 7049: Appendix A.  Examples.
@@ -221,13 +224,13 @@ describe("cbor", () => {
             "3bffffffffffffffff", // -18446744073709551616
         ];
         vectors.forEach(v => {
-            expect(() => decode(hex.decode(v))).toThrowError(/too large/);
+            expect(() => decode(hex.decode(v))).toThrow(CBORInvalidFormatError);
         });
     });
 
     it("should throw if there's extra data and the end", () => {
         const encoded = concat(encode("Hello world"), new Uint8Array(1));
-        expect(() => decode(encoded)).toThrowError(/extra/);
+        expect(() => decode(encoded)).toThrow(CBORExtraDataError);
     });
 
     it("should throw for objects cycles", () => {
@@ -309,33 +312,79 @@ describe("cbor", () => {
             0x67, 0x69, 0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e,
             0xf5
         ]);
-        expect(() => decode(payload)).toThrowError(/forbidden map key/);
+        expect(() => decode(payload)).toThrow(CBORForbiddenKeyError);
     });
 
     it("should throw on __proto__ key in definite map", () => {
         // { "__proto__": { "polluted": true } }
         const malicious = hex.decode("a1695f5f70726f746f5f5fa168706f6c6c75746564f5");
-        expect(() => decode(malicious)).toThrowError(/forbidden map key/);
+        expect(() => decode(malicious)).toThrow(CBORForbiddenKeyError);
         expect(({} as any).polluted).toBeUndefined();
     });
 
     it("should throw on __proto__ key in indefinite map", () => {
         //  { "__proto__": { "polluted": true } } break
         const malicious = hex.decode("bf695f5f70726f746f5f5fa168706f6c6c75746564f5ff");
-        expect(() => decode(malicious)).toThrowError(/forbidden map key/);
+        expect(() => decode(malicious)).toThrow(CBORForbiddenKeyError);
         expect(({} as any).polluted).toBeUndefined();
     });
 
     it("should throw on 'constructor' key in map", () => {
         // { "constructor": { "polluted": true } }
         const malicious = hex.decode("a16b636f6e7374727563746f72a168706f6c6c75746564f5");
-        expect(() => decode(malicious)).toThrowError(/forbidden map key/);
+        expect(() => decode(malicious)).toThrowError(CBORForbiddenKeyError);
     });
 
     it("should throw on 'prototype' key in map", () => {
         // { "prototype": { "polluted": true } }
         const malicious = hex.decode("a16970726f746f74797065a168706f6c6c75746564f5");
-        expect(() => decode(malicious)).toThrowError(/forbidden map key/);
+        expect(() => decode(malicious)).toThrowError(CBORForbiddenKeyError);
+    });
+
+    it("should throw when maxDepth is exceeded", () => {
+        // Nested arrays: [[[[1]]]] — depth 4
+        const nested = encode([[[[1]]]]);
+        expect(() => decode(nested, { maxDepth: 4 })).not.toThrow();
+        expect(() => decode(nested, { maxDepth: 3 })).toThrowError(CBORMaxDepthExceededError);
+    });
+
+    it("should throw when maxDepth is exceeded in maps", () => {
+        // Nested maps: { a: { b: { c: 1 } } } — depth 3
+        const nested = encode({ a: { b: { c: 1 } } });
+        expect(() => decode(nested, { maxDepth: 3 })).not.toThrow();
+        expect(() => decode(nested, { maxDepth: 2 })).toThrow(CBORMaxDepthExceededError);
+    });
+
+    it("should throw when maxDepth is exceeded in mixed nested maps and arrays", () => {
+        // { a: [{ b: [1] }] } — depth 4: map(1) > array(1) > map(1) > array(1)
+        const nested = encode({ a: [{ b: [1] }] });
+        expect(() => decode(nested, { maxDepth: 4 })).not.toThrow();
+        expect(() => decode(nested, { maxDepth: 3 })).toThrow(CBORMaxDepthExceededError);
+    });
+
+    it("CBORDecodeError is the base class for all decoder errors", () => {
+        const forbiddenKey = hex.decode("a1695f5f70726f746f5f5fa168706f6c6c75746564f5");
+        expect(() => decode(forbiddenKey)).toThrow(CBORDecodeError);
+        const extraData = concat(encode("x"), new Uint8Array(1));
+        expect(() => decode(extraData)).toThrow(CBORDecodeError);
+        const tooBig = hex.decode("1bffffffffffffffff");
+        expect(() => decode(tooBig)).toThrow(CBORDecodeError);
+    });
+
+    it("should throw CBORDuplicateKeyError on duplicate map keys when uniqueMapKeys is true", () => {
+        // map(2) { "a": 1, "a": 2 }
+        const dupKey = hex.decode("a2616101616102");
+        expect(() => decode(dupKey, { uniqueMapKeys: true })).toThrowError(CBORDuplicateKeyError);
+        // duplicate keys are allowed by default
+        expect(() => decode(dupKey)).not.toThrow();
+    });
+
+    it("should throw CBORInvalidKeyTypeError on non-string/number map key when strictMapKeys is true", () => {
+        // map(1) { bytes(0x01): 1 }
+        const badKeyType = hex.decode("a1410101");
+        expect(() => decode(badKeyType, { strictMapKeys: true })).toThrowError(CBORInvalidKeyTypeError);
+        // non-string keys are allowed by default
+        expect(() => decode(badKeyType)).not.toThrow();
     });
 
 });

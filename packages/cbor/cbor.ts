@@ -112,10 +112,10 @@ export const DateStringDecoder: TaggedDecoder<Date> =
             return undefined;
         }
         if (typeof value !== "string") {
-            throw new Error(`cbor: unexpected type for date string: "${typeof value}"`);
+            throw new CBORInvalidFormatError(`cbor: unexpected type for date string: "${typeof value}"`);
         }
         if (!ISO_DATE_RX.test(value)) {
-            throw new Error(`cbor: invalid date string format`);
+            throw new CBORInvalidFormatError(`cbor: invalid date string format`);
         }
         return new Date(value);
     };
@@ -136,7 +136,7 @@ export const DateNumberDecoder: TaggedDecoder<Date> =
             return undefined;
         }
         if (typeof value !== "number") {
-            throw new Error(`cbor: unexpected type for date number: "${typeof value}"`);
+            throw new CBORInvalidFormatError(`cbor: unexpected type for date number: "${typeof value}"`);
         }
         return new Date(value * 1000);
     };
@@ -155,11 +155,11 @@ export const RegExpDecoder: TaggedDecoder<RegExp> =
             return undefined;
         }
         if (typeof value !== "string") {
-            throw new Error(`cbor: unexpected type for regexp: "${typeof value}"`);
+            throw new CBORInvalidFormatError(`cbor: unexpected type for regexp: "${typeof value}"`);
         }
         let matches = value.match(/^\/(.*)\/(.*)$/);
         if (!matches || matches.length < 3) {
-            throw new Error('cbor: invalid regexp format');
+            throw new CBORInvalidFormatError('cbor: invalid regexp format');
         }
         return new RegExp(matches[1], matches[2]);
     };
@@ -509,6 +509,14 @@ export type DecoderOptions = {
     uniqueMapKeys?: boolean;
 
     /**
+     * Maximum allowed depth of nested structures (arrays and maps).
+     * If exceeded, decoder throws an error.
+     *
+     * By default, 128.
+     */
+    maxDepth?: number;
+
+    /**
      * Tagged object decoders.
      *
      * By default, DEFAULT_TAGGED_DECODERS, which converts tagged
@@ -518,14 +526,92 @@ export type DecoderOptions = {
      * Pass empty array to disable tagged decoders.
      */
     taggedDecoders?: TaggedDecoder<any>[];
-
 };
 
 export const DEFAULT_DECODER_OPTIONS: DecoderOptions = {
     noCopy: false,
     ignoreExtraData: false,
+    maxDepth: 128,
     taggedDecoders: DEFAULT_TAGGED_DECODERS
 };
+
+/**
+ * Base class for all CBOR decoder errors.
+ */
+export class CBORDecodeError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "CBORDecodeError";
+    }
+}
+
+/**
+ * Thrown when the CBOR data is malformed or contains an unsupported encoding.
+ */
+export class CBORInvalidFormatError extends CBORDecodeError {
+    constructor(message: string) {
+        super(message);
+        this.name = "CBORInvalidFormatError";
+    }
+}
+
+/**
+ * Thrown when there is extra data at the end of the CBOR input.
+ */
+export class CBORExtraDataError extends CBORDecodeError {
+    constructor() {
+        super("cbor: extra data at the end");
+        this.name = "CBORExtraDataError";
+    }
+}
+
+/**
+ * Thrown when the maximum nesting depth is exceeded.
+ */
+export class CBORMaxDepthExceededError extends CBORDecodeError {
+    readonly maxDepth: number;
+    constructor(maxDepth: number) {
+        super(`cbor: exceeded maximum depth of ${maxDepth}`);
+        this.name = "CBORMaxDepthExceededError";
+        this.maxDepth = maxDepth;
+    }
+}
+
+/**
+ * Thrown when a map key with a forbidden name is encountered.
+ */
+export class CBORForbiddenKeyError extends CBORDecodeError {
+    readonly key: string;
+    constructor(key: string) {
+        super(`cbor: forbidden map key: "${key}"`);
+        this.name = "CBORForbiddenKeyError";
+        this.key = key;
+    }
+}
+
+/**
+ * Thrown when a duplicate map key is encountered and uniqueMapKeys is enabled.
+ */
+export class CBORDuplicateKeyError extends CBORDecodeError {
+    readonly key: string;
+    constructor(key: string) {
+        super(`cbor: duplicate map key: "${key}"`);
+        this.name = "CBORDuplicateKeyError";
+        this.key = key;
+    }
+}
+
+/**
+ * Thrown when a map key has an invalid type and strictMapKeys is enabled.
+ */
+export class CBORInvalidKeyTypeError extends CBORDecodeError {
+    readonly keyType: string;
+    constructor(keyType: string) {
+        super(`cbor: wrong map key type "${keyType}"`);
+        this.name = "CBORInvalidKeyTypeError";
+        this.keyType = keyType;
+    }
+}
 
 /**
  * Decoder decodes values from CBOR format.
@@ -534,6 +620,8 @@ export class Decoder {
     private _r: ByteReader;
     private _opt: DecoderOptions;
     private _taggedDecoders: TaggedDecoder<any>[];
+    private _maxDepth: number;
+    private _depth = 0;
 
     /**
      * Creates decoder.
@@ -544,14 +632,19 @@ export class Decoder {
      */
     constructor(src: Uint8Array, options = DEFAULT_DECODER_OPTIONS) {
         this._r = new ByteReader(src);
-        this._opt = options;
-        this._taggedDecoders = options.taggedDecoders || DEFAULT_TAGGED_DECODERS;
+        this._opt = { ...DEFAULT_DECODER_OPTIONS, ...options };
+        this._maxDepth = this._opt.maxDepth || 128;
+        if (!Number.isInteger(this._maxDepth) || this._maxDepth <= 0) {
+            this._maxDepth = 128;
+        }
+        this._taggedDecoders = this._opt.taggedDecoders || DEFAULT_TAGGED_DECODERS;
     }
 
     decode(): any | null | undefined {
+        this._depth = 0;
         const result = this._decodeValue();
         if (!this._opt.ignoreExtraData && this.undecodedLength !== 0) {
-            throw new Error("cbor: extra data at the end");
+            throw new CBORExtraDataError();
         }
         return result;
     }
@@ -575,13 +668,13 @@ export class Decoder {
         } else if (additionalInfo === AI_64_BITS) {
             const value = this._r.readUint64BE();
             if (!isSafeInteger(value)) {
-                throw new Error("cbor: 64-bit value is too large");
+                throw new CBORInvalidFormatError("cbor: 64-bit value is too large");
             }
             return value;
         } else if (additionalInfo === AI_STOP) {
             return Infinity; // indefinite-length item
         } else {
-            throw new Error("cbor: unsupported (reserved) length");
+            throw new CBORInvalidFormatError("cbor: unsupported (reserved) length");
         }
     }
 
@@ -613,7 +706,7 @@ export class Decoder {
                 return this._decodeTagged(length);
             default:
                 // Note: MT_SIMPLE_OR_FLOAT is decoded earlier.
-                throw new Error(`cbor: unexpected major type ${majorType}`);
+                throw new CBORInvalidFormatError(`cbor: unexpected major type ${majorType}`);
         }
     }
 
@@ -648,7 +741,7 @@ export class Decoder {
             return this._r.readFloat64BE();
         } else {
             // Note: AI_STOP is handled by indefinite readers.
-            throw new Error("cbor: unsupported float length");
+            throw new CBORInvalidFormatError("cbor: unsupported float length");
         }
     }
 
@@ -695,7 +788,7 @@ export class Decoder {
             const majorType = b >> 5;
             const length = this._readLength(b & 31);
             if (majorType !== MT_TEXT_STRING || length === Infinity) {
-                throw new Error("cbor: incorrect indefinite string encoding");
+                throw new CBORInvalidFormatError("cbor: incorrect indefinite string encoding");
             }
             result += utf8.decode(this._r.readNoCopy(length));
         }
@@ -719,7 +812,7 @@ export class Decoder {
             const majorType = b >> 5;
             const length = this._readLength(b & 31);
             if (majorType !== MT_BYTE_STRING || length === Infinity) {
-                throw new Error(`cbor: incorrect indefinite bytes encoding (type=${majorType})`);
+                throw new CBORInvalidFormatError(`cbor: incorrect indefinite bytes encoding (type=${majorType})`);
             }
             buf.write(this._r.readNoCopy(length));
         }
@@ -732,19 +825,27 @@ export class Decoder {
         if (length === Infinity) {
             return this._decodeIndefiniteArray();
         }
+        if (++this._depth > this._maxDepth) {
+            throw new CBORMaxDepthExceededError(this._maxDepth);
+        }
         const result: Array<any | null | undefined> = [];
         for (let i = 0; i < length; i++) {
             result.push(this._decodeValue());
         }
+        this._depth--;
         return result;
     }
 
     private _decodeIndefiniteArray(): Array<any | null | undefined> {
+        if (++this._depth > this._maxDepth) {
+            throw new CBORMaxDepthExceededError(this._maxDepth);
+        }
         const result: Array<any | null | undefined> = [];
         let b: number;
         while ((b = this._r.readByte()) !== STOP_BYTE) {
             result.push(this._decodeValue(b));
         }
+        this._depth--;
         return result;
     }
 
@@ -752,43 +853,51 @@ export class Decoder {
         if (length === Infinity) {
             return this._decodeIndefiniteMap();
         }
+        if (++this._depth > this._maxDepth) {
+            throw new CBORMaxDepthExceededError(this._maxDepth);
+        }
         const result: { [key: string]: (any | null | undefined) } = {};
         for (let i = 0; i < length; i++) {
             const key = this._decodeValue();
             if (this._opt.strictMapKeys &&
                 (typeof key !== "number" && typeof key !== "string")) {
-                throw new Error(`cbor: wrong map key type "${typeof key}"`);
+                throw new CBORInvalidKeyTypeError(typeof key);
             }
             if (this._opt.uniqueMapKeys && Object.prototype.hasOwnProperty.call(result, key)) {
-                throw new Error(`cbor: duplicate map key: "${key}"`);
+                throw new CBORDuplicateKeyError(key);
             }
             if (key === "__proto__" || key === "constructor" || key === "prototype") {
-                throw new Error(`cbor: forbidden map key: "${key}"`);
+                throw new CBORForbiddenKeyError(key);
             }
             const value = this._decodeValue();
             result[key] = value;
         }
+        this._depth--;
         return result;
     }
 
     private _decodeIndefiniteMap(): { [key: string]: (any | null | undefined) } {
+        if (++this._depth > this._maxDepth) {
+            throw new CBORMaxDepthExceededError(this._maxDepth);
+        }
         const result: { [key: string]: (any | null | undefined) } = {};
         let b: number;
         while ((b = this._r.readByte()) !== STOP_BYTE) {
             const key = this._decodeValue(b);
             if (this._opt.strictMapKeys &&
                 (typeof key !== "number" && typeof key !== "string")) {
-                throw new Error(`cbor: wrong map key type "${typeof key}"`);
+                throw new CBORInvalidKeyTypeError(typeof key);
             }
             if (this._opt.uniqueMapKeys && Object.prototype.hasOwnProperty.call(result, key)) {
-                throw new Error(`cbor: duplicate map key: "${key}"`);
+                throw new CBORDuplicateKeyError(key);
             }
             if (key === "__proto__" || key === "constructor" || key === "prototype") {
-                throw new Error(`cbor: forbidden map key: "${key}"`);
+                throw new CBORForbiddenKeyError(key);
             }
             const value = this._decodeValue();
             result[key] = value;
         }
+        this._depth--;
         return result;
     }
 
