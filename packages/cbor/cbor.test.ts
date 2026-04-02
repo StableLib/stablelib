@@ -10,7 +10,8 @@ import {
     DEFAULT_TAGGED_ENCODERS, DEFAULT_TAGGED_DECODERS,
     CBORDecodeError, CBORInvalidFormatError, CBORExtraDataError,
     CBORMaxDepthExceededError, CBORForbiddenKeyError,
-    CBORDuplicateKeyError, CBORInvalidKeyTypeError
+    CBORDuplicateKeyError, CBORInvalidKeyTypeError,
+    CBORIndefiniteLengthExceededError, CBORLengthExceededError
 } from "./cbor.js";
 
 // Test vectors from RFC 7049: Appendix A.  Examples.
@@ -362,6 +363,43 @@ describe("cbor", () => {
         expect(() => decode(nested, { maxDepth: 3 })).toThrow(CBORMaxDepthExceededError);
     });
 
+    it("should throw CBORIndefiniteLengthExceededError for indefinite text strings exceeding maxIndefiniteLength", () => {
+        // 7f        = begin indefinite-length text string
+        // 61 61     = text(1) "a"
+        // 61 62     = text(1) "b"
+        // ff        = stop
+        const twoChunks = hex.decode("7f61616162ff");
+        const oneChunk  = hex.decode("7f6161ff");
+        expect(() => decode(twoChunks, { maxIndefiniteLength: 1 })).toThrow(CBORIndefiniteLengthExceededError);
+        expect(() => decode(oneChunk,  { maxIndefiniteLength: 1 })).not.toThrow();
+    });
+
+    it("should throw CBORIndefiniteLengthExceededError for indefinite byte strings exceeding maxIndefiniteLength", () => {
+        const twoChunks = hex.decode("5f41014102ff");
+        const oneChunk  = hex.decode("5f4101ff");
+        expect(() => decode(twoChunks, { maxIndefiniteLength: 1 })).toThrow(CBORIndefiniteLengthExceededError);
+        expect(() => decode(oneChunk,  { maxIndefiniteLength: 1 })).not.toThrow();
+    });
+
+    it("should throw CBORIndefiniteLengthExceededError for indefinite arrays exceeding maxIndefiniteLength", () => {
+        const twoElems = hex.decode("9f0102ff");
+        const oneElem  = hex.decode("9f01ff");
+        expect(() => decode(twoElems, { maxIndefiniteLength: 1 })).toThrow(CBORIndefiniteLengthExceededError);
+        expect(() => decode(oneElem,  { maxIndefiniteLength: 1 })).not.toThrow();
+    });
+
+    it("should throw CBORIndefiniteLengthExceededError for indefinite maps exceeding maxIndefiniteLength", () => {
+        const twoEntries = hex.decode("bf616101616202ff");
+        const oneEntry   = hex.decode("bf616101ff");
+        expect(() => decode(twoEntries, { maxIndefiniteLength: 1 })).toThrow(CBORIndefiniteLengthExceededError);
+        expect(() => decode(oneEntry,   { maxIndefiniteLength: 1 })).not.toThrow();
+    });
+
+    it("should disallow all indefinite-length items when maxIndefiniteLength is 0", () => {
+        const indef = hex.decode("9f01ff"); // indefinite array [1]
+        expect(() => decode(indef, { maxIndefiniteLength: 0 })).toThrow(CBORIndefiniteLengthExceededError);
+    });
+
     it("CBORDecodeError is the base class for all decoder errors", () => {
         const forbiddenKey = hex.decode("a1695f5f70726f746f5f5fa168706f6c6c75746564f5");
         expect(() => decode(forbiddenKey)).toThrow(CBORDecodeError);
@@ -385,6 +423,34 @@ describe("cbor", () => {
         expect(() => decode(badKeyType, { strictMapKeys: true })).toThrowError(CBORInvalidKeyTypeError);
         // non-string keys are allowed by default
         expect(() => decode(badKeyType)).not.toThrow();
+    });
+
+    it("should throw CBORLengthExceededError for arrays exceeding maxArrayLength", () => {
+        const arr3 = encode([1, 2, 3]);
+        const arr2 = encode([1, 2]);
+        expect(() => decode(arr3, { maxArrayLength: 2 })).toThrow(CBORLengthExceededError);
+        expect(() => decode(arr2, { maxArrayLength: 2 })).not.toThrow();
+    });
+
+    it("should throw CBORLengthExceededError for maps exceeding maxMapLength", () => {
+        const map2 = encode({ a: 1, b: 2 });
+        const map1 = encode({ a: 1 });
+        expect(() => decode(map2, { maxMapLength: 1 })).toThrow(CBORLengthExceededError);
+        expect(() => decode(map1, { maxMapLength: 1 })).not.toThrow();
+    });
+
+    it("should throw CBORLengthExceededError for byte strings exceeding maxByteLength", () => {
+        const bytes3 = encode(new Uint8Array([1, 2, 3]));
+        const bytes2 = encode(new Uint8Array([1, 2]));
+        expect(() => decode(bytes3, { maxByteLength: 2 })).toThrow(CBORLengthExceededError);
+        expect(() => decode(bytes2, { maxByteLength: 2 })).not.toThrow();
+    });
+
+    it("should throw CBORLengthExceededError for text strings exceeding maxByteLength", () => {
+        const str3 = encode("abc");
+        const str2 = encode("ab");
+        expect(() => decode(str3, { maxByteLength: 2 })).toThrow(CBORLengthExceededError);
+        expect(() => decode(str2, { maxByteLength: 2 })).not.toThrow();
     });
 
 });

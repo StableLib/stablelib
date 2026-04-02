@@ -517,6 +517,42 @@ export type DecoderOptions = {
     maxDepth?: number;
 
     /**
+     * Maximum allowed length of maps (number of key-value pairs).
+     *
+     * By default, unlimited.
+     */
+    maxMapLength?: number;
+
+    /**
+     * Maximum allowed length of arrays (number of items).
+     *
+     * By default, unlimited.
+     */
+    maxArrayLength?: number;
+
+    /**
+     * Maximum allowed byte length of bytes or strings.
+     *
+     * By default, unlimited.
+     */
+    maxByteLength?: number;
+
+    /**
+     * Maximum allowed length of indefinite-length items
+     * (bytes, strings, arrays, maps).
+     *
+     * Can be set to 0 to disallow indefinite-length items.
+     *
+     * maxArrayLength, maxMapLength and maxByteLength options,
+     * if set, still apply.
+     *
+     * If exceeded, decoder throws an error.
+     *
+     * By default, unlimited.
+     */
+    maxIndefiniteLength?: number;
+
+    /**
      * Tagged object decoders.
      *
      * By default, DEFAULT_TAGGED_DECODERS, which converts tagged
@@ -532,6 +568,10 @@ export const DEFAULT_DECODER_OPTIONS: DecoderOptions = {
     noCopy: false,
     ignoreExtraData: false,
     maxDepth: 128,
+    maxIndefiniteLength: Infinity,
+    maxMapLength: Infinity,
+    maxArrayLength: Infinity,
+    maxByteLength: Infinity,
     taggedDecoders: DEFAULT_TAGGED_DECODERS
 };
 
@@ -614,6 +654,32 @@ export class CBORInvalidKeyTypeError extends CBORDecodeError {
 }
 
 /**
+ * Thrown when reached maximum allowed length of indefinite-length items
+ * and maxIndefiniteLength is enabled.
+ */
+export class CBORIndefiniteLengthExceededError extends CBORDecodeError {
+    readonly maxIndefiniteLength: number;
+    constructor(maxIndefiniteLength: number) {
+        super(`cbor: exceeded maximum indefinite length of ${maxIndefiniteLength}`);
+        this.name = "CBORIndefiniteLengthExceededError";
+        this.maxIndefiniteLength = maxIndefiniteLength;
+    }
+}
+
+/**
+ * Thrown when reached maximum allowed length of maps, arrays, bytes or strings
+ * and corresponding maxMapLength, maxArrayLength or maxByteLength is enabled.
+ */
+export class CBORLengthExceededError extends CBORDecodeError {
+    readonly maxLength: number;
+    constructor(maxLength: number) {
+        super(`cbor: exceeded maximum length of ${maxLength}`);
+        this.name = "CBORLengthExceededError";
+        this.maxLength = maxLength;
+    }
+}
+
+/**
  * Decoder decodes values from CBOR format.
  */
 export class Decoder {
@@ -621,6 +687,10 @@ export class Decoder {
     private _opt: DecoderOptions;
     private _taggedDecoders: TaggedDecoder<any>[];
     private _maxDepth: number;
+    private _maxIndefiniteLength: number;
+    private _maxMapLength: number;
+    private _maxArrayLength: number;
+    private _maxByteLength: number;
     private _depth = 0;
 
     /**
@@ -634,9 +704,13 @@ export class Decoder {
         this._r = new ByteReader(src);
         this._opt = { ...DEFAULT_DECODER_OPTIONS, ...options };
         this._maxDepth = this._opt.maxDepth || 128;
-        if (!Number.isInteger(this._maxDepth) || this._maxDepth <= 0) {
+        if (!Number.isSafeInteger(this._maxDepth) || this._maxDepth <= 0) {
             this._maxDepth = 128;
         }
+        this._maxIndefiniteLength = this._opt.maxIndefiniteLength !== undefined ? this._opt.maxIndefiniteLength : Infinity;
+        this._maxArrayLength = this._opt.maxArrayLength !== undefined ? this._opt.maxArrayLength : Infinity;
+        this._maxMapLength = this._opt.maxMapLength !== undefined ? this._opt.maxMapLength : Infinity;
+        this._maxByteLength = this._opt.maxByteLength !== undefined ? this._opt.maxByteLength : Infinity;
         this._taggedDecoders = this._opt.taggedDecoders || DEFAULT_TAGGED_DECODERS;
     }
 
@@ -778,13 +852,23 @@ export class Decoder {
         if (length === Infinity) {
             return this._decodeIndefiniteString();
         }
+        if (length > this._maxByteLength) {
+            throw new CBORLengthExceededError(this._maxByteLength);
+        }
         return utf8.decode(this._r.readNoCopy(length));
     }
 
     private _decodeIndefiniteString(): string {
         let result = "";
         let b: number;
+        let n = 0;
         while ((b = this._r.readByte()) !== STOP_BYTE) {
+            if (++n > this._maxIndefiniteLength) {
+                throw new CBORIndefiniteLengthExceededError(this._maxIndefiniteLength);
+            }
+            if (n > this._maxByteLength) {
+                throw new CBORLengthExceededError(this._maxByteLength);
+            }
             const majorType = b >> 5;
             const length = this._readLength(b & 31);
             if (majorType !== MT_TEXT_STRING || length === Infinity) {
@@ -799,6 +883,9 @@ export class Decoder {
         if (length === Infinity) {
             return this._decodeIndefiniteBytes();
         }
+        if (length > this._maxByteLength) {
+            throw new CBORLengthExceededError(this._maxByteLength);
+        }
         if (this._opt.noCopy) {
             return this._r.readNoCopy(length);
         }
@@ -808,7 +895,14 @@ export class Decoder {
     private _decodeIndefiniteBytes(): Uint8Array {
         let buf = new ByteWriter();
         let b: number;
+        let n = 0;
         while ((b = this._r.readByte()) !== STOP_BYTE) {
+            if (++n > this._maxIndefiniteLength) {
+                throw new CBORIndefiniteLengthExceededError(this._maxIndefiniteLength);
+            }
+            if (n > this._maxByteLength) {
+                throw new CBORLengthExceededError(this._maxByteLength);
+            }
             const majorType = b >> 5;
             const length = this._readLength(b & 31);
             if (majorType !== MT_BYTE_STRING || length === Infinity) {
@@ -828,6 +922,9 @@ export class Decoder {
         if (++this._depth > this._maxDepth) {
             throw new CBORMaxDepthExceededError(this._maxDepth);
         }
+        if (length > this._maxArrayLength) {
+            throw new CBORLengthExceededError(this._maxArrayLength);
+        }
         const result: Array<any | null | undefined> = [];
         for (let i = 0; i < length; i++) {
             result.push(this._decodeValue());
@@ -842,7 +939,14 @@ export class Decoder {
         }
         const result: Array<any | null | undefined> = [];
         let b: number;
+        let n = 0;
         while ((b = this._r.readByte()) !== STOP_BYTE) {
+            if (++n > this._maxIndefiniteLength) {
+                throw new CBORIndefiniteLengthExceededError(this._maxIndefiniteLength);
+            }
+            if (n > this._maxArrayLength) {
+                throw new CBORLengthExceededError(this._maxArrayLength);
+            }
             result.push(this._decodeValue(b));
         }
         this._depth--;
@@ -855,6 +959,9 @@ export class Decoder {
         }
         if (++this._depth > this._maxDepth) {
             throw new CBORMaxDepthExceededError(this._maxDepth);
+        }
+        if (length > this._maxMapLength) {
+            throw new CBORLengthExceededError(this._maxMapLength);
         }
         const result: { [key: string]: (any | null | undefined) } = {};
         for (let i = 0; i < length; i++) {
@@ -882,7 +989,14 @@ export class Decoder {
         }
         const result: { [key: string]: (any | null | undefined) } = {};
         let b: number;
+        let n = 0;
         while ((b = this._r.readByte()) !== STOP_BYTE) {
+            if (++n > this._maxIndefiniteLength) {
+                throw new CBORIndefiniteLengthExceededError(this._maxIndefiniteLength);
+            }
+            if (n > this._maxMapLength) {
+                throw new CBORLengthExceededError(this._maxMapLength);
+            }
             const key = this._decodeValue(b);
             if (this._opt.strictMapKeys &&
                 (typeof key !== "number" && typeof key !== "string")) {
