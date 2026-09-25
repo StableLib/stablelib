@@ -417,12 +417,10 @@ describe("cbor", () => {
         expect(() => decode(dupKey)).not.toThrow();
     });
 
-    it("should throw CBORInvalidKeyTypeError on non-string/number map key when strictMapKeys is true", () => {
+    it("should throw CBORInvalidKeyTypeError on non-string/number map key", () => {
         // map(1) { bytes(0x01): 1 }
         const badKeyType = hex.decode("a1410101");
-        expect(() => decode(badKeyType, { strictMapKeys: true })).toThrowError(CBORInvalidKeyTypeError);
-        // non-string keys are allowed by default
-        expect(() => decode(badKeyType)).not.toThrow();
+        expect(() => decode(badKeyType)).toThrowError(CBORInvalidKeyTypeError);
     });
 
     it("should throw CBORLengthExceededError for arrays exceeding maxArrayLength", () => {

@@ -506,10 +506,12 @@ export type DecoderOptions = {
     ignoreExtraData?: boolean;
 
     /**
-     * If true, allow only string and number keys for maps.
-     * Throw if encountered any other type.
+     * Has not effect, always true.
      *
-     * By default, false.
+     * Requires map keys to be strings or numbers and throws an
+     * exception if they have a different type.
+     *
+     * @deprecated
      */
     strictMapKeys?: boolean;
 
@@ -655,7 +657,7 @@ export class CBORDuplicateKeyError extends CBORDecodeError {
 }
 
 /**
- * Thrown when a map key has an invalid type and strictMapKeys is enabled.
+ * Thrown when a map key has an invalid type.
  */
 export class CBORInvalidKeyTypeError extends CBORDecodeError {
     readonly keyType: string;
@@ -979,15 +981,14 @@ export class Decoder {
         const result: { [key: string]: (any | null | undefined) } = {};
         for (let i = 0; i < length; i++) {
             const key = this._decodeValue();
-            if (this._opt.strictMapKeys &&
-                (typeof key !== "number" && typeof key !== "string")) {
+            if (typeof key !== "number" && typeof key !== "string") {
                 throw new CBORInvalidKeyTypeError(typeof key);
-            }
-            if (this._opt.uniqueMapKeys && Object.prototype.hasOwnProperty.call(result, key)) {
-                throw new CBORDuplicateKeyError(key);
             }
             if (key === "__proto__" || key === "constructor" || key === "prototype") {
                 throw new CBORForbiddenKeyError(key);
+            }
+            if (this._opt.uniqueMapKeys && Object.prototype.hasOwnProperty.call(result, key)) {
+                throw new CBORDuplicateKeyError(String(key));
             }
             const value = this._decodeValue();
             result[key] = value;
@@ -1011,15 +1012,14 @@ export class Decoder {
                 throw new CBORLengthExceededError(this._maxMapLength);
             }
             const key = this._decodeValue(b);
-            if (this._opt.strictMapKeys &&
-                (typeof key !== "number" && typeof key !== "string")) {
+            if (typeof key !== "number" && typeof key !== "string") {
                 throw new CBORInvalidKeyTypeError(typeof key);
-            }
-            if (this._opt.uniqueMapKeys && Object.prototype.hasOwnProperty.call(result, key)) {
-                throw new CBORDuplicateKeyError(key);
             }
             if (key === "__proto__" || key === "constructor" || key === "prototype") {
                 throw new CBORForbiddenKeyError(key);
+            }
+            if (this._opt.uniqueMapKeys && Object.prototype.hasOwnProperty.call(result, key)) {
+                throw new CBORDuplicateKeyError(String(key));
             }
             const value = this._decodeValue();
             result[key] = value;
