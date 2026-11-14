@@ -2,7 +2,7 @@
 // MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'vitest';
-import { encode, decode, encodeURLSafe, decodeURLSafe } from "./base64.js";
+import { Coder, encode, decode, encodeURLSafe, decodeURLSafe } from "./base64.js";
 
 const testVectors: [number[], string][] = [
     // https://tools.ietf.org/html/rfc4648
@@ -39,7 +39,12 @@ const badVectors = [
     "Zg===",
     "AAA",
     "=Zm8",
-    "что"
+    "что",
+    "Zm9vX",
+    "Zm9v!",
+    "Zm9v\n",
+    "Zm9vYmFy*",
+    "Zm9vX=="
 ];
 
 describe("Base64", () => {
@@ -59,6 +64,10 @@ describe("Base64", () => {
         badVectors.forEach((v) => {
             expect(() => decode(v)).toThrow();
         });
+    });
+    it("should throw when decoding a single character with padding disabled", () => {
+        const coder = new Coder("");
+        expect(() => coder.decode("X")).toThrow();
     });
 });
 

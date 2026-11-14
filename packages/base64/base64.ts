@@ -72,6 +72,9 @@ export class Coder {
         }
         const paddingLength = this._getPaddingLength(s);
         const length = s.length - paddingLength;
+        if (length % 4 === 1) {
+            throw new Error("Base64Coder: incorrect length for decoding");
+        }
         const out = new Uint8Array(this.maxDecodedLength(length));
         let op = 0;
         let i = 0;
