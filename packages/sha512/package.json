@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/sha512",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "SHA-512 cryptographic hash function",
   "main": "./lib/sha512.js",
   "type": "module",
@@ -25,7 +25,7 @@
     "@stablelib/wipe": "^2.0.1"
   },
   "devDependencies": {
-    "@stablelib/base64": "^2.0.1",
+    "@stablelib/base64": "^2.0.2",
     "@stablelib/benchmark": "^2.0.0"
   }
 }

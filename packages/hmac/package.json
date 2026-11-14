@@ -1,6 +1,6 @@
 {
   "name": "@stablelib/hmac",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Hash-based message authentication code (HMAC)",
   "main": "./lib/hmac.js",
   "type": "module",
@@ -24,9 +24,9 @@
     "@stablelib/wipe": "^2.0.1"
   },
   "devDependencies": {
-    "@stablelib/base64": "^2.0.1",
+    "@stablelib/base64": "^2.0.2",
     "@stablelib/benchmark": "^2.0.0",
-    "@stablelib/sha224": "^2.0.1",
-    "@stablelib/sha256": "^2.0.1"
+    "@stablelib/sha224": "^2.0.2",
+    "@stablelib/sha256": "^2.0.2"
   }
 }
