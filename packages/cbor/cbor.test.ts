@@ -363,6 +363,35 @@ describe("cbor", () => {
         expect(() => decode(nested, { maxDepth: 3 })).toThrow(CBORMaxDepthExceededError);
     });
 
+    it.each([
+        "d7d7d7d7f6", // Four tags.
+        "d781d781f6", // Tags and definite arrays.
+        "d79fd79ff6ffff", // Tags and indefinite arrays.
+        "d7a100d7a100f6", // Tags and definite maps.
+        "d7bf00d7bf00f6ffff" // Tags and indefinite maps.
+    ])("should count tags toward maxDepth in %s", (encoded) => {
+        const nested = hex.decode(encoded);
+        expect(() => decode(nested, { maxDepth: 4 })).not.toThrow();
+        expect(() => decode(nested, { maxDepth: 3 })).toThrow(CBORMaxDepthExceededError);
+    });
+
+    it.each([false, true])("should reject deeply nested tags without overflowing the stack (mixed: %s)", (mixed) => {
+        const nested = new Uint8Array(12001);
+        for (let i = 0; i < nested.length - 1; i++) {
+            nested[i] = mixed && i % 32 === 0 ? 0x81 : 0xc0;
+        }
+        nested[nested.length - 1] = 0xf6;
+        expect(() => decode(nested)).toThrow(CBORMaxDepthExceededError);
+        expect(() => decode(nested, { maxDepth: 128 })).toThrow(CBORMaxDepthExceededError);
+    });
+
+    it("should restore depth after decoding sibling tags", () => {
+        const values = [new Tagged(23, null), new Tagged(23, null)];
+        expect(decode(encode(values), { maxDepth: 2 })).toEqual(values);
+        const dates = [new Date(1000), new Date(2000)];
+        expect(decode(hex.decode("82c101c102"), { maxDepth: 2 })).toEqual(dates);
+    });
+
     it("should throw CBORIndefiniteLengthExceededError for indefinite text strings exceeding maxIndefiniteLength", () => {
         // 7f        = begin indefinite-length text string
         // 61 61     = text(1) "a"

@@ -524,7 +524,7 @@ export type DecoderOptions = {
     uniqueMapKeys?: boolean;
 
     /**
-     * Maximum allowed depth of nested structures (arrays and maps).
+     * Maximum allowed depth of nested structures (arrays, maps, and tags).
      * If exceeded, decoder throws an error.
      *
      * By default, 128.
@@ -1029,7 +1029,11 @@ export class Decoder {
     }
 
     private _decodeTagged(tag: number): (any | null | undefined) {
+        if (++this._depth > this._maxDepth) {
+            throw new CBORMaxDepthExceededError(this._maxDepth);
+        }
         const tagged = new Tagged(tag, this._decodeValue());
+        this._depth--;
         for (let i = 0; i < this._taggedDecoders.length; i++) {
             const result = this._taggedDecoders[i](tagged);
             if (result !== undefined) {
